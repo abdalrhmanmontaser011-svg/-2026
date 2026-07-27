@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="المنصة الشاملة">
     <link rel="manifest" href="manifest.json" id="manifest-link">
-    <title>المنصة الشاملة 2026 - نسخة تجريبية V1.0</title>
+    <title>المنصة الشاملة 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <script type="importmap">
@@ -44,7 +44,7 @@
             background: rgba(255,255,255,0.95);
             padding: 40px 30px;
             border-radius: 40px;
-            max-width: 400px;
+            max-width: 420px;
             width: 100%;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             text-align: center;
@@ -55,12 +55,13 @@
             font-size: 2rem;
         }
         .login-container h1 span { color: #f9b83a; }
-        .login-container p {
+        .login-container p.sub {
             color: #555;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 0.95rem;
         }
-        .login-container input {
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
             width: 100%;
             padding: 14px;
             border: 2px solid #dce3ec;
@@ -69,10 +70,27 @@
             font-size: 1rem;
             background: #fafcff;
             transition: 0.2s;
+            direction: ltr;
+            text-align: left;
         }
         .login-container input:focus {
             border-color: #1a4b6d;
             outline: none;
+        }
+        .login-container .remember-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .login-container .remember-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            margin: 0;
         }
         .login-container .btn-login {
             background: #1a4b6d;
@@ -113,6 +131,13 @@
             color: #aaa;
             margin-top: 15px;
         }
+        .login-container .forgot-link {
+            font-size: 0.8rem;
+            color: #1a4b6d;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 5px;
+        }
 
         /* ===== المحتوى الرئيسي (يظهر بعد الدخول) ===== */
         #appContent {
@@ -122,7 +147,7 @@
         }
         .container { max-width: 1000px; margin: 0 auto; padding: 15px; }
 
-        /* ===== باقي الأنماط (نفس الكود السابق مع تعديلات طفيفة) ===== */
+        /* ===== باقي الأنماط (نفس الكود السابق) ===== */
         .app-header {
             background: linear-gradient(145deg, #0b2a41, #1a4b6d);
             color: #fff; padding: 18px 15px; border-radius: 0 0 30px 30px;
@@ -163,7 +188,7 @@
         }
         .nav-item.active { color: #1a4b6d; font-weight: bold; background: #e6f0fa; }
         .nav-item i { font-size: 1.4rem; display: block; margin-bottom: 2px; }
-        .nav-item.admin-item { display: none; } /* مخفي افتراضياً */
+        .nav-item.admin-item { display: none; }
         .section { display: none; animation: fade 0.3s ease; }
         .section.active { display: block; }
         @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -426,23 +451,31 @@
 <body>
 
 <!-- ============================================================ -->
-<!--  شاشة تسجيل الدخول (تظهر أولاً) -->
+<!--  شاشة تسجيل الدخول -->
 <!-- ============================================================ -->
 <div id="loginScreen">
     <div class="login-container">
         <h1>📚 <span>المنصة</span> الشاملة</h1>
-        <p>سجل الدخول أو أنشئ حساباً للوصول إلى جميع الخدمات</p>
+        <p class="sub">سجل الدخول أو أنشئ حساباً للوصول إلى جميع الخدمات</p>
         <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" dir="ltr">
         <input type="password" id="loginPassword" placeholder="كلمة المرور (6 أحرف على الأقل)" dir="ltr">
+        
+        <!-- خيار تذكرني -->
+        <div class="remember-row">
+            <input type="checkbox" id="rememberMe" checked>
+            <label for="rememberMe">تذكرني (ابقني مسجلاً)</label>
+        </div>
+
         <button class="btn-login" onclick="loginUser()">🔑 تسجيل الدخول</button>
         <button class="btn-signup" onclick="signupUser()">➕ إنشاء حساب جديد</button>
         <div class="login-message" id="loginMessage"></div>
         <div class="hint">🔒 جميع البيانات محفوظة في السحاب</div>
+        <a href="#" class="forgot-link" onclick="alert('تواصل مع الدعم لإعادة تعيين كلمة المرور')">نسيت كلمة المرور؟</a>
     </div>
 </div>
 
 <!-- ============================================================ -->
-<!--  المحتوى الرئيسي (يظهر فقط بعد تسجيل الدخول) -->
+<!--  المحتوى الرئيسي -->
 <!-- ============================================================ -->
 <div id="appContent">
 
@@ -787,7 +820,7 @@
             </div>
         </div>
 
-        <!-- ===== لوحة تحكم المدير (تظهر فقط للمدير) ===== -->
+        <!-- ===== لوحة تحكم المدير ===== -->
         <div id="adminSection" class="section">
             <div class="admin-panel">
                 <h3>🛠️ لوحة تحكم المدير</h3>
@@ -808,7 +841,6 @@
 
                 <hr style="border-color:#444; margin:20px 0;">
                 
-                <!-- مكان لإضافة كورسات أو محتوى آخر لاحقاً -->
                 <details>
                     <summary style="cursor:pointer; color:#f9b83a; font-weight:bold; font-size:1.1rem; margin-bottom:10px;">📚 إدارة الكورسات (قريباً)</summary>
                     <p style="color:#888;">سيتم إتاحة إضافة كورسات برمجة وعلم النفس قريباً.</p>
@@ -841,7 +873,6 @@
         <div class="nav-item" data-section="chatSection"><i class="fas fa-comment-dots"></i> دردشة</div>
         <div class="nav-item" data-section="meetingSection"><i class="fas fa-video"></i> ميتنج</div>
         <div class="nav-item" data-section="placesSection"><i class="fas fa-store"></i> أماكن</div>
-        <!-- قسم المدير (يظهر فقط للمدير) -->
         <div class="nav-item admin-item" data-section="adminSection"><i class="fas fa-user-shield"></i> تحكم</div>
         <div class="nav-item" data-section="devSection"><i class="fas fa-user-cog"></i> مطور</div>
     </div>
@@ -879,6 +910,7 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    // جعل الجلسة دائمة (تذكرني)
     setPersistence(auth, browserLocalPersistence);
 
     const db = getFirestore(app);
@@ -909,7 +941,7 @@
     window.uploadBytes = uploadBytes;
     window.getDownloadURL = getDownloadURL;
 
-    console.log("🔥 Firebase connected!");
+    console.log("🔥 Firebase connected with Local Persistence (Remember Me)");
 
     // ============================================================
     //  1. المتغيرات العامة
@@ -918,14 +950,24 @@
     let currentUserData = null;
 
     // ============================================================
-    //  2. دوال تسجيل الدخول / إنشاء الحساب
+    //  2. دوال تسجيل الدخول / إنشاء الحساب مع "تذكرني"
     // ============================================================
     window.loginUser = async function() {
         const email = document.getElementById('loginEmail').value.trim();
         const pass = document.getElementById('loginPassword').value.trim();
+        const remember = document.getElementById('rememberMe').checked;
         const msg = document.getElementById('loginMessage');
         if (!email || !pass) { msg.innerText = '⚠️ املأ جميع الحقول'; return; }
         try {
+            // إذا تم اختيار "تذكرني"، نستخدم persistence المحلي (وهو مفعل بالفعل)
+            // نستطيع تخزين تفضيل المستخدم في localStorage اختيارياً
+            if (remember) {
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('savedEmail', email);
+            } else {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('savedEmail');
+            }
             await signInWithEmailAndPassword(auth, email, pass);
             msg.innerText = '✅ جاري الدخول...';
         } catch(e) {
@@ -945,19 +987,22 @@
             await setDoc(doc(db, "users", cred.user.uid), {
                 username: email.split('@')[0],
                 email: email,
-                role: "user",  // المستخدم العادي
+                role: "user",
                 phone: '',
                 verified: false,
                 friends: []
             });
             msg.innerText = '✅ تم إنشاء الحساب! جاري الدخول...';
+            // إذا تم اختيار "تذكرني" (ال checkbox مفعل افتراضياً)
+            localStorage.setItem('rememberMe', 'true');
+            localStorage.setItem('savedEmail', email);
         } catch(e) {
             msg.innerText = '❌ ' + e.message;
         }
     };
 
     // ============================================================
-    //  3. مراقبة حالة المصادقة
+    //  3. مراقبة حالة المصادقة (استعادة الجلسة تلقائياً)
     // ============================================================
     onAuthStateChanged(auth, async (user) => {
         const loginScreen = document.getElementById('loginScreen');
@@ -970,58 +1015,13 @@
             if (docSnap.exists()) {
                 currentUserData = docSnap.data();
             } else {
-                // لو المستند غير موجود (حالة نادرة)
                 currentUserData = { username: user.email?.split('@')[0] || 'مستخدم', role: "user" };
                 await setDoc(docRef, currentUserData);
             }
             document.getElementById('userNameDisplay').textContent = currentUserData.username || 'مستخدم';
             document.getElementById('logoutBtn').style.display = 'inline-block';
 
-            // إخفاء شاشة الدخول وإظهار المحتوى
             loginScreen.style.display = 'none';
             appContent.style.display = 'block';
 
-            // التحقق من صلاحية المدير
-            const isAdmin = currentUserData.role === 'admin';
-            // إظهار/إخفاء عناصر المدير
-            document.querySelectorAll('.admin-item').forEach(el => {
-                el.style.display = isAdmin ? 'block' : 'none';
-            });
-            // إذا كان مديراً، نفعّل قسم الإدارة في التنقل
-            if (isAdmin) {
-                // يمكن إضافة تنبيه أو أي شيء
-                console.log('✅ مرحباً أيها المدير');
-            }
-
-            // تحميل كل البيانات
-            renderAll();
-        } else {
-            currentUser = null;
-            currentUserData = null;
-            document.getElementById('userNameDisplay').textContent = 'زائر';
-            document.getElementById('logoutBtn').style.display = 'none';
-
-            // إخفاء المحتوى وإظهار شاشة الدخول
-            loginScreen.style.display = 'flex';
-            appContent.style.display = 'none';
-            // إخفاء أقسام المدير
-            document.querySelectorAll('.admin-item').forEach(el => {
-                el.style.display = 'none';
-            });
-        }
-    });
-
-    // ============================================================
-    //  4. تسجيل الخروج
-    // ============================================================
-    window.logoutUser = function() {
-        if (confirm('هل تريد تسجيل الخروج؟')) {
-            signOut(auth);
-        }
-    };
-
-    // ============================================================
-    //  5. عرض الملف الشخصي
-    // ============================================================
-    window.showProfile = function() {
-  
+            // التحقق من صل
