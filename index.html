@@ -394,4 +394,1357 @@
                 <div class="islam-card">
                     <h4><i class="fas fa-pray"></i> الأذكار</h4>
                     <div id="dhikrDisplay" class="dhikr-box">سبحان الله وبحمده</div>
-                    <button class="btn btn-outline
+                    <button class="btn btn-outline" onclick="nextDhikr()">التالي</button>
+                </div>
+                <div class="islam-card">
+                    <h4><i class="fas fa-rosary"></i> المسبحة</h4>
+                    <div class="tasbeeh-counter" id="tasbeehCount">0</div>
+                    <div style="display:flex;gap:5px;">
+                        <button class="btn btn-sm" onclick="tasbeehAdd(1)">+1</button>
+                        <button class="btn btn-sm" onclick="tasbeehAdd(10)">+10</button>
+                        <button class="btn btn-danger btn-sm" onclick="tasbeehReset()">إعادة</button>
+                    </div>
+                </div>
+                <div class="islam-card">
+                    <h4><i class="fas fa-clock"></i> مواقيت الصلاة</h4>
+                    <button class="btn btn-sm" onclick="getPrayerTimes()">جلب (مصر)</button>
+                    <div id="prayerTimes" style="margin-top:10px;font-size:0.9rem;"></div>
+                </div>
+                <div class="islam-card">
+                    <h4><i class="fas fa-book-quran"></i> الختمة</h4>
+                    <p>الجزء: <span id="juzCounter">1</span></p>
+                    <input type="number" id="juzGoal" placeholder="الهدف" value="30" style="width:80%;">
+                    <button class="btn btn-sm" onclick="nextJuz()">التالي</button>
+                    <button class="btn btn-outline btn-sm" onclick="resetJuz()">إعادة</button>
+                    <div id="juzProgress" style="margin-top:5px;"></div>
+                </div>
+                <div class="islam-card" style="grid-column:span 2;">
+                    <h4><i class="fas fa-quran"></i> المصحف الشريف</h4>
+                    <select id="surahSelect" style="width:70%;"></select>
+                    <button class="btn" onclick="openQuranExternal()">📖 فتح السورة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== المدونة ===== -->
+        <div id="blogSection" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-edit"></i> إنشاء منشور</div>
+                <input type="text" id="postTitle" placeholder="عنوان المنشور">
+                <textarea id="postContent" placeholder="ماذا يحدث؟..."></textarea>
+                <input type="text" id="postImage" placeholder="رابط صورة (اختياري)">
+                <button class="btn btn-success" onclick="createPost()">نشر</button>
+            </div>
+            <div id="feedContainer"></div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-envelope"></i> الرسائل</div>
+                <input type="text" id="msgTo" placeholder="إلى (اسم المستخدم)">
+                <textarea id="msgBody" placeholder="نص الرسالة"></textarea>
+                <button class="btn" onclick="sendMessage()">إرسال</button>
+                <div id="messagesList" style="margin-top:10px;max-height:200px;overflow-y:auto;"></div>
+            </div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-user-plus"></i> الأصدقاء</div>
+                <input type="text" id="friendUser" placeholder="اسم المستخدم للإضافة">
+                <button class="btn btn-outline" onclick="addFriend()">إضافة صديق</button>
+                <div id="friendsList" style="margin-top:10px;"></div>
+            </div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-check-circle"></i> توثيق الحساب</div>
+                <button class="btn" onclick="verifyAccount()">تفعيل التوثيق (مجاناً)</button>
+                <div id="verificationStatus"></div>
+            </div>
+        </div>
+
+        <!-- ===== خدمات تقنية ===== -->
+        <div id="techSection" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-tools"></i> خدمات تقنية</div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <h4>🎬 قص فيديو</h4>
+                        <input type="file" id="videoCropInput" accept="video/*">
+                        <input type="number" id="startTime" placeholder="بداية (ثانية)" value="0">
+                        <input type="number" id="endTime" placeholder="نهاية (ثانية)" value="10">
+                        <button class="btn" onclick="cropVideo()">قص</button>
+                        <div id="cropResult"></div>
+                    </div>
+                    <div class="service-card">
+                        <h4>🖼️ تعديل الصور</h4>
+                        <input type="file" id="imageEditInput" accept="image/*">
+                        <button class="btn" onclick="editImage()">تعديل</button>
+                        <div id="editResult"></div>
+                    </div>
+                    <div class="service-card">
+                        <h4>💪 حساب السعرات (الطعام)</h4>
+                        <input type="text" id="foodName" placeholder="اسم الطعام">
+                        <input type="number" id="foodWeight" placeholder="الوزن (جرام)">
+                        <button class="btn" onclick="calcCalories()">حساب</button>
+                        <div id="calorieResult"></div>
+                    </div>
+                    <div class="service-card">
+                        <h4>⚖️ السعرات اليومية (BMR)</h4>
+                        <select id="genderBMR">
+                            <option value="male">ذكر</option>
+                            <option value="female">أنثى</option>
+                        </select>
+                        <input type="number" id="ageBMR" placeholder="العمر (سنة)">
+                        <input type="number" id="heightBMR" placeholder="الطول (سم)">
+                        <input type="number" id="weightBMR" placeholder="الوزن (كجم)">
+                        <select id="activityBMR">
+                            <option value="1.2">خامل</option>
+                            <option value="1.375">خفيف</option>
+                            <option value="1.55">متوسط</option>
+                            <option value="1.725">نشط</option>
+                            <option value="1.9">شديد النشاط</option>
+                        </select>
+                        <button class="btn" onclick="calcBMR()">احسب احتياجك</button>
+                        <div id="bmrResult" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== الدردشة ===== -->
+        <div id="chatSection" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-comments"></i> غرفة الدردشة العامة</div>
+                <div id="chatMessages" style="max-height:400px;overflow-y:auto;border:1px solid #dce3ec;border-radius:15px;padding:10px;background:#fafcff;margin-bottom:10px;"></div>
+                <div style="display:flex;gap:10px;">
+                    <input type="text" id="chatInput" placeholder="اكتب رسالتك..." style="flex:1;">
+                    <button class="btn btn-success" onclick="sendChatMessage()" style="width:auto;padding:10px 20px;">إرسال</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== الميتنج العام ===== -->
+        <div id="meetingSection" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-video"></i> الميتنج العام</div>
+                <div class="info-box">
+                    <p>🎥 يمكن لأي مستخدم إنشاء اجتماع ومشاركة الرابط</p>
+                </div>
+                <input type="text" id="publicMeetingTitle" placeholder="عنوان الاجتماع">
+                <input type="text" id="publicMeetingHost" placeholder="اسم المضيف (اختياري)">
+                <input type="datetime-local" id="publicMeetingTime">
+                <button class="btn btn-success" onclick="createPublicMeeting()">🎥 إنشاء اجتماع</button>
+                <div id="publicMeetingsList" style="margin-top:15px;"></div>
+            </div>
+        </div>
+
+        <!-- ===== الأماكن والحجوزات ===== -->
+        <div id="placesSection" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-store-alt"></i> إضافة مكان جديد</div>
+                <input type="text" id="placeName" placeholder="اسم المكان">
+                <select id="placeCategory">
+                    <option value="cafe">☕ كافيه</option>
+                    <option value="restaurant">🍽️ مطعم</option>
+                    <option value="clinic">🏥 عيادة</option>
+                    <option value="course">📚 كورسات</option>
+                    <option value="tutoring">📖 دروس خصوصية</option>
+                    <option value="other">📍 أخرى</option>
+                </select>
+                <input type="text" id="placeAddress" placeholder="العنوان">
+                <input type="text" id="placePhone" placeholder="رقم الهاتف">
+                <textarea id="placeDescription" placeholder="وصف المكان والخدمات..."></textarea>
+                <input type="text" id="placeSlots" placeholder="المواعيد المتاحة (مثال: 10:00, 11:00, 12:00)">
+                <button class="btn btn-success" onclick="addPlace()">➕ إضافة المكان</button>
+            </div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-list"></i> الأماكن المتاحة</div>
+                <div id="placesList"></div>
+            </div>
+            <div class="card">
+                <div class="card-title"><i class="fas fa-calendar-check"></i> حجوزاتي</div>
+                <div id="myBookingsList"></div>
+            </div>
+        </div>
+
+        <!-- ===== لوحة تحكم المدير ===== -->
+        <div id="adminSection" class="section">
+            <div class="admin-panel">
+                <h3>🛠️ لوحة تحكم المدير</h3>
+                <p style="margin-bottom:15px; color:#aaa;">هنا يمكنك إدارة المحتوى: إضافة أخصائيين، كورسات، وأي محتوى آخر.</p>
+                <details>
+                    <summary style="cursor:pointer; color:#f9b83a; font-weight:bold; font-size:1.1rem; margin-bottom:10px;">➕ إضافة أخصائي نفسي جديد</summary>
+                    <div style="margin-top:10px;">
+                        <input type="text" id="psychName" placeholder="الاسم الكامل">
+                        <input type="text" id="psychSpecialty" placeholder="التخصص (مثال: إكلينيكي، معرفي، ...)">
+                        <input type="text" id="psychImage" placeholder="رابط الصورة (URL)">
+                        <input type="number" id="psychPrice" placeholder="سعر الجلسة (جنيه)">
+                        <input type="text" id="psychAvailable" placeholder="الأوقات المتاحة (مثال: 10:00-14:00, 16:00-20:00)">
+                        <textarea id="psychDesc" placeholder="وصف الأخصائي وخبراته"></textarea>
+                        <button class="btn btn-success" onclick="addPsychologist()">➕ إضافة الأخصائي</button>
+                    </div>
+                </details>
+                <hr style="border-color:#444; margin:20px 0;">
+                <details>
+                    <summary style="cursor:pointer; color:#f9b83a; font-weight:bold; font-size:1.1rem; margin-bottom:10px;">📚 إدارة الكورسات (قريباً)</summary>
+                    <p style="color:#888;">سيتم إتاحة إضافة كورسات برمجة وعلم النفس قريباً.</p>
+                </details>
+            </div>
+        </div>
+
+        <!-- ===== المطور ===== -->
+        <div id="devSection" class="section">
+            <div class="dev-card">
+                <h2>👨‍💻 المطور: عبدالرحمن منتصر ماهر</h2>
+                <hr style="border-color:#444;margin:15px 0;">
+                <div class="dua">
+                    <p>🤲 <strong>دعاء للمطور ووالديه:</strong></p>
+                    <p>اللهم بارك لعبدالرحمن في علمه وعمله، واغفر له ولوالديه، وارحمهما كما ربياني صغيراً، وأدخلهما فسيح جناتك، ووفقه لما تحب وترضى. آمين.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== التنقل السفلي ===== -->
+    <div class="bottom-nav">
+        <div class="nav-item active" data-section="homeSection"><i class="fas fa-home"></i> الرئيسية</div>
+        <div class="nav-item" data-section="teacherSection"><i class="fas fa-chalkboard-teacher"></i> معلمون</div>
+        <div class="nav-item" data-section="psychologySection"><i class="fas fa-brain"></i> نفسية</div>
+        <div class="nav-item" data-section="programmingSection"><i class="fas fa-code"></i> برمجة</div>
+        <div class="nav-item" data-section="islamSection"><i class="fas fa-mosque"></i> إسلاميات</div>
+        <div class="nav-item" data-section="blogSection"><i class="fas fa-newspaper"></i> مدونة</div>
+        <div class="nav-item" data-section="techSection"><i class="fas fa-tools"></i> خدمات</div>
+        <div class="nav-item" data-section="chatSection"><i class="fas fa-comment-dots"></i> دردشة</div>
+        <div class="nav-item" data-section="meetingSection"><i class="fas fa-video"></i> ميتنج</div>
+        <div class="nav-item" data-section="placesSection"><i class="fas fa-store"></i> أماكن</div>
+        <div class="nav-item admin-item" data-section="adminSection"><i class="fas fa-user-shield"></i> تحكم</div>
+        <div class="nav-item" data-section="devSection"><i class="fas fa-user-cog"></i> مطور</div>
+    </div>
+
+</div> <!-- نهاية appContent -->
+
+<script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, setDoc, getDoc, where, arrayUnion, arrayRemove } from "firebase/firestore";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCIpFytzg22I0AK0VjBSA0HcToqwwU4iBk",
+        authDomain: "the-comprehensive-platfo-a05da.firebaseapp.com",
+        projectId: "the-comprehensive-platfo-a05da",
+        storageBucket: "the-comprehensive-platfo-a05da.firebasestorage.app",
+        messagingSenderId: "278383446638",
+        appId: "1:278383446638:web:045202a9781a6098c6f47f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    setPersistence(auth, browserLocalPersistence);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    window.auth = auth; window.db = db; window.storage = storage;
+    window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+    window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+    window.onAuthStateChanged = onAuthStateChanged;
+    window.signOut = signOut;
+    window.collection = collection; window.addDoc = addDoc; window.getDocs = getDocs;
+    window.query = query; window.orderBy = orderBy; window.onSnapshot = onSnapshot;
+    window.doc = doc; window.updateDoc = updateDoc; window.deleteDoc = deleteDoc;
+    window.setDoc = setDoc; window.getDoc = getDoc; window.where = where;
+    window.arrayUnion = arrayUnion; window.arrayRemove = arrayRemove;
+    window.ref = ref; window.uploadBytes = uploadBytes; window.getDownloadURL = getDownloadURL;
+
+    console.log("✅ Firebase connected!");
+
+    let currentUser = null;
+    let currentUserData = null;
+
+    // ===== دوال تسجيل الدخول وإنشاء الحساب =====
+    window.loginUser = async function() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const pass = document.getElementById('loginPassword').value.trim();
+        const remember = document.getElementById('rememberMe').checked;
+        const msg = document.getElementById('loginMessage');
+        if (!email || !pass) { msg.innerText = '⚠️ املأ جميع الحقول'; return; }
+        try {
+            if (remember) {
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('savedEmail', email);
+            } else {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('savedEmail');
+            }
+            await signInWithEmailAndPassword(auth, email, pass);
+            msg.innerText = '✅ جاري الدخول...';
+        } catch(e) {
+            msg.innerText = '❌ ' + e.message;
+        }
+    };
+
+    window.signupUser = async function() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const pass = document.getElementById('loginPassword').value.trim();
+        const msg = document.getElementById('loginMessage');
+        if (!email || !pass) { msg.innerText = '⚠️ املأ جميع الحقول'; return; }
+        if (pass.length < 6) { msg.innerText = '⚠️ كلمة المرور 6 أحرف على الأقل'; return; }
+        try {
+            const cred = await createUserWithEmailAndPassword(auth, email, pass);
+            await setDoc(doc(db, "users", cred.user.uid), {
+                username: email.split('@')[0],
+                email: email,
+                role: "user",
+                phone: '',
+                verified: false,
+                friends: []
+            });
+            msg.innerText = '✅ تم إنشاء الحساب! جاري الدخول...';
+            localStorage.setItem('rememberMe', 'true');
+            localStorage.setItem('savedEmail', email);
+        } catch(e) {
+            msg.innerText = '❌ ' + e.message;
+        }
+    };
+
+    // ===== مراقبة حالة المصادقة =====
+    onAuthStateChanged(auth, async (user) => {
+        const loginScreen = document.getElementById('loginScreen');
+        const appContent = document.getElementById('appContent');
+        if (user) {
+            currentUser = user.uid;
+            const docRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                currentUserData = docSnap.data();
+            } else {
+                currentUserData = { username: user.email?.split('@')[0] || 'مستخدم', role: "user" };
+                await setDoc(docRef, currentUserData);
+            }
+            document.getElementById('userNameDisplay').textContent = currentUserData.username || 'مستخدم';
+            document.getElementById('logoutBtn').style.display = 'inline-block';
+            loginScreen.style.display = 'none';
+            appContent.style.display = 'block';
+            
+            // ===== التعديل المهم: يقبل "admin" و "مسؤول" =====
+            const isAdmin = currentUserData.role === 'admin' || currentUserData.role === 'مسؤول';
+            document.querySelectorAll('.admin-item').forEach(el => {
+                el.style.display = isAdmin ? 'block' : 'none';
+            });
+            renderAll();
+        } else {
+            currentUser = null;
+            currentUserData = null;
+            document.getElementById('userNameDisplay').textContent = 'زائر';
+            document.getElementById('logoutBtn').style.display = 'none';
+            loginScreen.style.display = 'flex';
+            appContent.style.display = 'none';
+            document.querySelectorAll('.admin-item').forEach(el => {
+                el.style.display = 'none';
+            });
+            const savedEmail = localStorage.getItem('savedEmail');
+            if (savedEmail) {
+                document.getElementById('loginEmail').value = savedEmail;
+                document.getElementById('rememberMe').checked = true;
+            }
+        }
+    });
+
+    window.logoutUser = function() {
+        if (confirm('هل تريد تسجيل الخروج؟')) {
+            if (!document.getElementById('rememberMe').checked) {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('savedEmail');
+            }
+            signOut(auth);
+        }
+    };
+
+    window.showProfile = function() {
+        if (currentUserData) {
+            alert(`مرحباً ${currentUserData.username || 'مستخدم'}\n📱 هاتف: ${currentUserData.phone || 'غير مسجل'}\n✅ موثق: ${currentUserData.verified ? 'نعم' : 'لا'}\n🔑 الدور: ${currentUserData.role || 'user'}`);
+        }
+    };
+
+    // ===== دوال إضافة الأخصائي (للمدير فقط) =====
+    window.addPsychologist = async function() {
+        if (!currentUserData || (currentUserData.role !== 'admin' && currentUserData.role !== 'مسؤول')) {
+            alert('⛔ فقط المدير يمكنه إضافة أخصائيين.');
+            return;
+        }
+        const name = document.getElementById('psychName').value.trim();
+        const specialty = document.getElementById('psychSpecialty').value.trim();
+        const image = document.getElementById('psychImage').value.trim() || 'https://via.placeholder.com/80';
+        const price = parseFloat(document.getElementById('psychPrice').value) || 0;
+        const available = document.getElementById('psychAvailable').value.trim() || 'مرن';
+        const description = document.getElementById('psychDesc').value.trim() || '';
+        if (!name || !specialty) {
+            alert('الاسم والتخصص إجباريان');
+            return;
+        }
+        try {
+            await addDoc(collection(db, "psychologists"), {
+                name, specialty, image, price, available, description,
+                createdAt: new Date()
+            });
+            alert('✅ تم إضافة الأخصائي بنجاح!');
+            document.getElementById('psychName').value = '';
+            document.getElementById('psychSpecialty').value = '';
+            document.getElementById('psychImage').value = '';
+            document.getElementById('psychPrice').value = '';
+            document.getElementById('psychAvailable').value = '';
+            document.getElementById('psychDesc').value = '';
+            loadPsychologists();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    // ===== دوال علم النفس =====
+    window.loadPsychologists = function() {
+        const container = document.getElementById('psychologistsList');
+        const q = query(collection(db, "psychologists"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا يوجد أخصائيون حالياً. تواصل مع المدير لإضافة أخصائيين.</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                html += `
+                    <div class="psychologist-card">
+                        <img src="${p.image || 'https://via.placeholder.com/80'}" alt="${p.name}">
+                        <div class="info">
+                            <h4>${p.name}</h4>
+                            <p style="color:#555;">🧠 ${p.specialty}</p>
+                            <p style="color:#888; font-size:0.9rem;">${p.description || ''}</p>
+                            <p>💰 ${p.price} ج.م - ⏰ ${p.available}</p>
+                            <button class="btn btn-success btn-sm" onclick="selectPsychologist('${id}')" style="width:auto;">📅 احجز موعد</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.selectPsychologist = function(id) {
+        if (!currentUser) return alert('يجب تسجيل الدخول أولاً');
+        document.getElementById('selectedPsychologistId').value = id;
+        const ref = doc(db, "psychologists", id);
+        getDoc(ref).then(snap => {
+            if (snap.exists()) {
+                document.getElementById('selectedPsychologistName').textContent = snap.data().name;
+                document.getElementById('psychologistBookingForm').style.display = 'block';
+            }
+        });
+    };
+
+    window.bookPsychSession = async function() {
+        const psychId = document.getElementById('selectedPsychologistId').value;
+        if (!psychId) return alert('اختر أخصائي أولاً');
+        const date = document.getElementById('sessionDate').value;
+        const time = document.getElementById('sessionTime').value;
+        const notes = document.getElementById('sessionNotes').value.trim();
+        if (!date || !time) return alert('حدد التاريخ والوقت');
+        try {
+            const psychRef = doc(db, "psychologists", psychId);
+            const psychSnap = await getDoc(psychRef);
+            if (!psychSnap.exists()) return alert('الأخصائي غير موجود');
+            const sessionId = `psych-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+            const meetLink = `https://meet.jit.si/${sessionId}`;
+            await addDoc(collection(db, "psychSessions"), {
+                psychologistId: psychId,
+                psychologistName: psychSnap.data().name,
+                patientId: currentUser,
+                patientName: currentUserData?.username || 'مريض',
+                date, time, notes, meetLink,
+                status: 'pending',
+                createdAt: new Date()
+            });
+            alert('✅ تم حجز الجلسة! سيتم إرسال رابط الميتنج لكل من المريض والأخصائي.');
+            document.getElementById('psychologistBookingForm').style.display = 'none';
+            document.getElementById('sessionDate').value = '';
+            document.getElementById('sessionTime').value = '';
+            document.getElementById('sessionNotes').value = '';
+            loadPsychSessions();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.loadPsychSessions = function() {
+        const container = document.getElementById('psychSessionsList');
+        if (!currentUser) { container.innerHTML = '<p>سجل دخول لعرض حجوزاتك</p>'; return; }
+        const q = query(collection(db, "psychSessions"), orderBy("createdAt", "desc"));
+        onSnapshot(q, async (snapshot) => {
+            if (snapshot.empty) { container.innerHTML = '<p>لا توجد حجوزات</p>'; return; }
+            let html = '';
+            for (const docSnap of snapshot.docs) {
+                const s = docSnap.data();
+                const id = docSnap.id;
+                const isPatient = s.patientId === currentUser;
+                let isPsychologist = false;
+                if (currentUserData?.role === 'admin' || currentUserData?.role === 'مسؤول') isPsychologist = true;
+                else {
+                    const psychRef = doc(db, "psychologists", s.psychologistId);
+                    const psychSnap = await getDoc(psychRef);
+                    if (psychSnap.exists() && psychSnap.data().ownerId === currentUser) isPsychologist = true;
+                }
+                if (!isPatient && !isPsychologist) continue;
+                const statusMap = {
+                    'pending': '⏳ قيد الانتظار',
+                    'confirmed': '✅ مؤكد',
+                    'completed': '✔️ مكتمل',
+                    'cancelled': '❌ ملغي'
+                };
+                html += `
+                    <div class="session-item">
+                        <strong>${s.psychologistName}</strong> - ${s.date} الساعة ${s.time}
+                        <br><span style="font-size:0.8rem;">👤 المريض: ${s.patientName}</span>
+                        <br><span style="font-size:0.8rem;color:#555;">الحالة: ${statusMap[s.status] || s.status}</span>
+                        ${s.meetLink ? `<br><a href="${s.meetLink}" target="_blank" class="meet-link">🎥 دخول الميتنج</a>` : ''}
+                        ${isPsychologist ? `
+                            <div class="session-actions" style="margin-top:5px;">
+                                <button class="btn btn-success btn-sm" onclick="updatePsychSessionStatus('${id}', 'confirmed')">تأكيد</button>
+                                <button class="btn btn-danger btn-sm" onclick="updatePsychSessionStatus('${id}', 'cancelled')">إلغاء</button>
+                                <button class="btn btn-outline btn-sm" onclick="updatePsychSessionStatus('${id}', 'completed')">إنهاء</button>
+                            </div>
+                        ` : ''}
+                        ${s.notes ? `<p style="font-size:0.8rem;color:#888;">📝 ${s.notes}</p>` : ''}
+                    </div>
+                `;
+            }
+            container.innerHTML = html || '<p>لا توجد حجوزات</p>';
+        });
+    };
+
+    window.updatePsychSessionStatus = async function(id, status) {
+        if (!confirm(`تغيير حالة الجلسة إلى ${status}؟`)) return;
+        try { await updateDoc(doc(db, "psychSessions", id), { status }); loadPsychSessions(); } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    // ===== دوال الطقس والتقويم =====
+    window.getWeather = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${p.coords.latitude}&lon=${p.coords.longitude}&units=metric&lang=ar&appid=6c6f5b9e5a1e7b8c0d4e3f2a1b0c9d8e`)
+                    .then(r => r.json())
+                    .then(d => document.getElementById('weatherDisplay').innerHTML = `🌡️ ${d.main.temp}°C - ${d.weather[0].description} - ${d.name}`)
+                    .catch(() => document.getElementById('weatherDisplay').textContent = 'تعذر جلب الطقس');
+            }, () => document.getElementById('weatherDisplay').textContent = 'الرجاء السماح بتحديد الموقع');
+        } else document.getElementById('weatherDisplay').textContent = 'المتصفح لا يدعم الموقع';
+    };
+
+    window.updateCalendar = function() {
+        const now = new Date();
+        document.getElementById('gregorianDate').textContent = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const hijri = new Intl.DateTimeFormat('ar-TN-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).format(now);
+        document.getElementById('hijriDate').textContent = hijri;
+    };
+
+    // ===== دوال المهام =====
+    window.renderTasks = function() {
+        const container = document.getElementById('tasksList');
+        if (!currentUser) { container.innerHTML = '<p>سجل دخول لعرض مهامك</p>'; return; }
+        const q = query(collection(db, "tasks"), where("userId", "==", currentUser), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) { container.innerHTML = '<p>لا توجد مهام</p>'; return; }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const t = docSnap.data();
+                const id = docSnap.id;
+                html += `
+                    <div class="task-item ${t.done ? 'done' : ''}">
+                        <span>${t.text}</span>
+                        <span>
+                            <button class="btn btn-success btn-sm" onclick="toggleTask('${id}')">${t.done ? 'تراجع' : 'تم'}</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteTask('${id}')">🗑️</button>
+                        </span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.addTask = async function() {
+        const input = document.getElementById('newTaskInput');
+        const text = input.value.trim();
+        if (!text) return alert('أدخل نص المهمة');
+        if (!currentUser) return alert('سجل دخول أولاً');
+        try {
+            await addDoc(collection(db, "tasks"), { userId: currentUser, text, done: false, timestamp: new Date() });
+            input.value = '';
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.toggleTask = async function(id) {
+        const ref = doc(db, "tasks", id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) await updateDoc(ref, { done: !snap.data().done });
+    };
+
+    window.deleteTask = async function(id) {
+        if (confirm('حذف المهمة؟')) await deleteDoc(doc(db, "tasks", id));
+    };
+
+    // ===== دوال المعلمين =====
+    window.setRole = function(role) {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        document.getElementById('teacherPanel').style.display = role === 'teacher' ? 'block' : 'none';
+        document.getElementById('studentPanel').style.display = role === 'student' ? 'block' : 'none';
+        if (role === 'teacher') checkTeacherStatus();
+    };
+
+    async function checkTeacherStatus() {
+        const ref = doc(db, "teachers", currentUser);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            document.getElementById('teacherDashboard').style.display = 'block';
+            document.getElementById('currentTeacherDisplay').textContent = currentUserData?.username || 'معلم';
+            document.getElementById('teacherCodeDisplay').textContent = snap.data().code;
+            renderTeacherData();
+        } else {
+            document.getElementById('teacherDashboard').style.display = 'none';
+            alert('ليس لديك حساب معلم. أنشئ حساباً أولاً.');
+        }
+    }
+
+    window.teacherSignup = async function() {
+        const username = document.getElementById('teacherUsername').value.trim();
+        const password = document.getElementById('teacherPassword').value.trim();
+        if (!username || !password) return alert('املأ جميع الحقول');
+        if (password.length < 6) return alert('كلمة المرور 6 أحرف على الأقل');
+        try {
+            const userCred = await createUserWithEmailAndPassword(auth, username, password);
+            const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+            await setDoc(doc(db, "teachers", userCred.user.uid), {
+                userId: userCred.user.uid,
+                username: currentUserData?.username || 'معلم',
+                email: username,
+                code: code,
+                students: [],
+                videos: [],
+                exams: [],
+                meetings: []
+            });
+            alert('✅ تم إنشاء حساب المعلم! كودك: ' + code);
+            document.getElementById('teacherDashboard').style.display = 'block';
+            document.getElementById('currentTeacherDisplay').textContent = currentUserData?.username || 'معلم';
+            document.getElementById('teacherCodeDisplay').textContent = code;
+            renderTeacherData();
+        } catch (e) { alert('❌ خطأ: ' + e.message); }
+    };
+
+    window.teacherLogin = async function() {
+        const username = document.getElementById('teacherUsername').value.trim();
+        const password = document.getElementById('teacherPassword').value.trim();
+        if (!username || !password) return alert('املأ جميع الحقول');
+        try {
+            await signInWithEmailAndPassword(auth, username, password);
+            alert('✅ تم تسجيل الدخول');
+            setTimeout(() => checkTeacherStatus(), 1000);
+        } catch (e) { alert('❌ خطأ: ' + e.message); }
+    };
+
+    async function renderTeacherData() {
+        const snap = await getDoc(doc(db, "teachers", currentUser));
+        if (!snap.exists()) return;
+        const t = snap.data();
+        document.getElementById('studentList').innerHTML = t.students?.map(s => `<div>👤 ${s}</div>`).join('') || '<p>لا يوجد طلاب</p>';
+        document.getElementById('teacherVideosList').innerHTML = t.videos?.map((v, idx) => `
+            <div class="video-item">
+                <strong>📹 ${v.title}</strong>
+                <video controls src="${v.url}"></video>
+                <button class="btn btn-danger btn-sm" onclick="deleteTeacherVideo(${idx})" style="width:auto;margin-top:5px;">🗑️ حذف</button>
+            </div>
+        `).join('') || '<p>لا توجد فيديوهات</p>';
+        document.getElementById('teacherExamsList').innerHTML = t.exams?.map((e, idx) =>
+            `<div style="background:#f0f6ff;padding:12px;border-radius:15px;margin-bottom:10px;">
+                <strong>${e.title}</strong>
+                <button class="btn btn-outline btn-sm" onclick="viewExam(${idx})">عرض الامتحان</button>
+            </div>`
+        ).join('') || '<p>لا توجد امتحانات</p>';
+        document.getElementById('teacherMeetingsList').innerHTML = t.meetings?.map((m, idx) =>
+            `<div class="teacher-meeting-card">
+                <strong>🎥 ${m.title}</strong>
+                <br>⏰ ${m.time ? new Date(m.time).toLocaleString() : 'مرن'}
+                <br><a href="${m.link}" target="_blank" style="color:#1a4b6d;font-weight:bold;">🔗 اضغط للدخول</a>
+                <br><button class="btn btn-danger btn-sm" onclick="deleteTeacherMeeting(${idx})" style="width:auto;margin-top:5px;">🗑️ حذف</button>
+            </div>`
+        ).join('') || '<p>لا توجد اجتماعات</p>';
+    }
+
+    window.teacherLogout = function() { document.getElementById('teacherDashboard').style.display = 'none'; };
+    window.studentLogin = async function() { /* ... */ };
+    window.studentLogout = function() { document.getElementById('studentDashboard').style.display = 'none'; };
+
+    // ===== دوال إسلاميات =====
+    const dhikrList = ["سبحان الله وبحمده", "سبحان الله العظيم", "لا إله إلا الله", "اللهم صل على محمد", "أستغفر الله"];
+    let dhikrIndex = 0, tasbeeh = 0, juz = 1;
+
+    window.nextDhikr = function() { dhikrIndex = (dhikrIndex + 1) % dhikrList.length; document.getElementById('dhikrDisplay').textContent = dhikrList[dhikrIndex]; };
+    window.tasbeehAdd = function(val) { tasbeeh += val; document.getElementById('tasbeehCount').textContent = tasbeeh; };
+    window.tasbeehReset = function() { tasbeeh = 0; document.getElementById('tasbeehCount').textContent = tasbeeh; };
+
+    window.getPrayerTimes = function() {
+        const today = new Date();
+        const date = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        fetch(`https://api.aladhan.com/v1/timingsByCity/${date}?city=Cairo&country=Egypt&method=5`)
+            .then(r => r.json())
+            .then(data => {
+                const timings = data.data.timings;
+                document.getElementById('prayerTimes').innerHTML = `
+                    <p>الفجر: ${timings.Fajr}</p>
+                    <p>الشروق: ${timings.Sunrise}</p>
+                    <p>الظهر: ${timings.Dhuhr}</p>
+                    <p>العصر: ${timings.Asr}</p>
+                    <p>المغرب: ${timings.Maghrib}</p>
+                    <p>العشاء: ${timings.Isha}</p>
+                `;
+            })
+            .catch(() => document.getElementById('prayerTimes').textContent = 'تعذر جلب المواقيت');
+    };
+
+    window.nextJuz = function() {
+        const goal = parseInt(document.getElementById('juzGoal').value) || 30;
+        if (juz < goal) juz++; else alert('أتممت الختمة!');
+        document.getElementById('juzCounter').textContent = juz;
+        updateJuzProgress();
+    };
+    window.resetJuz = function() { juz = 1; document.getElementById('juzCounter').textContent = juz; updateJuzProgress(); };
+    function updateJuzProgress() {
+        const goal = parseInt(document.getElementById('juzGoal').value) || 30;
+        const progress = Math.round((juz / goal) * 100);
+        document.getElementById('juzProgress').innerHTML = `<div style="background:#27ae60;height:10px;width:${progress}%;border-radius:10px;"></div> <span>${progress}%</span>`;
+    }
+
+    const surahNames = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+    window.loadSurahSelect = function() {
+        const select = document.getElementById('surahSelect');
+        for (let i = 1; i <= 114; i++) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = `${i}. ${surahNames[i-1]}`;
+            select.appendChild(opt);
+        }
+    };
+    window.openQuranExternal = function() { const idx = parseInt(document.getElementById('surahSelect').value); window.open(`https://quran.com/${idx}`, '_blank'); };
+
+    // ===== دوال المدونة =====
+    window.createPost = async function() {
+        const title = document.getElementById('postTitle').value.trim();
+        const content = document.getElementById('postContent').value.trim();
+        const image = document.getElementById('postImage').value.trim();
+        if (!content) return alert('اكتب محتوى المنشور');
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        try {
+            await addDoc(collection(db, "posts"), {
+                userId: currentUser,
+                username: currentUserData?.username || 'مستخدم',
+                title: title || 'بدون عنوان',
+                content: content,
+                image: image || '',
+                likesCount: 0,
+                comments: [],
+                timestamp: new Date()
+            });
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+            document.getElementById('postImage').value = '';
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.renderFeed = function() {
+        const container = document.getElementById('feedContainer');
+        const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) { container.innerHTML = '<p>لا توجد منشورات</p>'; return; }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                html += `
+                    <div class="post-card" id="post-${id}">
+                        <div class="post-header">
+                            <div class="post-avatar">${(p.username || 'م')[0]}</div>
+                            <div><strong>${p.username || 'مجهول'}</strong> <span style="font-size:0.7rem;color:#888;">${p.timestamp?.toDate?.()?.toLocaleString() || ''}</span></div>
+                        </div>
+                        <h4>${p.title}</h4>
+                        <p>${p.content}</p>
+                        ${p.image ? `<img src="${p.image}" style="max-width:100%;border-radius:10px;margin:10px 0;" />` : ''}
+                        <div class="post-actions">
+                            <span onclick="likePost('${id}')">❤️ ${p.likesCount || 0}</span>
+                            <span onclick="commentPost('${id}')">💬 تعليق</span>
+                        </div>
+                        ${p.comments && p.comments.length ? `<div style="background:#f8faff;padding:10px;border-radius:10px;">${p.comments.map(c => `<div><strong>${c.username || 'مجهول'}</strong>: ${c.text}</div>`).join('')}</div>` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.likePost = async function(id) {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const ref = doc(db, "posts", id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) await updateDoc(ref, { likesCount: (snap.data().likesCount || 0) + 1 });
+    };
+
+    window.commentPost = async function(id) {
+        const text = prompt('أضف تعليقك:');
+        if (!text) return;
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const ref = doc(db, "posts", id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            const comments = snap.data().comments || [];
+            comments.push({ userId: currentUser, username: currentUserData?.username || 'مستخدم', text, timestamp: new Date() });
+            await updateDoc(ref, { comments });
+        }
+    };
+
+    window.renderHomePosts = function() {
+        const container = document.getElementById('homePosts');
+        const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const posts = [];
+            snapshot.forEach(d => posts.push(d.data()));
+            const limited = posts.slice(0, 3);
+            if (!limited.length) { container.innerHTML = '<p>لا توجد منشورات</p>'; return; }
+            container.innerHTML = limited.map(p => `
+                <div style="border-bottom:1px solid #eee;padding:8px 0;">
+                    <strong>${p.username || 'مجهول'}</strong>: ${p.content.substring(0, 50)}...
+                </div>
+            `).join('');
+        });
+    };
+
+    window.sendMessage = async function() {
+        const to = document.getElementById('msgTo').value.trim();
+        const body = document.getElementById('msgBody').value.trim();
+        if (!to || !body) return alert('املأ الحقول');
+        if (!currentUser) return alert('سجل دخول');
+        try {
+            await addDoc(collection(db, "messages"), {
+                from: currentUserData?.username || 'مستخدم',
+                fromId: currentUser,
+                to: to,
+                body: body,
+                timestamp: new Date()
+            });
+            document.getElementById('msgTo').value = '';
+            document.getElementById('msgBody').value = '';
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.renderMessages = function() {
+        const container = document.getElementById('messagesList');
+        if (!currentUser) { container.innerHTML = '<p>سجل دخول لعرض الرسائل</p>'; return; }
+        const q = query(collection(db, "messages"), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) { container.innerHTML = '<p>لا توجد رسائل</p>'; return; }
+            const user = currentUserData?.username || '';
+            let html = '';
+            snapshot.forEach(d => {
+                const m = d.data();
+                if (m.from === user || m.to === user) {
+                    html += `
+                        <div class="msg-item">
+                            <strong>${m.from}</strong> → ${m.to}: ${m.body} <span style="font-size:0.6rem;color:#888;">${m.timestamp?.toDate?.()?.toLocaleString() || ''}</span>
+                        </div>
+                    `;
+                }
+            });
+            container.innerHTML = html || '<p>لا توجد رسائل لك</p>';
+        });
+    };
+
+    window.addFriend = async function() {
+        const friend = document.getElementById('friendUser').value.trim();
+        if (!friend) return alert('أدخل اسم المستخدم');
+        if (!currentUser) return alert('سجل دخول');
+        if (friend === currentUserData?.username) return alert('لا يمكنك إضافة نفسك');
+        const ref = doc(db, "users", currentUser);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            const friends = snap.data().friends || [];
+            if (friends.includes(friend)) return alert('هذا المستخدم صديق بالفعل');
+            const q = query(collection(db, "users"), where("username", "==", friend));
+            const qSnap = await getDocs(q);
+            if (qSnap.empty) return alert('المستخدم غير موجود');
+            await updateDoc(ref, { friends: arrayUnion(friend) });
+            document.getElementById('friendUser').value = '';
+            renderFriends();
+        }
+    };
+
+    window.renderFriends = function() {
+        const container = document.getElementById('friendsList');
+        if (!currentUser) { container.innerHTML = '<p>سجل دخول لعرض الأصدقاء</p>'; return; }
+        const ref = doc(db, "users", currentUser);
+        onSnapshot(ref, (snap) => {
+            if (snap.exists()) {
+                const friends = snap.data().friends || [];
+                if (!friends.length) { container.innerHTML = '<p>لا يوجد أصدقاء</p>'; return; }
+                container.innerHTML = friends.map(f => `<div class="friend-item">👤 ${f}</div>`).join('');
+            }
+        });
+    };
+
+    window.verifyAccount = async function() {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        const ref = doc(db, "users", currentUser);
+        const snap = await getDoc(ref);
+        if (snap.exists() && snap.data().verified) return alert('حسابك موثق بالفعل');
+        await updateDoc(ref, { verified: true });
+        document.getElementById('verificationStatus').innerHTML = '<span style="color:#27ae60;">✅ تم توثيق حسابك!</span>';
+    };
+
+    // ===== دوال الخدمات التقنية =====
+    window.cropVideo = function() {
+        const fileInput = document.getElementById('videoCropInput');
+        if (!fileInput.files.length) return alert('اختر ملف فيديو');
+        const file = fileInput.files[0];
+        const url = URL.createObjectURL(file);
+        document.getElementById('cropResult').innerHTML = `<video controls width="100%"><source src="${url}" type="${file.type}"></video><p>⏱️ تم القص (محاكاة)</p>`;
+        alert('تم قص الفيديو (محاكاة)');
+    };
+
+    window.editImage = function() {
+        const fileInput = document.getElementById('imageEditInput');
+        if (!fileInput.files.length) return alert('اختر صورة');
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width; canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                for (let i = 0; i < data.length; i += 4) {
+                    const gray = 0.34 * data[i] + 0.5 * data[i+1] + 0.16 * data[i+2];
+                    data[i] = gray; data[i+1] = gray; data[i+2] = gray;
+                }
+                ctx.putImageData(imageData, 0, 0);
+                document.getElementById('editResult').innerHTML = `<img src="${canvas.toDataURL('image/png')}" style="max-width:100%;border-radius:10px;margin-top:10px;" /><p>✅ تم التعديل</p>`;
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+
+    window.calcCalories = function() {
+        const name = document.getElementById('foodName').value.trim();
+        const weight = parseFloat(document.getElementById('foodWeight').value);
+        if (!name || !weight) return alert('أدخل اسم الطعام والوزن');
+        const map = { 'تفاح':52, 'موز':89, 'خبز':265, 'أرز':130, 'دجاج':165, 'لحم':250, 'سمك':206, 'بيض':155, 'حليب':60, 'زبدة':717 };
+        const per100 = map[name.toLowerCase()] || 100;
+        const total = (per100 * weight) / 100;
+        document.getElementById('calorieResult').innerHTML = `<div style="background:#eaf4e8;padding:10px;border-radius:15px;"><strong>${name}</strong> (${weight}g) = ${total.toFixed(1)} سعرة حرارية</div>`;
+    };
+
+    window.calcBMR = function() {
+        const gender = document.getElementById('genderBMR').value;
+        const age = parseFloat(document.getElementById('ageBMR').value);
+        const height = parseFloat(document.getElementById('heightBMR').value);
+        const weight = parseFloat(document.getElementById('weightBMR').value);
+        const activity = parseFloat(document.getElementById('activityBMR').value);
+        if (!age || !height || !weight) { alert('يرجى إدخال العمر والطول والوزن'); return; }
+        let bmr = (gender === 'male') ? 10*weight + 6.25*height - 5*age + 5 : 10*weight + 6.25*height - 5*age - 161;
+        document.getElementById('bmrResult').innerHTML = `
+            <div style="background:#eaf4e8;padding:10px;border-radius:15px;">
+                <p><strong>BMR:</strong> ${bmr.toFixed(0)} سعرة</p>
+                <p><strong>احتياجك اليومي:</strong> ${(bmr*activity).toFixed(0)} سعرة</p>
+            </div>
+        `;
+    };
+
+    // ===== دوال الدردشة =====
+    window.sendChatMessage = async function() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if (!text) return alert('اكتب رسالة');
+        if (!currentUser) return alert('يجب تسجيل الدخول للدردشة');
+        try {
+            await addDoc(collection(db, "chatMessages"), {
+                userId: currentUser,
+                username: currentUserData?.username || 'مستخدم',
+                text: text,
+                timestamp: new Date()
+            });
+            input.value = '';
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.renderChat = function() {
+        const container = document.getElementById('chatMessages');
+        const q = query(collection(db, "chatMessages"), orderBy("timestamp", "asc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) { container.innerHTML = '<p>لا توجد رسائل، ابدأ الدردشة!</p>'; return; }
+            let html = '';
+            snapshot.forEach(d => {
+                const data = d.data();
+                html += `
+                    <div class="chat-message">
+                        <span class="sender">${data.username || 'مجهول'}</span>
+                        <span style="font-size:0.7rem;color:#888;">${data.timestamp?.toDate?.()?.toLocaleTimeString() || ''}</span>
+                        <p>${data.text}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            container.scrollTop = container.scrollHeight;
+        });
+    };
+
+    // ===== دوال الميتنج العام =====
+    window.createPublicMeeting = async function() {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        const title = document.getElementById('publicMeetingTitle').value.trim();
+        const host = document.getElementById('publicMeetingHost').value.trim() || currentUserData?.username || 'مستخدم';
+        const time = document.getElementById('publicMeetingTime').value;
+        if (!title) return alert('أدخل عنوان الاجتماع');
+        const meetLink = prompt('أدخل رابط Google Meet أو Zoom:', 'https://meet.google.com/');
+        if (!meetLink) return;
+        try {
+            await addDoc(collection(db, "publicMeetings"), {
+                creatorId: currentUser,
+                creatorName: currentUserData?.username || 'مستخدم',
+                host: host,
+                title: title,
+                time: time || new Date().toISOString(),
+                link: meetLink,
+                createdAt: new Date()
+            });
+            alert('✅ تم إنشاء الاجتماع العام!');
+            document.getElementById('publicMeetingTitle').value = '';
+            document.getElementById('publicMeetingHost').value = '';
+            document.getElementById('publicMeetingTime').value = '';
+            loadPublicMeetings();
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.loadPublicMeetings = function() {
+        const container = document.getElementById('publicMeetingsList');
+        const q = query(collection(db, "publicMeetings"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) { container.innerHTML = '<p>لا توجد اجتماعات عامة حالياً</p>'; return; }
+            let html = '';
+            snapshot.forEach(d => {
+                const m = d.data();
+                const id = d.id;
+                html += `
+                    <div class="meeting-card">
+                        <strong>🎥 ${m.title}</strong>
+                        <br>👤 المضيف: ${m.host || m.creatorName}
+                        <br>⏰ ${m.time ? new Date(m.time).toLocaleString() : 'مرن'}
+                        <br><a href="${m.link}" target="_blank" style="color:#1a4b6d;font-weight:bold;">🔗 اضغط للدخول</a>
+                        ${m.creatorId === currentUser ? `<br><button class="btn btn-danger btn-sm" onclick="deletePublicMeeting('${id}')" style="width:auto;margin-top:5px;">🗑️ حذف</button>` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.deletePublicMeeting = async function(id) {
+        if (!confirm('حذف الاجتماع؟')) return;
+        try { await deleteDoc(doc(db, "publicMeetings", id)); } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    // ===== دوال الأماكن والحجوزات =====
+    window.addPlace = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول أولاً');
+        const name = document.getElementById('placeName').value.trim();
+        const category = document.getElementById('placeCategory').value;
+        const address = document.getElementById('placeAddress').value.trim();
+        const phone = document.getElementById('placePhone').value.trim();
+        const description = document.getElementById('placeDescription').value.trim();
+        const slotsRaw = document.getElementById('placeSlots').value.trim();
+        if (!name || !address) return alert('اسم المكان والعنوان إجباريان');
+        const slots = slotsRaw ? slotsRaw.split(',').map(s => s.trim()) : [];
+        try {
+            await addDoc(collection(db, "places"), {
+                ownerId: currentUser,
+                ownerName: currentUserData?.username || 'صاحب المكان',
+                name, category, address, phone, description, availableSlots: slots,
+                createdAt: new Date()
+            });
+            alert('✅ تم إضافة المكان بنجاح!');
+            document.getElementById('placeName').value = '';
+            document.getElementById('placeAddress').value = '';
+            document.getElementById('placePhone').value = '';
+            document.getElementById('placeDescription').value = '';
+            document.getElementById('placeSlots').value = '';
+            loadPlaces();
+            loadMyBookings();
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.loadPlaces = function() {
+        const container = document.getElementById('placesList');
+        const q = query(collection(db, "places"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) { container.innerHTML = '<p>لا توجد أماكن متاحة للحجز حالياً</p>'; return; }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                const categoryEmojis = { 'cafe': '☕', 'restaurant': '🍽️', 'clinic': '🏥', 'course': '📚', 'tutoring': '📖' };
+                html += `
+                    <div class="place-card">
+                        <h4>${categoryEmojis[p.category] || '📍'} ${p.name}</h4>
+                        <p>📍 ${p.address}</p>
+                        <p>📞 ${p.phone || 'غير متاح'}</p>
+                        <p>${p.description || ''}</p>
+                        <p>⏰ المواعيد: ${p.availableSlots?.join(' - ') || 'مرنة'}</p>
+                        <p style="font-size:0.7rem;color:#888;">المضيف: ${p.ownerName}</p>
+                        <button class="btn btn-success btn-sm" onclick="bookPlace('${id}')" style="width:auto;margin-top:5px;">📅 احجز موعد</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.bookPlace = async function(placeId) {
+        if (!currentUser) return alert('يجب تسجيل الدخول للحجز');
+        const date = prompt('أدخل التاريخ (مثال: 2026-07-30):');
+        if (!date) return;
+        const time = prompt('أدخل الوقت (مثال: 14:30):');
+        if (!time) return;
+        const notes = prompt('أي ملاحظات إضافية؟ (اختياري)') || '';
+        try {
+            const placeRef = doc(db, "places", placeId);
+            const placeSnap = await getDoc(placeRef);
+            if (!placeSnap.exists()) return alert('المكان غير موجود');
+            const placeData = placeSnap.data();
+            await addDoc(collection(db, "bookings"), {
+                placeId, placeName: placeData.name, ownerId: placeData.ownerId,
+                userId: currentUser, userName: currentUserData?.username || 'مستخدم',
+                userPhone: currentUserData?.phone || 'غير مسجل',
+                date, time, notes, status: 'pending', createdAt: new Date()
+            });
+            alert('✅ تم إرسال طلب الحجز! في انتظار تأكيد صاحب المكان.');
+            loadMyBookings();
+        } catch (e) { alert('خطأ في الحجز: ' + e.message); }
+    };
+
+    window.loadMyBookings = async function() {
+        const container = document.getElementById('myBookingsList');
+        if (!currentUser) { container.innerHTML = '<p>سجل دخول لعرض حجوزاتك</p>'; return; }
+        try {
+            const q1 = query(collection(db, "bookings"), where("userId", "==", currentUser));
+            const q2 = query(collection(db, "bookings"), where("ownerId", "==", currentUser));
+            const snap1 = await getDocs(q1);
+            const snap2 = await getDocs(q2);
+            const allBookings = [];
+            snap1.forEach(d => allBookings.push({ id: d.id, ...d.data() }));
+            snap2.forEach(d => { if (!allBookings.find(b => b.id === d.id)) allBookings.push({ id: d.id, ...d.data() }); });
+            if (allBookings.length === 0) { container.innerHTML = '<p>لا توجد حجوزات</p>'; return; }
+            allBookings.sort((a, b) => (a.createdAt?.toDate?.() || 0) - (b.createdAt?.toDate?.() || 0));
+            let html = '';
+            allBookings.forEach(b => {
+                const statusMap = { 'pending': '⏳ قيد الانتظار', 'confirmed': '✅ مؤكد', 'completed': '✔️ مكتمل', 'cancelled': '❌ ملغي' };
+                const isOwner = b.ownerId === currentUser;
+                html += `
+                    <div class="booking-item" style="border-right-color: ${b.status === 'pending' ? '#f39c12' : '#27ae60'};">
+                        <strong>${b.placeName}</strong> - ${b.date} الساعة ${b.time}
+                        <br><span style="font-size:0.8rem;">👤 ${b.userName} - 📞 ${b.userPhone}</span>
+                        <br><span style="font-size:0.8rem;color:#555;">الحالة: ${statusMap[b.status] || b.status}</span>
+                        ${isOwner ? `
+                            <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;">
+                                <button class="btn btn-success btn-sm" onclick="updateBookingStatus('${b.id}', 'confirmed')" style="width:auto;">تأكيد</button>
+                                <button class="btn btn-danger btn-sm" onclick="updateBookingStatus('${b.id}', 'cancelled')" style="width:auto;">إلغاء</button>
+                                <button class="btn btn-outline btn-sm" onclick="updateBookingStatus('${b.id}', 'completed')" style="width:auto;">إنهاء</button>
+                            </div>
+                        ` : ''}
+                        ${b.notes ? `<p style="font-size:0.8rem;color:#888;">📝 ${b.notes}</p>` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        } catch (e) { console.error(e); container.innerHTML = '<p>حدث خطأ في تحميل الحجوزات</p>'; }
+    };
+
+    window.updateBookingStatus = async function(bookingId, status) {
+        if (!confirm(`هل تريد تغيير الحالة إلى ${status}؟`)) return;
+        try { await updateDoc(doc(db, "bookings", bookingId), { status }); loadMyBookings(); } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    // ===== دوال علم النفس (مكتبة + مراكز) =====
+    window.renderPsychology = function() {
+        const books = [
+            { title: "مدخل إلى التحليل النفسي - فرويد", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D9%85%D8%AF%D8%AE%D9%84-%D8%A7%D9%84%D9%89-%D8%A7%D9%84%D8%AA%D8%AD%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%86%D9%81%D8%B3%D9%8A-%D9%81%D8%B1%D9%88%D9%8A%D8%AF-pdf" },
+            { title: "العلاج السلوكي المعرفي - د. جودت", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D8%AC-%D8%A7%D9%84%D8%B3%D9%84%D9%88%D9%83%D9%8A-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%81%D9%8A-pdf" },
+            { title: "تفسير الأحلام - فرويد", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D8%A7%D9%84%D8%A7%D8%AD%D9%84%D8%A7%D9%85-%D9%81%D8%B1%D9%88%D9%8A%D8%AF-pdf" },
+            { title: "الأنا والهو - فرويد", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%A7%D9%86%D8%A7-%D9%88%D8%A7%D9%84%D9%87%D9%88-%D9%81%D8%B1%D9%88%D9%8A%D8%AF-pdf" },
+            { title: "علم النفس الإيجابي - سليجمان", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%B9%D9%84%D9%85-%D8%A7%D9%84%D9%86%D9%81%D8%B3-%D8%A7%D9%84%D8%A7%D9%8A%D8%AC%D8%A7%D8%A8%D9%8A-pdf" },
+            { title: "فن التعامل مع الناس - ديل كارنيجي", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D9%81%D9%86-%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%85%D9%84-%D9%85%D8%B9-%D8%A7%D9%84%D9%86%D8%A7%D8%B3-pdf" }
+        ];
+        document.getElementById('psychBooks').innerHTML = books.map(b =>
+            `<div style="padding:10px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+                <span style="color:#1a4b6d;font-weight:bold;">📘 ${b.title}</span>
+                <a href="${b.link}" target="_blank" class="book-link"><i class="fas fa-download"></i> تحميل PDF</a>
+            </div>`
+        ).join('');
+    };
+
+    window.renderPsychologyCenters = function() {
+        const centers = [
+            { name: "مركز الإرشاد النفسي - جامعة عين شمس", desc: "برامج تدريبية ودبلومات في علم النفس الإكلينيكي، التربية الخاصة، والتخاطب.", location: "العباسية، القاهرة", contact: "26831231" },
+            { name: "الجمعية المصرية للمعالجين النفسيين", desc: "دورات تدريبية وورش عمل متخصصة لتأهيل المعالجين النفسيين.", location: "شارع الهرم، الجيزة", contact: "01030756456" },
+            { name: "أكاديمية MSA للعلوم النفسية", desc: "دورات تدريبية واستشارات نفسية متخصصة.", location: "القاهرة", contact: "0237762220" }
+        ];
+        document.getElementById('psychologyCenters').innerHTML = centers.map(c =>
+            `<div class="psych-center-item">
+                <strong>🏛️ ${c.name}</strong>
+                <div class="desc">${c.desc}</div>
+                <div class="info">📍 ${c.location} ${c.contact ? '| 📞 ' + c.contact : ''}</div>
+            </div>`
+        ).join('');
+    };
+
+    // ===== دوال البرمجة =====
+    window.renderProgramming = function() {
+        const articles = [
+            { title: "مقدمة في الخوارزميات - شرح نظري وعملي", content: `الخوارزمية هي مجموعة من الخطوات المنطقية المتسلسة لحل مشكلة معينة...\n<strong>مثال عملي (جافا سكريبت):</strong>\n<div class="code-block">function binarySearch(arr, target) { let left = 0, right = arr.length - 1; while (left <= right) { let mid = Math.floor((left + right) / 2); if (arr[mid] === target) return mid; else if (arr[mid] < target) left = mid + 1; else right = mid - 1; } return -1; }</div>` },
+            { title: "هياكل البيانات - شرح نظري مع تطبيق عملي", content: `هياكل البيانات هي طرق تنظيم وتخزين البيانات...\n<div class="code-block">class Stack { constructor() { this.items = []; } push(element) { this.items.push(element); } pop() { return this.items.pop(); } }</div>` }
+        ];
+        const container = document.getElementById('programmingArticles');
+        container.innerHTML = articles.map((a, i) => `
+            <div class="programming-article">
+                <h4 onclick="toggleArticle(${i})">📘 ${a.title}</h4>
+                <div id="articleDetail_${i}" class="article-detail"><pre>${a.content}</pre></div>
+            </div>
+        `).join('');
+    };
+
+    window.toggleArticle = function(i) {
+        const detail = document.getElementById(`articleDetail_${i}`);
+        if (detail) detail.style.display = detail.style.display === 'block' ? 'none' : 'block';
+    };
+
+    window.renderProgrammingCenters = function() {
+        const centers = [
+            { name: "معهد تكنولوجيا المعلومات (ITI) - القاهرة", desc: "أكبر معهد تدريب تكنولوجيا معلومات في مصر، يقدم دورات مجانية ومدفوعة.", link: "https://www.iti.gov.eg" },
+            { name: "مدرسة الروبوتات - الإسكندرية", desc: "دورات تدريبية في الروبوتات والبرمجة للأطفال والشباب.", link: "https://www.robotics-school.com" },
+            { name: "أكاديمية نيو هورايزن - الجيزة", desc: "مركز تدريب معتمد يقدم دورات في لغات البرمجة المختلفة.", link: "https://www.newhorizons.com" }
+        ];
+        document.getElementById('programmingCenters').innerHTML = centers.map(c =>
+            `<div style="padding:12px 0;border-bottom:1px solid #eee;">
+                <strong><a href="${c.link}" target="_blank" style="color:#1a4b6d;text-decoration:none;">🏛️ ${c.name}</a></strong>
+                <p style="margin:4px 0;font-size:0.9rem;color:#555;">${c.desc}</p>
+                <a href="${c.link}" target="_blank" style="font-size:0.8rem;color:#f9b83a;">🔗 زيارة الموقع</a>
+            </div>`
+        ).join('');
+    };
+
+    // ===== دوال التنقل و PWA =====
+    window.setupNavigation = function() {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                const sectionId = this.dataset.section;
+                document.getElementById(sectionId).classList.add('active');
+                if (sectionId === 'programmingSection') { renderProgramming(); renderProgrammingCenters(); }
+                if (sectionId === 'psychologySection') { renderPsychology(); renderPsychologyCenters(); loadPsychologists(); loadPsychSessions(); }
+                if (sectionId === 'blogSection') { renderFeed(); renderMessages(); renderFriends(); }
+                if (sectionId === 'homeSection') { renderHomePosts(); renderTasks(); }
+                if (sectionId === 'chatSection') renderChat();
+                if (sectionId === 'meetingSection') loadPublicMeetings();
+                if (sectionId === 'placesSection') { loadPlaces(); loadMyBookings(); }
+                if (sectionId === 'adminSection') {
+                    if (currentUserData?.role !== 'admin' && currentUserData?.role !== 'مسؤول') {
+                        alert('هذا القسم مخصص للمدير فقط.');
+                        document.querySelector('.nav-item.active')?.classList.remove('active');
+                        document.getElementById('homeSection').classList.add('active');
+                        document.querySelector('[data-section="homeSection"]')?.classList.add('active');
+                    }
+                }
+            });
+        });
+    };
+
+    window.registerPWA = function() {
+        const manifest = {
+            name: "المنصة الشاملة 2026",
+            short_name: "المنصة",
+            description: "تطبيق منصة شاملة للتعليم والدردشة والخدمات",
+            start_url: "/",
+            display: "standalone",
+            background_color: "#0b2a41",
+            theme_color: "#0b2a41",
+            orientation: "portrait",
+            icons: [{ src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230b2a41'/%3E%3Ctext x='256' y='320' font-size='200' text-anchor='middle' fill='%23f9b83a' font-family='Segoe UI'%3E📚%3C/text%3E%3C/svg%3E", sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }]
+        };
+        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
+        if ('serviceWorker' in navigator) {
+            const swCode = `self.addEventListener('install', e => { e.waitUntil(caches.open('app-cache').then(cache => cache.addAll(['/']))); }); self.addEventListener('fetch', e => { e.respondWith(caches.match(e.request).then(response => response || fetch(e.request))); });`;
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            navigator.serviceWorker.register(URL.createObjectURL(swBlob), { scope: '/' }).catch(() => {});
+        }
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; document.getElementById('installBanner').style.display = 'block'; });
+        window.installApp = function() {
+            if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; document.getElementById('installBanner').style.display = 'none'; }
+            else alert('يمكنك تثبيت التطبيق عبر قائمة المتصفح "إضافة إلى الشاشة الرئيسية"');
+        };
+    };
+
+    window.renderAll = function() {
+        getWeather();
+        updateCalendar();
+        renderTasks();
+        renderPsychology();
+        renderPsychologyCenters();
+        renderProgramming();
+        renderProgrammingCenters();
+        renderFeed();
+        renderHomePosts();
+        renderMessages();
+        renderFriends();
+        loadSurahSelect();
+        updateJuzProgress();
+        renderChat();
+        loadPublicMeetings();
+        loadPlaces();
+        loadMyBookings();
+        loadPsychologists();
+        loadPsychSessions();
+        if (currentUserData?.verified) {
+            document.getElementById('verificationStatus').innerHTML = '<span style="color:#27ae60;">✅ حساب موثق</span>';
+        }
+        if (!document.getElementById('selectedPsychologistId')) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.id = 'selectedPsychologistId';
+            document.body.appendChild(input);
+        }
+    };
+
+    window.onload = function() {
+        setupNavigation();
+        registerPWA();
+        const savedEmail = localStorage.getItem('savedEmail');
+        if (savedEmail) {
+            document.getElementById('loginEmail').value = savedEmail;
+            document.getElementById('rememberMe').checked = true;
+        }
+    };
+
+    if (document.readyState === 'complete') {
+        window.onload();
+    } else {
+        window.addEventListener('load', window.onload);
+    }
+
+    console.log('✅ تم تحميل التطبيق بالكامل!');
+</script>
+</body>
+                        </html>
