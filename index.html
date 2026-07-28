@@ -26,7 +26,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { background: #f0f2f5; color: #1a2332; padding: 0; direction: rtl; height: 100vh; display: flex; flex-direction: column; }
 
-        /* ===== شاشة تسجيل الدخول ===== */
         #loginScreen {
             display: flex;
             justify-content: center;
@@ -79,11 +78,9 @@
         .login-container .hint { font-size: 0.7rem; color: #aaa; margin-top: 15px; }
         .login-container .forgot-link { font-size: 0.8rem; color: #1a4b6d; text-decoration: none; display: inline-block; margin-top: 5px; }
 
-        /* ===== المحتوى الرئيسي ===== */
         #appContent { display: none; flex: 1; padding: 0 0 80px 0; }
         .container { max-width: 1000px; margin: 0 auto; padding: 15px; }
 
-        /* ===== باقي الأنماط (مختصرة) ===== */
         .app-header {
             background: linear-gradient(145deg, #0b2a41, #1a4b6d);
             color: #fff; padding: 18px 15px; border-radius: 0 0 30px 30px;
@@ -198,13 +195,13 @@
 </head>
 <body>
 
-<!-- ===== شاشة تسجيل الدخول الإلزامية ===== -->
+<!-- ===== شاشة تسجيل الدخول ===== -->
 <div id="loginScreen">
     <div class="login-container">
         <h1>📚 <span>المنصة</span> الشاملة</h1>
         <p class="sub">سجل الدخول أو أنشئ حساباً للوصول إلى جميع الخدمات</p>
-        <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" dir="ltr">
-        <input type="password" id="loginPassword" placeholder="كلمة المرور (6 أحرف على الأقل)" dir="ltr">
+        <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" dir="ltr" value="abdalrhmanmontase3@gmail.com">
+        <input type="password" id="loginPassword" placeholder="كلمة المرور (6 أحرف على الأقل)" dir="ltr" value="hhhjjj">
         <div class="remember-row">
             <input type="checkbox" id="rememberMe" checked>
             <label for="rememberMe">تذكرني (ابقني مسجلاً)</label>
@@ -217,7 +214,7 @@
     </div>
 </div>
 
-<!-- ===== المحتوى الرئيسي (يظهر بعد تسجيل الدخول) ===== -->
+<!-- ===== المحتوى الرئيسي ===== -->
 <div id="appContent">
 
     <div class="app-header">
@@ -655,6 +652,9 @@
     let currentUser = null;
     let currentUserData = null;
 
+    // ===== البريد الإلكتروني للأدمن =====
+    const ADMIN_EMAIL = "abdalrhmanmontase3@gmail.com";
+
     // ===== دوال تسجيل الدخول وإنشاء الحساب =====
     window.loginUser = async function() {
         const email = document.getElementById('loginEmail').value.trim();
@@ -685,15 +685,24 @@
         if (pass.length < 6) { msg.innerText = '⚠️ كلمة المرور 6 أحرف على الأقل'; return; }
         try {
             const cred = await createUserWithEmailAndPassword(auth, email, pass);
+            
+            // ===== تحديد الدور بناءً على البريد الإلكتروني =====
+            const role = (email === ADMIN_EMAIL) ? 'admin' : 'user';
+            
             await setDoc(doc(db, "users", cred.user.uid), {
                 username: email.split('@')[0],
                 email: email,
-                role: "user",
+                role: role,
                 phone: '',
                 verified: false,
                 friends: []
             });
-            msg.innerText = '✅ تم إنشاء الحساب! جاري الدخول...';
+            
+            if (role === 'admin') {
+                msg.innerText = '✅ مرحباً أيها المدير! تم إنشاء حسابك.';
+            } else {
+                msg.innerText = '✅ تم إنشاء الحساب بنجاح!';
+            }
             localStorage.setItem('rememberMe', 'true');
             localStorage.setItem('savedEmail', email);
         } catch(e) {
@@ -720,7 +729,7 @@
             loginScreen.style.display = 'none';
             appContent.style.display = 'block';
             
-            // ===== التعديل المهم: يقبل "admin" و "مسؤول" =====
+            // ===== التحقق من الأدمن =====
             const isAdmin = currentUserData.role === 'admin' || currentUserData.role === 'مسؤول';
             document.querySelectorAll('.admin-item').forEach(el => {
                 el.style.display = isAdmin ? 'block' : 'none';
@@ -1747,4 +1756,4 @@
     console.log('✅ تم تحميل التطبيق بالكامل!');
 </script>
 </body>
-                        </html>
+    </html>
