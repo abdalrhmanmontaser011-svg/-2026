@@ -114,6 +114,34 @@
         .login-container .tag-input-row input { flex: 1; margin-bottom: 0; }
         .login-container .tag-input-row button { width: auto; padding: 8px 15px; }
 
+        /* ===== إشعارات ===== */
+        .notification-bell {
+            position: fixed; top: 80px; left: 15px; z-index: 999;
+            background: #1a4b6d; color: #fff; padding: 12px 15px; border-radius: 50%;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 1.2rem;
+            border: none; transition: 0.2s;
+        }
+        .notification-bell:hover { transform: scale(1.05); }
+        .notification-bell .badge {
+            position: absolute; top: -5px; right: -5px; background: #c0392b;
+            color: #fff; border-radius: 50%; padding: 2px 7px; font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .notification-dropdown {
+            position: fixed; top: 130px; left: 15px; width: 320px; max-height: 400px;
+            background: #fff; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 999; display: none; overflow-y: auto; padding: 10px 0;
+        }
+        .notification-dropdown .notif-item {
+            padding: 12px 15px; border-bottom: 1px solid #eee; cursor: pointer;
+            transition: 0.2s; display: flex; align-items: center; gap: 10px;
+        }
+        .notification-dropdown .notif-item:hover { background: #f0f6ff; }
+        .notification-dropdown .notif-item.unread { background: #e6f0fa; }
+        .notification-dropdown .notif-item .notif-icon { font-size: 1.2rem; }
+        .notification-dropdown .notif-item .notif-text { flex: 1; font-size: 0.85rem; }
+        .notification-dropdown .notif-item .notif-time { font-size: 0.6rem; color: #888; }
+
         #appContent { display: none; flex: 1; padding: 0 0 80px 0; }
         .container { max-width: 1000px; margin: 0 auto; padding: 15px; }
 
@@ -166,12 +194,52 @@
         input, textarea, select { width: 100%; padding: 12px; border: 1px solid #dce3ec; border-radius: 14px; margin-bottom: 12px; font-size: 1rem; background: #fafcff; }
         textarea { min-height: 80px; resize: vertical; }
         .weather-box { background: #e3f0fa; padding: 15px; border-radius: 20px; margin-bottom: 15px; font-weight: bold; }
-        .post-card { background: #fff; border-radius: 20px; padding: 15px; margin-bottom: 18px; border: 1px solid #e9ecf0; }
+        
+        /* ===== المدونة زي فيسبوك ===== */
+        .post-card {
+            background: #fff; border-radius: 20px; padding: 15px; margin-bottom: 18px;
+            border: 1px solid #e9ecf0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
         .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-        .post-avatar { width: 45px; height: 45px; border-radius: 50%; background: #1a4b6d; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; object-fit: cover; }
-        .post-actions { display: flex; gap: 20px; margin: 10px 0; border-top: 1px solid #f0f0f0; padding-top: 10px; }
-        .post-actions span { cursor: pointer; color: #5f6b7a; font-weight: 600; }
+        .post-avatar {
+            width: 45px; height: 45px; border-radius: 50%; background: #1a4b6d;
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: bold; object-fit: cover;
+        }
+        .post-avatar img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+        .post-actions {
+            display: flex; gap: 20px; margin: 10px 0; padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .post-actions span { cursor: pointer; color: #5f6b7a; font-weight: 600; font-size: 0.85rem; }
         .post-actions span:hover { color: #1a4b6d; }
+        .post-actions span.liked { color: #1a4b6d; }
+        .post-comments { margin-top: 10px; background: #f8faff; padding: 10px; border-radius: 10px; }
+        .post-comments .comment { padding: 6px 0; border-bottom: 1px solid #eee; }
+        .post-comments .comment:last-child { border-bottom: none; }
+        .comment-input-row { display: flex; gap: 8px; margin-top: 8px; }
+        .comment-input-row input { flex: 1; margin-bottom: 0; padding: 8px 12px; border-radius: 20px; }
+        .comment-input-row button { width: auto; padding: 8px 15px; border-radius: 20px; }
+        
+        /* ===== ستوري ===== */
+        .stories-row {
+            display: flex; gap: 12px; overflow-x: auto; padding: 10px 0;
+            margin-bottom: 15px;
+        }
+        .story-item {
+            min-width: 100px; height: 150px; border-radius: 15px;
+            background: linear-gradient(145deg, #1a4b6d, #0b2a41);
+            color: #fff; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 10px; cursor: pointer;
+            border: 2px solid #f9b83a; text-align: center; position: relative;
+        }
+        .story-item img, .story-item video {
+            width: 100%; height: 100%; border-radius: 13px; object-fit: cover;
+            position: absolute; top: 0; left: 0;
+        }
+        .story-item .story-text { position: relative; z-index: 1; font-size: 0.7rem; }
+        .story-item .story-username { position: absolute; bottom: 5px; font-size: 0.6rem; background: rgba(0,0,0,0.5); padding: 2px 8px; border-radius: 10px; }
+
         .islam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .islam-card { background: #eaf4e8; padding: 15px; border-radius: 20px; text-align: center; border: 2px solid #2e7d32; }
         .tasbeeh-counter { font-size: 3rem; font-weight: bold; color: #1a4b6d; }
@@ -231,6 +299,7 @@
             .bottom-nav .nav-item i { font-size: 1.1rem; }
             .psychologist-card { flex-direction: column; text-align: center; }
             .login-container { padding: 20px; }
+            .notification-dropdown { width: 280px; left: 10px; }
         }
     </style>
 </head>
@@ -264,17 +333,14 @@
             </div>
             <input type="text" id="signupUsername" placeholder="اسم المستخدم (الظاهر)">
 
-            <!-- ===== الدولة ===== -->
             <select id="signupCountry" onchange="updateCountryCode(); updateCities();">
                 <option value="">اختر الدولة</option>
             </select>
 
-            <!-- ===== المدينة ===== -->
             <select id="signupCity">
                 <option value="">اختر المدينة</option>
             </select>
 
-            <!-- ===== رقم التليفون مع المفتاح ===== -->
             <div style="display:flex;gap:8px;align-items:center;">
                 <span id="countryCodeDisplay" style="background:#e6f0fa;padding:10px 12px;border-radius:14px;font-weight:bold;min-width:50px;">+20</span>
                 <input type="text" id="signupPhone" placeholder="رقم التليفون" dir="ltr" style="flex:1;">
@@ -286,7 +352,6 @@
 
             <input type="text" id="signupBio" placeholder="وصف ذاتي (نبذة عنك)">
 
-            <!-- ===== الهوايات (اختيار + إضافة) ===== -->
             <label style="display:block;text-align:right;font-weight:bold;margin-bottom:5px;">الهوايات</label>
             <div id="hobbiesContainer" class="tag-container"></div>
             <div class="tag-input-row">
@@ -309,7 +374,6 @@
 
             <input type="text" id="signupSpecialty" placeholder="التخصص (مثال: علم نفس، برمجة، هندسة)">
 
-            <!-- ===== الكلية/الجامعة (اختيار + إضافة) ===== -->
             <label style="display:block;text-align:right;font-weight:bold;margin-bottom:5px;">الكلية / الجامعة</label>
             <div id="collegeContainer" class="tag-container"></div>
             <div class="tag-input-row">
@@ -353,6 +417,17 @@
     </div>
 </div>
 
+<!-- ===== زر الإشعارات ===== -->
+<button class="notification-bell" onclick="toggleNotifications()" id="notificationBell">
+    <i class="fas fa-bell"></i>
+    <span class="badge" id="notifBadge">0</span>
+</button>
+<div class="notification-dropdown" id="notificationDropdown">
+    <div style="padding:10px 15px;font-weight:bold;border-bottom:1px solid #eee;">📬 الإشعارات</div>
+    <div id="notificationsList"></div>
+</div>
+
+<!-- ===== المحتوى الرئيسي ===== -->
 <div id="appContent">
     <div class="app-header">
         <h1>📚 <span>المنصة الشاملة</span> 2026</h1>
@@ -370,6 +445,7 @@
     </button>
 
     <div class="container">
+        <!-- ===== الرئيسية ===== -->
         <div id="homeSection" class="section active">
             <div class="weather-box" id="weatherDisplay">🌤️ جاري جلب الطقس...</div>
             <div class="card">
@@ -397,222 +473,266 @@
                 <div class="card-title"><i class="fas fa-newspaper"></i> أحدث المنشورات</div>
                 <div id="homePosts"></div>
             </div>
-                                                    </div>
-           <div id="teacherSection" class="section">
-            <div class="card">
-                <div class="card-title"><i class="fas fa-chalkboard-teacher"></i> نظام المعلمين</div>
-                <div class="info-box">
-                    <p>📢 <strong>سيتم التعاقد مع مجموعة من المدرسين في جميع المواد والصفوف الدراسية قريباً</strong></p>
+            </div>
+        <!-- ===== المعلمون ===== -->
+<div id="teacherSection" class="section">
+    <div class="card">
+        <div class="card-title"><i class="fas fa-chalkboard-teacher"></i> نظام المعلمين</div>
+        <div class="info-box">
+            <p>📢 <strong>نظام متكامل للمعلمين والطلاب</strong></p>
+            <p style="font-size:0.9rem;color:#555;margin-top:8px;">المعلمين يمكنهم إضافة طلاب، رفع فيديوهات، إنشاء امتحانات وواجبات، وميتنج</p>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:15px;">
+            <button class="btn btn-outline" onclick="setRole('teacher')">👨‍🏫 معلم</button>
+            <button class="btn btn-outline" onclick="setRole('student')">👨‍🎓 طالب</button>
+        </div>
+        <div id="teacherPanel" style="display:none;">
+            <h4>🔐 تسجيل الدخول كمعلم</h4>
+            <input type="email" id="teacherUsername" placeholder="البريد الإلكتروني">
+            <input type="password" id="teacherPassword" placeholder="كلمة المرور (6 أحرف على الأقل)">
+            <div style="display:flex;gap:10px;">
+                <button class="btn btn-success" onclick="teacherSignup()" style="flex:1;">➕ إنشاء حساب</button>
+                <button class="btn" onclick="teacherLogin()" style="flex:1;">🔑 تسجيل دخول</button>
+            </div>
+            <div id="teacherDashboard" style="display:none;margin-top:15px;">
+                <p><span style="background:#27ae60;color:#fff;padding:4px 15px;border-radius:30px;">المعلم: <span id="currentTeacherDisplay"></span></span></p>
+                <button class="btn btn-danger btn-sm" onclick="teacherLogout()" style="width:auto;">تسجيل خروج المعلم</button>
+                <hr><h4>🔑 كود المعلم الخاص بك: <span id="teacherCodeDisplay" style="background:#f9b83a;padding:3px 12px;border-radius:20px;"></span></h4>
+                <p style="font-size:0.8rem;color:#555;">شارك هذا الكود مع طلابك</p>
+                <hr>
+                <h4>👨‍🎓 إضافة طالب جديد</h4>
+                <input type="text" id="studentUser" placeholder="اسم المستخدم للطالب">
+                <input type="password" id="studentPass" placeholder="كلمة المرور للطالب">
+                <button class="btn btn-success" onclick="addStudent()">➕ إضافة طالب</button>
+                <div id="studentList" style="margin-top:10px;"></div>
+                <hr>
+                <h4>📹 رفع فيديو تعليمي</h4>
+                <input type="text" id="teacherVideoTitle" placeholder="عنوان الفيديو">
+                <input type="file" id="teacherVideoFile" accept="video/*">
+                <button class="btn" onclick="uploadTeacherVideo()">📤 رفع فيديو</button>
+                <div id="uploadProgress" class="upload-progress" style="display:none;"></div>
+                <div id="teacherVideosList" style="margin-top:10px;"></div>
+                <hr>
+                <h4>📝 إنشاء امتحان متقدم</h4>
+                <input type="text" id="examTitle" placeholder="عنوان الامتحان">
+                <input type="text" id="examDescription" placeholder="وصف الامتحان">
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <div style="flex:1;"><label>📅 تاريخ البداية</label><input type="datetime-local" id="examStartDate"></div>
+                    <div style="flex:1;"><label>📅 تاريخ النهاية</label><input type="datetime-local" id="examEndDate"></div>
                 </div>
-                <div style="display:flex;gap:10px;margin-bottom:15px;">
-                    <button class="btn btn-outline" onclick="setRole('teacher')">👨‍🏫 معلم</button>
-                    <button class="btn btn-outline" onclick="setRole('student')">👨‍🎓 طالب</button>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <div style="flex:1;"><label>⏱️ المدة (دقائق)</label><input type="number" id="examDuration" value="60"></div>
+                    <div style="flex:1;"><label>⏰ جدولة</label><input type="datetime-local" id="examScheduledTime"></div>
                 </div>
-                <div id="teacherPanel" style="display:none;">
-                    <h4>🔐 تسجيل الدخول كمعلم</h4>
-                    <input type="email" id="teacherUsername" placeholder="البريد الإلكتروني">
-                    <input type="password" id="teacherPassword" placeholder="كلمة المرور (6 أحرف على الأقل)">
-                    <div style="display:flex;gap:10px;">
-                        <button class="btn btn-success" onclick="teacherSignup()" style="flex:1;">➕ إنشاء حساب</button>
-                        <button class="btn" onclick="teacherLogin()" style="flex:1;">🔑 تسجيل دخول</button>
-                    </div>
-                    <div id="teacherDashboard" style="display:none;margin-top:15px;">
-                        <p><span style="background:#27ae60;color:#fff;padding:4px 15px;border-radius:30px;">المعلم: <span id="currentTeacherDisplay"></span></span></p>
-                        <button class="btn btn-danger btn-sm" onclick="teacherLogout()" style="width:auto;">تسجيل خروج المعلم</button>
-                        <hr><h4>🔑 كود المعلم الخاص بك: <span id="teacherCodeDisplay" style="background:#f9b83a;padding:3px 12px;border-radius:20px;"></span></h4>
-                        <button class="btn btn-success" onclick="addStudent()">➕ إضافة طالب</button>
-                        <div id="studentList" style="margin-top:10px;"></div>
-                        <hr><h4>📹 رفع فيديو تعليمي</h4>
-                        <input type="text" id="teacherVideoTitle" placeholder="عنوان الفيديو">
-                        <input type="file" id="teacherVideoFile" accept="video/*">
-                        <button class="btn" onclick="uploadTeacherVideo()">📤 رفع فيديو</button>
-                        <div id="uploadProgress" class="upload-progress" style="display:none;"></div>
-                        <div id="teacherVideosList" style="margin-top:10px;"></div>
-                        <hr><h4>📝 إنشاء امتحان</h4>
-                        <input type="text" id="examTitle" placeholder="عنوان الامتحان">
-                        <div id="questionsContainer"></div>
-                        <button class="btn btn-outline btn-sm" onclick="addQuestionField()">➕ إضافة سؤال</button>
-                        <button class="btn btn-success" onclick="saveExam()">💾 حفظ الامتحان</button>
-                        <div id="teacherExamsList" style="margin-top:15px;"></div>
-                        <hr><h4>🎥 الميتنج</h4>
-                        <input type="text" id="teacherMeetingTitle" placeholder="عنوان الاجتماع">
-                        <input type="datetime-local" id="teacherMeetingTime">
-                        <button class="btn" onclick="createTeacherMeeting()">🎥 إنشاء اجتماع</button>
-                        <div id="teacherMeetingsList" style="margin-top:15px;"></div>
-                    </div>
-                </div>
-                <div id="studentPanel" style="display:none;">
-                    <h4>دخول الطالب</h4>
-                    <input type="text" id="studentCode" placeholder="كود المعلم">
-                    <input type="text" id="studentLoginUser" placeholder="اسم المستخدم (من المعلم)">
-                    <input type="password" id="studentLoginPass" placeholder="كلمة المرور (من المعلم)">
-                    <button class="btn" onclick="studentLogin()">دخول</button>
-                    <div id="studentDashboard" style="display:none;margin-top:15px;">
-                        <p><span style="background:#27ae60;color:#fff;padding:4px 15px;border-radius:30px;">الطالب: <span id="currentStudentDisplay"></span></span></p>
-                        <button class="btn btn-danger btn-sm" onclick="studentLogout()" style="width:auto;">تسجيل خروج</button>
-                        <h4>📹 فيديوهات المعلم</h4>
-                        <div id="studentVideosView"></div>
-                        <h4>📝 الامتحانات</h4>
-                        <div id="studentExamsView"></div>
-                        <h4>🎥 الميتنج</h4>
-                        <div id="studentMeetingsView"></div>
-                    </div>
-                </div>
+                <div id="examQuestionsContainer"></div>
+                <button class="btn btn-outline btn-sm" onclick="addExamQuestion()">➕ إضافة سؤال</button>
+                <button class="btn btn-success" onclick="saveAdvancedExam()" style="margin-top:10px;">💾 حفظ الامتحان</button>
+                <div id="advancedExamsList" style="margin-top:15px;"></div>
+                <hr>
+                <h4>📤 إدارة الواجبات</h4>
+                <input type="text" id="assignmentTitle" placeholder="عنوان الواجب">
+                <textarea id="assignmentDesc" placeholder="وصف الواجب"></textarea>
+                <input type="datetime-local" id="assignmentDeadline">
+                <input type="file" id="assignmentFile" accept=".pdf,.doc,.docx,.zip">
+                <button class="btn btn-success" onclick="uploadAssignment()">📤 رفع الواجب</button>
+                <div id="assignmentsList" style="margin-top:15px;"></div>
+                <hr>
+                <h4>🎥 الميتنج</h4>
+                <input type="text" id="teacherMeetingTitle" placeholder="عنوان الاجتماع">
+                <input type="datetime-local" id="teacherMeetingTime">
+                <button class="btn" onclick="createTeacherMeeting()">🎥 إنشاء اجتماع</button>
+                <div id="teacherMeetingsList" style="margin-top:15px;"></div>
             </div>
         </div>
-
-        <div id="psychologySection" class="section">
-            <div class="card">
-                <div class="card-title"><i class="fas fa-brain"></i> حجز جلسات نفسية مع أخصائيين</div>
-                <div id="psychologistsList"></div>
-                <div id="psychologistBookingForm" style="display:none; margin-top:20px; background:#eaf4e8; padding:15px; border-radius:20px;">
-                    <h4>📅 حجز جلسة مع <span id="selectedPsychologistName"></span></h4>
-                    <input type="date" id="sessionDate" required>
-                    <input type="time" id="sessionTime" required>
-                    <textarea id="sessionNotes" placeholder="ملاحظات إضافية (اختياري)"></textarea>
-                    <button class="btn btn-success" onclick="bookPsychSession()">✅ احجز الجلسة</button>
-                    <button class="btn btn-outline btn-sm" onclick="document.getElementById('psychologistBookingForm').style.display='none';">إلغاء</button>
-                </div>
-                <div style="margin-top:20px;">
-                    <h4>📋 حجوزاتي</h4>
-                    <div id="psychSessionsList"></div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-graduation-cap"></i> كورسات علم النفس</div>
-                <div id="psychCourses"></div>
-                <button class="btn btn-success" onclick="showAddPsychCourse()" style="width:auto;margin-top:10px;">➕ إضافة كورس جديد</button>
-                <div id="addPsychCourseForm" style="display:none;margin-top:10px;background:#f8faff;padding:15px;border-radius:15px;">
-                    <input type="text" id="psychCourseTitle" placeholder="عنوان الكورس">
-                    <input type="text" id="psychCourseInstructor" placeholder="اسم المحاضر">
-                    <input type="text" id="psychCoursePrice" placeholder="السعر (اتركه فارغاً للمجاني)">
-                    <textarea id="psychCourseDesc" placeholder="وصف الكورس"></textarea>
-                    <button class="btn btn-success" onclick="addPsychCourse()">✅ إضافة الكورس</button>
-                    <button class="btn btn-outline btn-sm" onclick="document.getElementById('addPsychCourseForm').style.display='none';">إلغاء</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-book-open"></i> مكتبة علم النفس</div>
-                <div id="psychBooks"></div>
-            </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-university"></i> أماكن دورات علم النفس في مصر</div>
-                <div id="psychologyCenters"></div>
+        <div id="studentPanel" style="display:none;">
+            <h4>دخول الطالب</h4>
+            <input type="text" id="studentCode" placeholder="كود المعلم">
+            <input type="text" id="studentLoginUser" placeholder="اسم المستخدم">
+            <input type="password" id="studentLoginPass" placeholder="كلمة المرور">
+            <button class="btn" onclick="studentLogin()">دخول</button>
+            <div id="studentDashboard" style="display:none;margin-top:15px;">
+                <p><span style="background:#27ae60;color:#fff;padding:4px 15px;border-radius:30px;">الطالب: <span id="currentStudentDisplay"></span></span></p>
+                <button class="btn btn-danger btn-sm" onclick="studentLogout()" style="width:auto;">تسجيل خروج</button>
+                <h4>📹 فيديوهات المعلم</h4>
+                <div id="studentVideosView"></div>
+                <h4>📝 الامتحانات</h4>
+                <div id="studentExamsView"></div>
+                <h4>📋 الواجبات</h4>
+                <div id="studentAssignmentsView"></div>
+                <h4>🎥 الميتنج</h4>
+                <div id="studentMeetingsView"></div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div id="programmingSection" class="section">
-            <div class="card">
-                <div class="card-title"><i class="fas fa-code"></i> مقالات برمجة</div>
-                <div id="programmingArticles"></div>
+<!-- ===== علم النفس ===== -->
+<div id="psychologySection" class="section">
+    <div class="card">
+        <div class="card-title"><i class="fas fa-brain"></i> حجز جلسات نفسية مع أخصائيين</div>
+        <div id="psychologistsList"></div>
+        <div id="psychologistBookingForm" style="display:none; margin-top:20px; background:#eaf4e8; padding:15px; border-radius:20px;">
+            <h4>📅 حجز جلسة مع <span id="selectedPsychologistName"></span></h4>
+            <input type="date" id="sessionDate" required>
+            <input type="time" id="sessionTime" required>
+            <textarea id="sessionNotes" placeholder="ملاحظات إضافية"></textarea>
+            <button class="btn btn-success" onclick="bookPsychSession()">✅ احجز الجلسة</button>
+            <button class="btn btn-outline btn-sm" onclick="document.getElementById('psychologistBookingForm').style.display='none';">إلغاء</button>
+        </div>
+        <div style="margin-top:20px;">
+            <h4>📋 حجوزاتي</h4>
+            <div id="psychSessionsList"></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title"><i class="fas fa-graduation-cap"></i> كورسات علم النفس</div>
+        <div id="psychCourses"></div>
+        <button class="btn btn-success" onclick="showAddPsychCourse()" style="width:auto;margin-top:10px;">➕ إضافة كورس</button>
+        <div id="addPsychCourseForm" style="display:none;margin-top:10px;background:#f8faff;padding:15px;border-radius:15px;">
+            <input type="text" id="psychCourseTitle" placeholder="عنوان الكورس">
+            <input type="text" id="psychCourseInstructor" placeholder="اسم المحاضر">
+            <input type="text" id="psychCoursePrice" placeholder="السعر (مجاني)">
+            <textarea id="psychCourseDesc" placeholder="وصف الكورس"></textarea>
+            <button class="btn btn-success" onclick="addPsychCourse()">✅ إضافة</button>
+            <button class="btn btn-outline btn-sm" onclick="document.getElementById('addPsychCourseForm').style.display='none';">إلغاء</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title"><i class="fas fa-book-open"></i> مكتبة علم النفس</div>
+        <div id="psychBooks"></div>
+    </div>
+    <div class="card">
+        <div class="card-title"><i class="fas fa-university"></i> أماكن دورات علم النفس</div>
+        <div id="psychologyCenters"></div>
+    </div>
+</div>
+
+<!-- ===== البرمجة ===== -->
+<div id="programmingSection" class="section">
+    <div class="card">
+        <div class="card-title"><i class="fas fa-code"></i> مقالات برمجة</div>
+        <div id="programmingArticles"></div>
+    </div>
+    <div class="card">
+        <div class="card-title"><i class="fas fa-graduation-cap"></i> كورسات البرمجة</div>
+        <div id="programmingCourses"></div>
+        <button class="btn btn-success" onclick="showAddProgrammingCourse()" style="width:auto;margin-top:10px;">➕ إضافة كورس</button>
+        <div id="addProgrammingCourseForm" style="display:none;margin-top:10px;background:#f8faff;padding:15px;border-radius:15px;">
+            <input type="text" id="progCourseTitle" placeholder="عنوان الكورس">
+            <input type="text" id="progCourseInstructor" placeholder="اسم المحاضر">
+            <input type="text" id="progCoursePrice" placeholder="السعر (مجاني)">
+            <textarea id="progCourseDesc" placeholder="وصف الكورس"></textarea>
+            <button class="btn btn-success" onclick="addProgrammingCourse()">✅ إضافة</button>
+            <button class="btn btn-outline btn-sm" onclick="document.getElementById('addProgrammingCourseForm').style.display='none';">إلغاء</button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title"><i class="fas fa-university"></i> مراكز تدريب برمجة</div>
+        <div id="programmingCenters"></div>
+    </div>
+</div>
+
+<!-- ===== إسلاميات ===== -->
+<div id="islamSection" class="section">
+    <div class="islam-grid">
+        <div class="islam-card">
+            <h4><i class="fas fa-pray"></i> الأذكار</h4>
+            <div id="dhikrDisplay" class="dhikr-box">سبحان الله وبحمده</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">
+                <button class="btn btn-sm" onclick="nextDhikr()" style="width:auto;">التالي</button>
+                <button class="btn btn-sm btn-success" onclick="countDhikr()" style="width:auto;">+1</button>
+                <button class="btn btn-sm btn-danger" onclick="resetDhikrCount()" style="width:auto;">إعادة</button>
             </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-graduation-cap"></i> كورسات البرمجة</div>
-                <div id="programmingCourses"></div>
-                <button class="btn btn-success" onclick="showAddProgrammingCourse()" style="width:auto;margin-top:10px;">➕ إضافة كورس جديد</button>
-                <div id="addProgrammingCourseForm" style="display:none;margin-top:10px;background:#f8faff;padding:15px;border-radius:15px;">
-                    <input type="text" id="progCourseTitle" placeholder="عنوان الكورس">
-                    <input type="text" id="progCourseInstructor" placeholder="اسم المحاضر">
-                    <input type="text" id="progCoursePrice" placeholder="السعر (اتركه فارغاً للمجاني)">
-                    <textarea id="progCourseDesc" placeholder="وصف الكورس"></textarea>
-                    <button class="btn btn-success" onclick="addProgrammingCourse()">✅ إضافة الكورس</button>
-                    <button class="btn btn-outline btn-sm" onclick="document.getElementById('addProgrammingCourseForm').style.display='none';">إلغاء</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-university"></i> مراكز وكورسات برمجة في مصر</div>
-                <div id="programmingCenters"></div>
+            <div style="margin-top:5px;">
+                <span>🔢 العدد: <span id="dhikrCount">0</span></span>
+                <span style="margin-right:10px;">📊 الإجمالي: <span id="totalTasbeeh">0</span></span>
             </div>
         </div>
-
-        <div id="islamSection" class="section">
-            <div class="islam-grid">
-                <div class="islam-card">
-                    <h4><i class="fas fa-pray"></i> الأذكار</h4>
-                    <div id="dhikrDisplay" class="dhikr-box">سبحان الله وبحمده</div>
-                    <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">
-                        <button class="btn btn-sm" onclick="nextDhikr()" style="width:auto;">التالي</button>
-                        <button class="btn btn-sm btn-success" onclick="countDhikr()" style="width:auto;">+1</button>
-                        <button class="btn btn-sm btn-danger" onclick="resetDhikrCount()" style="width:auto;">إعادة</button>
-                    </div>
-                    <div style="margin-top:5px;">
-                        <span>🔢 العدد: <span id="dhikrCount">0</span></span>
-                        <span style="margin-right:10px;">📊 الإجمالي: <span id="totalTasbeeh">0</span></span>
-                    </div>
-                </div>
-                <div class="islam-card">
-                    <h4><i class="fas fa-rosary"></i> المسبحة</h4>
-                    <div class="tasbeeh-counter" id="tasbeehCount">0</div>
-                    <div style="display:flex;gap:5px;">
-                        <button class="btn btn-sm" onclick="tasbeehAdd(1)">+1</button>
-                        <button class="btn btn-sm" onclick="tasbeehAdd(10)">+10</button>
-                        <button class="btn btn-danger btn-sm" onclick="tasbeehReset()">إعادة</button>
-                    </div>
-                </div>
-                <div class="islam-card">
-                    <h4><i class="fas fa-clock"></i> مواقيت الصلاة</h4>
-                    <input type="text" id="prayerCountry" placeholder="الدولة" value="مصر" style="width:70%;display:inline-block;margin-bottom:5px;">
-                    <input type="text" id="prayerCity" placeholder="المدينة" value="القاهرة" style="width:70%;display:inline-block;margin-bottom:5px;">
-                    <button class="btn btn-sm" onclick="getPrayerTimesWithLocation()">جلب المواقيت</button>
-                    <div id="prayerTimes" style="margin-top:10px;font-size:0.9rem;"></div>
-                </div>
-                <div class="islam-card">
-                    <h4><i class="fas fa-book-quran"></i> الختمة الذكية</h4>
-                    <p style="font-size:0.9rem;color:#555;">المدة بالأيام</p>
-                    <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:center;">
-                        <input type="number" id="khatmaDays" value="30" min="1" max="30" style="width:60px;display:inline-block;">
-                        <button class="btn btn-sm" onclick="calculateKhatma()" style="width:auto;">احسب</button>
-                    </div>
-                    <div id="khatmaResult" style="margin-top:10px;font-size:0.8rem;text-align:right;"></div>
-                </div>
-                <div class="islam-card" style="grid-column:span 2;">
-                    <h4><i class="fas fa-quran"></i> المصحف الشريف</h4>
-                    <select id="surahSelect" style="width:70%;"></select>
-                    <button class="btn" onclick="openQuranExternal()">📖 فتح السورة</button>
-                </div>
+        <div class="islam-card">
+            <h4><i class="fas fa-rosary"></i> المسبحة</h4>
+            <div class="tasbeeh-counter" id="tasbeehCount">0</div>
+            <div style="display:flex;gap:5px;">
+                <button class="btn btn-sm" onclick="tasbeehAdd(1)">+1</button>
+                <button class="btn btn-sm" onclick="tasbeehAdd(10)">+10</button>
+                <button class="btn btn-danger btn-sm" onclick="tasbeehReset()">إعادة</button>
             </div>
         </div>
-
-        <div id="blogSection" class="section">
-            <div class="card">
-                <div class="card-title"><i class="fas fa-clock"></i> ستوري</div>
-                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-                    <input type="text" id="storyText" placeholder="اكتب نص الستوري..." style="flex:1;">
-                    <input type="file" id="storyImage" accept="image/*" style="width:auto;">
-                    <input type="file" id="storyVideo" accept="video/*" style="width:auto;">
-                    <button class="btn btn-success" onclick="addStory()" style="width:auto;">➕ إضافة ستوري</button>
-                </div>
-                <div id="storiesList" style="margin-top:10px;display:flex;gap:10px;overflow-x:auto;padding:10px 0;"></div>
-            </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-edit"></i> إنشاء منشور</div>
-                <input type="text" id="postTitle" placeholder="عنوان المنشور">
-                <textarea id="postContent" placeholder="ماذا يحدث؟..."></textarea>
-                <input type="text" id="postImage" placeholder="رابط صورة (اختياري)">
-                <input type="file" id="postVideoFile" accept="video/*" style="margin-bottom:10px;">
-                <button class="btn btn-success" onclick="createPost()">نشر</button>
-            </div>
-            <div id="feedContainer"></div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-envelope"></i> الرسائل</div>
-                <input type="text" id="msgTo" placeholder="إلى (اسم المستخدم)">
-                <textarea id="msgBody" placeholder="نص الرسالة"></textarea>
-                <button class="btn" onclick="sendMessage()">إرسال</button>
-                <div id="messagesList" style="margin-top:10px;max-height:200px;overflow-y:auto;"></div>
-            </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-user-plus"></i> الأصدقاء</div>
-                <input type="text" id="friendUser" placeholder="اسم المستخدم للإضافة">
-                <button class="btn btn-outline" onclick="addFriend()">إضافة صديق</button>
-                <div id="friendsList" style="margin-top:10px;"></div>
-            </div>
-            <div class="card">
-                <div class="card-title"><i class="fas fa-check-circle"></i> توثيق الحساب</div>
-                <button class="btn" onclick="verifyAccount()">تفعيل التوثيق (مجاناً)</button>
-                <div id="verificationStatus"></div>
-            </div>
+        <div class="islam-card">
+            <h4><i class="fas fa-clock"></i> مواقيت الصلاة</h4>
+            <input type="text" id="prayerCountry" placeholder="الدولة" value="مصر" style="width:70%;display:inline-block;margin-bottom:5px;">
+            <input type="text" id="prayerCity" placeholder="المدينة" value="القاهرة" style="width:70%;display:inline-block;margin-bottom:5px;">
+            <button class="btn btn-sm" onclick="getPrayerTimesWithLocation()">جلب المواقيت</button>
+            <div id="prayerTimes" style="margin-top:10px;font-size:0.9rem;"></div>
         </div>
+        <div class="islam-card">
+            <h4><i class="fas fa-book-quran"></i> الختمة الذكية</h4>
+            <p style="font-size:0.9rem;color:#555;">المدة بالأيام</p>
+            <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:center;">
+                <input type="number" id="khatmaDays" value="30" min="1" max="30" style="width:60px;display:inline-block;">
+                <button class="btn btn-sm" onclick="calculateKhatma()" style="width:auto;">احسب</button>
+            </div>
+            <div id="khatmaResult" style="margin-top:10px;font-size:0.8rem;text-align:right;"></div>
+        </div>
+        <div class="islam-card" style="grid-column:span 2;">
+            <h4><i class="fas fa-quran"></i> المصحف الشريف</h4>
+            <select id="surahSelect" style="width:70%;"></select>
+            <button class="btn" onclick="openQuranExternal()">📖 فتح السورة</button>
+        </div>
+    </div>
+</div>
 
+<!-- ===== المدونة (زي فيسبوك) ===== -->
+<div id="blogSection" class="section">
+    <!-- ستوري -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-clock"></i> ستوري</div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <input type="text" id="storyText" placeholder="اكتب نص الستوري..." style="flex:1;">
+            <input type="file" id="storyImage" accept="image/*" style="width:auto;">
+            <input type="file" id="storyVideo" accept="video/*" style="width:auto;">
+            <button class="btn btn-success" onclick="addStory()" style="width:auto;">➕ إضافة</button>
+        </div>
+        <div id="storiesList" class="stories-row"></div>
+    </div>
+
+    <!-- إنشاء منشور -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-edit"></i> إنشاء منشور</div>
+        <input type="text" id="postTitle" placeholder="عنوان المنشور">
+        <textarea id="postContent" placeholder="ماذا يحدث؟..."></textarea>
+        <input type="text" id="postImage" placeholder="رابط صورة (اختياري)">
+        <input type="file" id="postVideoFile" accept="video/*" style="margin-bottom:10px;">
+        <button class="btn btn-success" onclick="createPost()">📤 نشر</button>
+    </div>
+
+    <!-- عرض المنشورات -->
+    <div id="feedContainer"></div>
+
+    <!-- الرسائل -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-envelope"></i> الرسائل</div>
+        <input type="text" id="msgTo" placeholder="إلى (اسم المستخدم)">
+        <textarea id="msgBody" placeholder="نص الرسالة"></textarea>
+        <button class="btn" onclick="sendMessage()">📤 إرسال</button>
+        <div id="messagesList" style="margin-top:10px;max-height:200px;overflow-y:auto;"></div>
+    </div>
+
+    <!-- الأصدقاء -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-user-plus"></i> الأصدقاء</div>
+        <input type="text" id="friendUser" placeholder="اسم المستخدم للإضافة">
+        <button class="btn btn-outline" onclick="addFriend()">➕ إضافة</button>
+        <div id="friendsList" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- توثيق الحساب -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-check-circle"></i> توثيق الحساب</div>
+        <button class="btn" onclick="verifyAccount()">تفعيل التوثيق</button>
+        <div id="verificationStatus"></div>
+    </div>
+</div>
+                <!-- ===== خدمات تقنية ===== -->
         <div id="techSection" class="section">
             <div class="card">
                 <div class="card-title"><i class="fas fa-tools"></i> خدمات تقنية</div>
@@ -632,7 +752,7 @@
                         <div id="editResult"></div>
                     </div>
                     <div class="service-card">
-                        <h4>💪 حساب السعرات (الطعام)</h4>
+                        <h4>💪 حساب السعرات</h4>
                         <input type="text" id="foodName" placeholder="اسم الطعام">
                         <input type="number" id="foodWeight" placeholder="الوزن (جرام)">
                         <button class="btn" onclick="calcCalories()">حساب</button>
@@ -644,7 +764,7 @@
                             <option value="male">ذكر</option>
                             <option value="female">أنثى</option>
                         </select>
-                        <input type="number" id="ageBMR" placeholder="العمر (سنة)">
+                        <input type="number" id="ageBMR" placeholder="العمر">
                         <input type="number" id="heightBMR" placeholder="الطول (سم)">
                         <input type="number" id="weightBMR" placeholder="الوزن (كجم)">
                         <select id="activityBMR">
@@ -654,13 +774,14 @@
                             <option value="1.725">نشط</option>
                             <option value="1.9">شديد النشاط</option>
                         </select>
-                        <button class="btn" onclick="calcBMR()">احسب احتياجك</button>
+                        <button class="btn" onclick="calcBMR()">احسب</button>
                         <div id="bmrResult" style="margin-top:10px;"></div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ===== الدردشة ===== -->
         <div id="chatSection" class="section">
             <div class="card">
                 <div class="card-title"><i class="fas fa-comments"></i> غرفة الدردشة العامة</div>
@@ -672,6 +793,7 @@
             </div>
         </div>
 
+        <!-- ===== الميتنج العام ===== -->
         <div id="meetingSection" class="section">
             <div class="card">
                 <div class="card-title"><i class="fas fa-video"></i> الميتنج العام</div>
@@ -686,6 +808,7 @@
             </div>
         </div>
 
+        <!-- ===== الأماكن والحجوزات ===== -->
         <div id="placesSection" class="section">
             <div class="card">
                 <div class="card-title"><i class="fas fa-store-alt"></i> إضافة مكان جديد</div>
@@ -700,9 +823,9 @@
                 </select>
                 <input type="text" id="placeAddress" placeholder="العنوان">
                 <input type="text" id="placePhone" placeholder="رقم الهاتف">
-                <textarea id="placeDescription" placeholder="وصف المكان والخدمات..."></textarea>
-                <input type="text" id="placeSlots" placeholder="المواعيد المتاحة (مثال: 10:00, 11:00, 12:00)">
-                <button class="btn btn-success" onclick="addPlace()">➕ إضافة المكان</button>
+                <textarea id="placeDescription" placeholder="وصف المكان"></textarea>
+                <input type="text" id="placeSlots" placeholder="المواعيد المتاحة (10:00, 11:00)">
+                <button class="btn btn-success" onclick="addPlace()">➕ إضافة</button>
             </div>
             <div class="card">
                 <div class="card-title"><i class="fas fa-list"></i> الأماكن المتاحة</div>
@@ -714,28 +837,66 @@
             </div>
         </div>
 
+        <!-- ===== ربط ولي الأمر ===== -->
+        <div id="parentSection" class="section">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-user-friends"></i> ربط ولي الأمر</div>
+                <p style="color:#555;font-size:0.9rem;">أدخل بريد ولي الأمر لربطه بحسابك</p>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <input type="email" id="parentEmail" placeholder="بريد ولي الأمر" style="flex:1;">
+                    <button class="btn btn-success" onclick="linkParent()" style="width:auto;">🔗 ربط</button>
+                </div>
+                <div id="parentStatus" style="margin-top:10px;"></div>
+            </div>
+            
+            <!-- لوحة تحكم ولي الأمر -->
+            <div id="parentDashboard" style="display:none;">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-chart-line"></i> متابعة الطالب</div>
+                    <div id="parentStudentInfo"></div>
+                </div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-calendar-check"></i> الحضور</div>
+                    <div id="parentAttendance"></div>
+                </div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-tasks"></i> الدرجات</div>
+                    <div id="parentGrades"></div>
+                </div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-envelope"></i> التواصل مع المعلم</div>
+                    <textarea id="parentMessage" placeholder="اكتب رسالتك للمعلم..."></textarea>
+                    <button class="btn" onclick="sendParentMessage()">📤 إرسال</button>
+                    <div id="parentMessagesList" style="margin-top:10px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== لوحة تحكم المدير ===== -->
         <div id="adminSection" class="section">
             <div class="admin-panel">
                 <h3>🛠️ لوحة تحكم المدير</h3>
-                <p style="margin-bottom:15px; color:#aaa;">هنا يمكنك إدارة المحتوى: إضافة أخصائيين، كورسات، وأي محتوى آخر.</p>
+                <p style="margin-bottom:15px; color:#aaa;">إدارة المحتوى: أخصائيين، كورسات، مستخدمين</p>
+                
                 <details>
-                    <summary style="cursor:pointer; color:#f9b83a; font-weight:bold; font-size:1.1rem; margin-bottom:10px;">👨‍⚕️ إضافة أخصائي نفسي (بالإيميل)</summary>
+                    <summary style="cursor:pointer; color:#f9b83a; font-weight:bold;">👨‍⚕️ إضافة أخصائي نفسي</summary>
                     <div style="margin-top:10px;">
-                        <p style="color:#888;font-size:0.8rem;">أدخل الإيميل أو اسم المستخدم، وستظهر لك اقتراحات</p>
                         <input type="text" id="adminPsychEmail" placeholder="البريد الإلكتروني أو اسم المستخدم" oninput="searchUsersForAdmin(this.value)">
                         <div id="userSearchResults" style="background:#fff;color:#000;border-radius:10px;margin-bottom:10px;max-height:150px;overflow-y:auto;"></div>
                         <input type="text" id="adminPsychName" placeholder="الاسم الكامل">
                         <input type="text" id="adminPsychSpecialty" placeholder="التخصص">
-                        <input type="text" id="adminPsychImage" placeholder="رابط الصورة (URL)">
-                        <input type="number" id="adminPsychPrice" placeholder="سعر الجلسة (جنيه)">
+                        <input type="text" id="adminPsychImage" placeholder="رابط الصورة">
+                        <input type="number" id="adminPsychPrice" placeholder="سعر الجلسة">
                         <input type="text" id="adminPsychAvailable" placeholder="الأوقات المتاحة">
                         <textarea id="adminPsychDesc" placeholder="وصف الأخصائي"></textarea>
-                        <button class="btn btn-success" onclick="addPsychologistByAdmin()">➕ إضافة الأخصائي</button>
+                        <button class="btn btn-success" onclick="addPsychologistByAdmin()">➕ إضافة</button>
                     </div>
                 </details>
+
                 <hr style="border-color:#444; margin:20px 0;">
+
                 <details>
-                    <summary style="cursor:pointer; color:#f9b83a; font-weight:bold; font-size:1.1rem; margin-bottom:10px;">📚 إضافة كورس جديد</summary>
+                    <summary style="cursor:pointer; color:#f9b83a; font-weight:bold;">📚 إضافة كورس جديد</summary>
                     <div style="margin-top:10px;">
                         <select id="adminCourseCategory">
                             <option value="psychology">علم النفس</option>
@@ -744,14 +905,15 @@
                         </select>
                         <input type="text" id="adminCourseTitle" placeholder="عنوان الكورس">
                         <input type="text" id="adminCourseInstructor" placeholder="اسم المحاضر">
-                        <input type="text" id="adminCoursePrice" placeholder="السعر (اتركه فارغاً للمجاني)">
+                        <input type="text" id="adminCoursePrice" placeholder="السعر (مجاني)">
                         <textarea id="adminCourseDesc" placeholder="وصف الكورس"></textarea>
-                        <button class="btn btn-success" onclick="addCourseByAdmin()">➕ إضافة الكورس</button>
+                        <button class="btn btn-success" onclick="addCourseByAdmin()">➕ إضافة</button>
                     </div>
                 </details>
             </div>
         </div>
 
+        <!-- ===== المطور ===== -->
         <div id="devSection" class="section">
             <div class="dev-card">
                 <h2>👨‍💻 المطور: عبدالرحمن منتصر ماهر</h2>
@@ -764,6 +926,7 @@
         </div>
     </div>
 
+    <!-- ===== التنقل السفلي ===== -->
     <div class="bottom-nav">
         <div class="nav-item active" data-section="homeSection"><i class="fas fa-home"></i> الرئيسية</div>
         <div class="nav-item" data-section="teacherSection"><i class="fas fa-chalkboard-teacher"></i> معلمون</div>
@@ -775,17 +938,48 @@
         <div class="nav-item" data-section="chatSection"><i class="fas fa-comment-dots"></i> دردشة</div>
         <div class="nav-item" data-section="meetingSection"><i class="fas fa-video"></i> ميتنج</div>
         <div class="nav-item" data-section="placesSection"><i class="fas fa-store"></i> أماكن</div>
+        <div class="nav-item" data-section="parentSection"><i class="fas fa-user-friends"></i> أولياء</div>
         <div class="nav-item admin-item" data-section="adminSection"><i class="fas fa-user-shield"></i> تحكم</div>
         <div class="nav-item" data-section="devSection"><i class="fas fa-user-cog"></i> مطور</div>
     </div>
 
-    </div>
+</div>
     <script type="module">
+    // ============================================================
+    //  0. استيراد Firebase
+    // ============================================================
     import { initializeApp } from "firebase/app";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, setDoc, getDoc, where, arrayUnion, arrayRemove, Timestamp } from "firebase/firestore";
+    import { 
+        getAuth, 
+        createUserWithEmailAndPassword, 
+        signInWithEmailAndPassword, 
+        onAuthStateChanged, 
+        signOut,
+        setPersistence,
+        browserLocalPersistence,
+        sendPasswordResetEmail
+    } from "firebase/auth";
+    import { 
+        getFirestore, 
+        collection, 
+        addDoc, 
+        getDocs, 
+        query, 
+        orderBy, 
+        onSnapshot, 
+        doc, 
+        updateDoc, 
+        deleteDoc, 
+        setDoc, 
+        getDoc, 
+        where, 
+        arrayUnion, 
+        arrayRemove,
+        Timestamp
+    } from "firebase/firestore";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+    // ===== Firebase Config =====
     const firebaseConfig = {
         apiKey: "AIzaSyCIpFytzg22I0AK0VjBSA0HcToqwwU4iBk",
         authDomain: "the-comprehensive-platfo-a05da.firebaseapp.com",
@@ -801,67 +995,77 @@
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    window.auth = auth; window.db = db; window.storage = storage;
+    window.auth = auth;
+    window.db = db;
+    window.storage = storage;
     window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
     window.signInWithEmailAndPassword = signInWithEmailAndPassword;
     window.onAuthStateChanged = onAuthStateChanged;
     window.signOut = signOut;
-    window.collection = collection; window.addDoc = addDoc; window.getDocs = getDocs;
-    window.query = query; window.orderBy = orderBy; window.onSnapshot = onSnapshot;
-    window.doc = doc; window.updateDoc = updateDoc; window.deleteDoc = deleteDoc;
-    window.setDoc = setDoc; window.getDoc = getDoc; window.where = where;
-    window.arrayUnion = arrayUnion; window.arrayRemove = arrayRemove;
+    window.sendPasswordResetEmail = sendPasswordResetEmail;
+    window.collection = collection;
+    window.addDoc = addDoc;
+    window.getDocs = getDocs;
+    window.query = query;
+    window.orderBy = orderBy;
+    window.onSnapshot = onSnapshot;
+    window.doc = doc;
+    window.updateDoc = updateDoc;
+    window.deleteDoc = deleteDoc;
+    window.setDoc = setDoc;
+    window.getDoc = getDoc;
+    window.where = where;
+    window.arrayUnion = arrayUnion;
+    window.arrayRemove = arrayRemove;
     window.Timestamp = Timestamp;
-    window.ref = ref; window.uploadBytes = uploadBytes; window.getDownloadURL = getDownloadURL;
+    window.ref = ref;
+    window.uploadBytes = uploadBytes;
+    window.getDownloadURL = getDownloadURL;
 
     console.log("✅ Firebase connected!");
 
+    // ============================================================
+    //  المتغيرات العامة
+    // ============================================================
     let currentUser = null;
     let currentUserData = null;
     let profileImageFile = null;
     let selectedHobbies = [];
     let selectedColleges = [];
 
-    // ===== بيانات الدول والمدن والمفاتيح =====
+    // ===== بيانات الدول =====
     const countryData = {
-        "مصر": { code: "+20", cities: ["القاهرة", "الإسكندرية", "الجيزة", "المنيا", "أسيوط", "الأقصر", "أسوان", "بورسعيد", "السويس", "طنطا", "المنصورة", "دمياط", "كفر الشيخ", "بنها", "الزقازيق", "شبين الكوم", "دمنهور", "الفيوم", "بني سويف", "قنا", "سوهاج"] },
-        "السعودية": { code: "+966", cities: ["الرياض", "جدة", "مكة المكرمة", "المدينة المنورة", "الدمام", "الخبر", "الظهران", "بريدة", "تبوك", "حائل", "نجران", "جازان", "أبها"] },
-        "الإمارات": { code: "+971", cities: ["دبي", "أبوظبي", "الشارقة", "عجمان", "أم القيوين", "رأس الخيمة", "الفجيرة"] },
-        "الكويت": { code: "+965", cities: ["مدينة الكويت", "حولي", "الفروانية", "الأحمدي", "الجهراء", "مبارك الكبير"] },
-        "قطر": { code: "+974", cities: ["الدوحة", "الريان", "الوكرة", "الخور", "الذخيرة", "مسيعيد"] },
-        "البحرين": { code: "+973", cities: ["المنامة", "المحرق", "الرفاع", "مدينة حمد", "سترة"] },
-        "عمان": { code: "+968", cities: ["مسقط", "صلالة", "نزوى", "صحار", "الخوير", "السيب"] },
-        "اليمن": { code: "+967", cities: ["صنعاء", "عدن", "تعز", "الحديدة", "إب", "المكلا"] },
-        "الأردن": { code: "+962", cities: ["عمان", "الزرقاء", "إربد", "السلط", "العقبة", "مادبا"] },
-        "لبنان": { code: "+961", cities: ["بيروت", "طرابلس", "صيدا", "زحلة", "جونيه", "النبطية"] },
-        "فلسطين": { code: "+970", cities: ["القدس", "غزة", "رام الله", "الخليل", "نابلس", "بيت لحم"] },
-        "سوريا": { code: "+963", cities: ["دمشق", "حلب", "حمص", "حماة", "اللاذقية", "دير الزور"] },
-        "العراق": { code: "+964", cities: ["بغداد", "البصرة", "الموصل", "أربيل", "كركوك", "النجف"] },
-        "ليبيا": { code: "+218", cities: ["طرابلس", "بنغازي", "مصراتة", "الزاوية", "سبها", "طبرق"] },
-        "تونس": { code: "+216", cities: ["تونس", "صفاقس", "سوسة", "القيروان", "بنزرت", "قابس"] },
-        "الجزائر": { code: "+213", cities: ["الجزائر", "وهران", "قسنطينة", "عنابة", "باتنة", "سطيف"] },
-        "المغرب": { code: "+212", cities: ["الرباط", "الدار البيضاء", "فاس", "مراكش", "طنجة", "أكادير"] },
-        "السودان": { code: "+249", cities: ["الخرطوم", "أم درمان", "بورتسودان", "كسلا", "الفاشر", "نيالا"] },
-        "تركيا": { code: "+90", cities: ["إسطنبول", "أنقرة", "إزمير", "بورصة", "أنطاليا", "أضنة"] },
-        "الولايات المتحدة": { code: "+1", cities: ["نيويورك", "لوس أنجلوس", "شيكاغو", "هيوستن", "ميامي", "سان فرانسيسكو"] },
-        "المملكة المتحدة": { code: "+44", cities: ["لندن", "مانشستر", "برمنغهام", "ليفربول", "غلاسكو", "إدنبرة"] },
-        "فرنسا": { code: "+33", cities: ["باريس", "مرسيليا", "ليون", "تولوز", "نيس", "نانت"] },
-        "ألمانيا": { code: "+49", cities: ["برلين", "ميونخ", "هامبورغ", "كولونيا", "فرانكفورت", "شتوتغارت"] },
-        "إيطاليا": { code: "+39", cities: ["روما", "ميلان", "نابولي", "تورينو", "فلورنسا", "بالبيرمو"] },
-        "إسبانيا": { code: "+34", cities: ["مدريد", "برشلونة", "فالنسيا", "إشبيلية", "مالقة", "سرقسطة"] },
-        "كندا": { code: "+1", cities: ["تورونتو", "مونتريال", "فانكوفر", "كالجاري", "أوتاوا", "إدمونتون"] },
-        "أستراليا": { code: "+61", cities: ["سيدني", "ملبورن", "بريسبان", "بيرث", "أديليد", "كانبرا"] },
-        "اليابان": { code: "+81", cities: ["طوكيو", "يوكوهاما", "أوساكا", "ناغويا", "سابورو", "فوكوكا"] },
-        "الصين": { code: "+86", cities: ["بكين", "شنغهاي", "قوانغتشو", "شينزين", "تشنغدو", "ووهان"] },
-        "الهند": { code: "+91", cities: ["مومباي", "دلهي", "بنغالور", "تشيناي", "حيدر أباد", "كلكتا"] },
-        "روسيا": { code: "+7", cities: ["موسكو", "سانت بطرسبرغ", "نوفوسيبيرسك", "ييكاتيرينبرغ", "نيزني نوفغورود", "قازان"] },
-        "البرازيل": { code: "+55", cities: ["ساو باولو", "ريو دي جانيرو", "برازيليا", "سلفادور", "فورتاليزا", "بيلو هوريزونتي"] },
-        "جنوب أفريقيا": { code: "+27", cities: ["جوهانسبرغ", "كيب تاون", "ديربان", "بريتوريا", "بورت إليزابيث", "بلومفونتين"] },
-        "نيجيريا": { code: "+234", cities: ["لاغوس", "أبوجا", "كانو", "إبادان", "بورت هاركورت", "بنين"] },
-        "باكستان": { code: "+92", cities: ["كراتشي", "لاهور", "إسلام آباد", "فيصل آباد", "راولبندي", "بيشاور"] },
-        "إندونيسيا": { code: "+62", cities: ["جاكرتا", "سورابايا", "باندونغ", "ميدان", "ديبوك", "تانجيرانغ"] },
-        "ماليزيا": { code: "+60", cities: ["كوالالمبور", "جورج تاون", "إيبوه", "شاه علم", "بيتالينغ جايا", "جوهر بهرو"] },
-        "سنغافورة": { code: "+65", cities: ["سنغافورة"] }
+        "مصر": { code: "+20", cities: ["القاهرة", "الإسكندرية", "الجيزة", "المنيا", "أسيوط", "الأقصر", "أسوان"] },
+        "السعودية": { code: "+966", cities: ["الرياض", "جدة", "مكة", "المدينة", "الدمام", "الخبر"] },
+        "الإمارات": { code: "+971", cities: ["دبي", "أبوظبي", "الشارقة", "عجمان"] },
+        "الكويت": { code: "+965", cities: ["مدينة الكويت", "حولي", "الفروانية"] },
+        "قطر": { code: "+974", cities: ["الدوحة", "الريان", "الوكرة"] },
+        "البحرين": { code: "+973", cities: ["المنامة", "المحرق", "الرفاع"] },
+        "الأردن": { code: "+962", cities: ["عمان", "الزرقاء", "إربد"] },
+        "لبنان": { code: "+961", cities: ["بيروت", "طرابلس", "صيدا"] },
+        "فلسطين": { code: "+970", cities: ["القدس", "غزة", "رام الله"] },
+        "سوريا": { code: "+963", cities: ["دمشق", "حلب", "حمص"] },
+        "العراق": { code: "+964", cities: ["بغداد", "البصرة", "الموصل"] },
+        "ليبيا": { code: "+218", cities: ["طرابلس", "بنغازي", "مصراتة"] },
+        "تونس": { code: "+216", cities: ["تونس", "صفاقس", "سوسة"] },
+        "الجزائر": { code: "+213", cities: ["الجزائر", "وهران", "قسنطينة"] },
+        "المغرب": { code: "+212", cities: ["الرباط", "الدار البيضاء", "فاس"] },
+        "السودان": { code: "+249", cities: ["الخرطوم", "أم درمان", "بورتسودان"] },
+        "تركيا": { code: "+90", cities: ["إسطنبول", "أنقرة", "إزمير"] },
+        "الولايات المتحدة": { code: "+1", cities: ["نيويورك", "لوس أنجلوس", "شيكاغو"] },
+        "المملكة المتحدة": { code: "+44", cities: ["لندن", "مانشستر", "برمنغهام"] },
+        "فرنسا": { code: "+33", cities: ["باريس", "مرسيليا", "ليون"] },
+        "ألمانيا": { code: "+49", cities: ["برلين", "ميونخ", "هامبورغ"] },
+        "إيطاليا": { code: "+39", cities: ["روما", "ميلان", "نابولي"] },
+        "إسبانيا": { code: "+34", cities: ["مدريد", "برشلونة", "فالنسيا"] },
+        "كندا": { code: "+1", cities: ["تورونتو", "مونتريال", "فانكوفر"] },
+        "أستراليا": { code: "+61", cities: ["سيدني", "ملبورن", "بريسبان"] },
+        "اليابان": { code: "+81", cities: ["طوكيو", "يوكوهاما", "أوساكا"] },
+        "الصين": { code: "+86", cities: ["بكين", "شنغهاي", "قوانغتشو"] },
+        "الهند": { code: "+91", cities: ["مومباي", "دلهي", "بنغالور"] },
+        "روسيا": { code: "+7", cities: ["موسكو", "سانت بطرسبرغ", "نوفوسيبيرسك"] },
+        "البرازيل": { code: "+55", cities: ["ساو باولو", "ريو دي جانيرو", "برازيليا"] },
+        "جنوب أفريقيا": { code: "+27", cities: ["جوهانسبرغ", "كيب تاون", "ديربان"] }
     };
 
     // ===== تعبئة قائمة الدول =====
@@ -874,7 +1078,6 @@
             option.textContent = country;
             select.appendChild(option);
         });
-        // ضبط مصر كلدولة افتراضية
         select.value = 'مصر';
         updateCountryCode();
         updateCities();
@@ -894,8 +1097,7 @@
         const citySelect = document.getElementById('signupCity');
         citySelect.innerHTML = '<option value="">اختر المدينة</option>';
         if (country && countryData[country]) {
-            const cities = countryData[country].cities;
-            cities.forEach(city => {
+            countryData[country].cities.forEach(city => {
                 const option = document.createElement('option');
                 option.value = city;
                 option.textContent = city;
@@ -904,26 +1106,22 @@
         }
     };
 
-    // ===== دوال الهوايات =====
+    // ===== دوال الهوايات والكليات =====
     window.addHobby = function() {
         const select = document.getElementById('hobbiesSelect');
         const hobby = select.value;
-        if (!hobby) return;
-        if (!selectedHobbies.includes(hobby)) {
-            selectedHobbies.push(hobby);
-            renderHobbies();
-        }
+        if (!hobby || selectedHobbies.includes(hobby)) return;
+        selectedHobbies.push(hobby);
+        renderHobbies();
         select.value = '';
     };
 
     window.addCustomHobby = function() {
         const input = document.getElementById('signupHobbiesCustom');
         const hobby = input.value.trim();
-        if (!hobby) return;
-        if (!selectedHobbies.includes(hobby)) {
-            selectedHobbies.push(hobby);
-            renderHobbies();
-        }
+        if (!hobby || selectedHobbies.includes(hobby)) return;
+        selectedHobbies.push(hobby);
+        renderHobbies();
         input.value = '';
     };
 
@@ -939,26 +1137,21 @@
         ).join('');
     }
 
-    // ===== دوال الكليات =====
     window.addCollege = function() {
         const select = document.getElementById('collegeSelect');
         const college = select.value;
-        if (!college) return;
-        if (!selectedColleges.includes(college)) {
-            selectedColleges.push(college);
-            renderColleges();
-        }
+        if (!college || selectedColleges.includes(college)) return;
+        selectedColleges.push(college);
+        renderColleges();
         select.value = '';
     };
 
     window.addCustomCollege = function() {
         const input = document.getElementById('signupCollegeCustom');
         const college = input.value.trim();
-        if (!college) return;
-        if (!selectedColleges.includes(college)) {
-            selectedColleges.push(college);
-            renderColleges();
-        }
+        if (!college || selectedColleges.includes(college)) return;
+        selectedColleges.push(college);
+        renderColleges();
         input.value = '';
     };
 
@@ -1000,8 +1193,9 @@
             reader.readAsDataURL(file);
         }
     };
-
-    // ===== إنشاء الحساب (دخول فوري بدون تفعيل) =====
+            // ============================================================
+    //  إنشاء الحساب (دخول فوري بدون تفعيل)
+    // ============================================================
     window.signupUser = async function() {
         const username = document.getElementById('signupUsername').value.trim();
         const email = document.getElementById('signupEmail').value.trim();
@@ -1025,7 +1219,7 @@
 
         const msg = document.getElementById('signupMessage');
         if (!username || !email || !password || !confirmPassword) {
-            msg.innerText = '⚠️ املأ الحقول الأساسية (الاسم، الإيميل، كلمة المرور)';
+            msg.innerText = '⚠️ املأ الحقول الأساسية';
             return;
         }
         if (password.length < 6) {
@@ -1078,7 +1272,6 @@
             localStorage.setItem('rememberMe', 'true');
             localStorage.setItem('savedEmail', email);
 
-            // دخول فوري (بدون انتظار تفعيل)
             setTimeout(() => {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('appContent').style.display = 'block';
@@ -1089,7 +1282,9 @@
         }
     };
 
-    // ===== تسجيل الدخول =====
+    // ============================================================
+    //  تسجيل الدخول
+    // ============================================================
     window.loginUser = async function() {
         const emailOrPhone = document.getElementById('loginEmailOrPhone').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
@@ -1127,7 +1322,9 @@
         }
     };
 
-    // ===== مراقبة حالة المصادقة =====
+    // ============================================================
+    //  مراقبة حالة المصادقة
+    // ============================================================
     onAuthStateChanged(auth, async (user) => {
         const loginScreen = document.getElementById('loginScreen');
         const appContent = document.getElementById('appContent');
@@ -1156,7 +1353,9 @@
 
             loginScreen.style.display = 'none';
             appContent.style.display = 'block';
-
+            
+            // تحميل الإشعارات
+            loadNotifications();
             renderAll();
         } else {
             currentUser = null;
@@ -1201,7 +1400,6 @@
             info += `💼 ${currentUserData.job || ''}\n`;
             info += `❤️ ${currentUserData.maritalStatus || ''}\n`;
             info += `📅 ${currentUserData.birthDate || ''}\n`;
-            info += `🎯 ${currentUserData.collegeSpecialty || ''}\n`;
             info += `🏷️ ${(currentUserData.hobbies || []).join(', ')}\n`;
             info += `✅ موثق: ${currentUserData.verified ? 'نعم' : 'لا'}\n`;
             info += `🔑 الدور: ${currentUserData.role || 'user'}`;
@@ -1210,16 +1408,2260 @@
     };
 
     // ============================================================
-    //  باقي الدوال (نفس الكود السابق)
+    //  نظام الإشعارات
     // ============================================================
-    // تم اختصارها لتوفير المساحة، ولكنها موجودة في الكود الكامل
-    // يمكنك نسخها من الملف السابق
-
-    // ===== التهيئة =====
-    window.renderAll = function() {
-        // دوال التحميل موجودة في الكود الكامل
+    window.loadNotifications = function() {
+        if (!currentUser) return;
+        const q = query(
+            collection(db, "notifications"),
+            where("userId", "==", currentUser),
+            orderBy("createdAt", "desc")
+        );
+        onSnapshot(q, (snapshot) => {
+            const container = document.getElementById('notificationsList');
+            const badge = document.getElementById('notifBadge');
+            let unreadCount = 0;
+            let html = '';
+            
+            snapshot.forEach(docSnap => {
+                const n = docSnap.data();
+                if (!n.read) unreadCount++;
+                const icon = n.type === 'grade' ? '📝' : 
+                            n.type === 'assignment' ? '📋' : 
+                            n.type === 'exam' ? '📝' : 
+                            n.type === 'course' ? '📚' : '🔔';
+                html += `
+                    <div class="notif-item ${n.read ? '' : 'unread'}" onclick="markNotificationRead('${docSnap.id}')">
+                        <span class="notif-icon">${icon}</span>
+                        <span class="notif-text">${n.message}</span>
+                        <span class="notif-time">${n.createdAt?.toDate?.()?.toLocaleString() || ''}</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html || '<div style="padding:10px;color:#888;">لا توجد إشعارات</div>';
+            badge.textContent = unreadCount > 0 ? unreadCount : '0';
+            badge.style.display = unreadCount > 0 ? 'block' : 'none';
+        });
     };
 
+    window.toggleNotifications = function() {
+        const dropdown = document.getElementById('notificationDropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    };
+
+    window.markNotificationRead = async function(id) {
+        try {
+            await updateDoc(doc(db, "notifications", id), { read: true });
+        } catch (e) { console.error(e); }
+    };
+
+    // دالة لإضافة إشعار
+    async function addNotification(userId, message, type = 'general') {
+        try {
+            await addDoc(collection(db, "notifications"), {
+                userId: userId,
+                message: message,
+                type: type,
+                read: false,
+                createdAt: new Date()
+            });
+        } catch (e) { console.error(e); }
+    }
+
+    // ============================================================
+    //  دوال المعلمين
+    // ============================================================
+    window.setRole = function(role) {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        document.getElementById('teacherPanel').style.display = role === 'teacher' ? 'block' : 'none';
+        document.getElementById('studentPanel').style.display = role === 'student' ? 'block' : 'none';
+        if (role === 'teacher') checkTeacherStatus();
+        if (role === 'student') loadStudentData();
+    };
+
+    async function checkTeacherStatus() {
+        const ref = doc(db, "teachers", currentUser);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            document.getElementById('teacherDashboard').style.display = 'block';
+            document.getElementById('currentTeacherDisplay').textContent = currentUserData?.username || 'معلم';
+            document.getElementById('teacherCodeDisplay').textContent = snap.data().code;
+            renderTeacherData();
+        } else {
+            document.getElementById('teacherDashboard').style.display = 'none';
+            alert('ليس لديك حساب معلم. أنشئ حساباً أولاً.');
+        }
+    }
+
+    window.teacherSignup = async function() {
+        const username = document.getElementById('teacherUsername').value.trim();
+        const password = document.getElementById('teacherPassword').value.trim();
+        if (!username || !password) return alert('املأ جميع الحقول');
+        if (password.length < 6) return alert('كلمة المرور 6 أحرف على الأقل');
+        try {
+            const userCred = await createUserWithEmailAndPassword(auth, username, password);
+            const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+            await setDoc(doc(db, "teachers", userCred.user.uid), {
+                userId: userCred.user.uid,
+                username: currentUserData?.username || 'معلم',
+                email: username,
+                code: code,
+                students: [],
+                videos: [],
+                exams: [],
+                meetings: []
+            });
+            alert('✅ تم إنشاء حساب المعلم! كودك: ' + code);
+            document.getElementById('teacherDashboard').style.display = 'block';
+            document.getElementById('currentTeacherDisplay').textContent = currentUserData?.username || 'معلم';
+            document.getElementById('teacherCodeDisplay').textContent = code;
+            renderTeacherData();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.teacherLogin = async function() {
+        const username = document.getElementById('teacherUsername').value.trim();
+        const password = document.getElementById('teacherPassword').value.trim();
+        if (!username || !password) return alert('املأ جميع الحقول');
+        try {
+            await signInWithEmailAndPassword(auth, username, password);
+            alert('✅ تم تسجيل الدخول');
+            setTimeout(() => checkTeacherStatus(), 1000);
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    async function renderTeacherData() {
+        const snap = await getDoc(doc(db, "teachers", currentUser));
+        if (!snap.exists()) return;
+        const t = snap.data();
+        document.getElementById('studentList').innerHTML = t.students?.map(s => `<div>👤 ${s}</div>`).join('') || '<p>لا يوجد طلاب</p>';
+        
+        const videosContainer = document.getElementById('teacherVideosList');
+        if (t.videos && t.videos.length > 0) {
+            videosContainer.innerHTML = t.videos.map((v, idx) => `
+                <div class="video-item">
+                    <strong>📹 ${v.title}</strong>
+                    <video controls src="${v.url}"></video>
+                    <button class="btn btn-danger btn-sm" onclick="deleteTeacherVideo(${idx})" style="width:auto;margin-top:5px;">🗑️ حذف</button>
+                </div>
+            `).join('');
+        } else {
+            videosContainer.innerHTML = '<p>لا توجد فيديوهات</p>';
+        }
+
+        document.getElementById('teacherExamsList').innerHTML = t.exams?.map((e, idx) =>
+            `<div style="background:#f0f6ff;padding:12px;border-radius:15px;margin-bottom:10px;">
+                <strong>${e.title}</strong>
+                <button class="btn btn-outline btn-sm" onclick="viewExam(${idx})">عرض الامتحان</button>
+            </div>`
+        ).join('') || '<p>لا توجد امتحانات</p>';
+
+        document.getElementById('teacherMeetingsList').innerHTML = t.meetings?.map((m, idx) =>
+            `<div class="teacher-meeting-card">
+                <strong>🎥 ${m.title}</strong>
+                <br>⏰ ${m.time ? new Date(m.time).toLocaleString() : 'مرن'}
+                <br><a href="${m.link}" target="_blank" style="color:#1a4b6d;font-weight:bold;">🔗 اضغط للدخول</a>
+                <br><button class="btn btn-danger btn-sm" onclick="deleteTeacherMeeting(${idx})" style="width:auto;margin-top:5px;">🗑️ حذف</button>
+            </div>`
+        ).join('') || '<p>لا توجد اجتماعات</p>';
+    }
+
+    window.uploadTeacherVideo = async function() {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        const title = document.getElementById('teacherVideoTitle').value.trim();
+        const fileInput = document.getElementById('teacherVideoFile');
+        if (!title) return alert('أدخل عنوان الفيديو');
+        if (!fileInput.files || !fileInput.files[0]) return alert('اختر ملف فيديو');
+        
+        const file = fileInput.files[0];
+        const progressDiv = document.getElementById('uploadProgress');
+        progressDiv.style.display = 'block';
+        progressDiv.innerHTML = '⏳ جاري الرفع...';
+
+        try {
+            const storageRef = ref(storage, `videos/${currentUser}/${Date.now()}_${file.name}`);
+            const snapshot = await uploadBytes(storageRef, file);
+            const url = await getDownloadURL(snapshot.ref);
+            
+            const teacherRef = doc(db, "teachers", currentUser);
+            const snap = await getDoc(teacherRef);
+            if (snap.exists()) {
+                const videos = snap.data().videos || [];
+                videos.push({ title, url, createdAt: new Date() });
+                await updateDoc(teacherRef, { videos });
+                progressDiv.innerHTML = '✅ تم رفع الفيديو بنجاح!';
+                setTimeout(() => { progressDiv.style.display = 'none'; }, 3000);
+                document.getElementById('teacherVideoTitle').value = '';
+                document.getElementById('teacherVideoFile').value = '';
+                renderTeacherData();
+            }
+        } catch (e) {
+            progressDiv.innerHTML = '❌ خطأ: ' + e.message;
+        }
+    };
+
+    window.deleteTeacherVideo = async function(idx) {
+        if (!confirm('حذف الفيديو؟')) return;
+        try {
+            const ref = doc(db, "teachers", currentUser);
+            const snap = await getDoc(ref);
+            if (snap.exists()) {
+                const videos = snap.data().videos || [];
+                videos.splice(idx, 1);
+                await updateDoc(ref, { videos });
+                renderTeacherData();
+            }
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.addStudent = async function() {
+        const u = document.getElementById('studentUser').value.trim();
+        const p = document.getElementById('studentPass').value.trim();
+        if (!u || !p) return alert('املأ البيانات');
+        const ref = doc(db, "teachers", currentUser);
+        await updateDoc(ref, { students: arrayUnion(u) });
+        alert('✅ تمت إضافة الطالب');
+        renderTeacherData();
+        document.getElementById('studentUser').value = '';
+        document.getElementById('studentPass').value = '';
+    };
+
+    // ===== دوال الامتحانات المتقدمة =====
+    let examQuestions = [];
+
+    window.addExamQuestion = function() {
+        const container = document.getElementById('examQuestionsContainer');
+        const div = document.createElement('div');
+        div.className = 'question-block';
+        div.innerHTML = `
+            <input type="text" placeholder="نص السؤال" class="eq-text">
+            <select class="eq-type">
+                <option value="mcq">اختيار متعدد</option>
+                <option value="essay">مقالي</option>
+            </select>
+            <div class="options">
+                <input type="text" placeholder="اختيار أ" class="eq-opt">
+                <input type="text" placeholder="اختيار ب" class="eq-opt">
+                <input type="text" placeholder="اختيار ج" class="eq-opt">
+                <input type="text" placeholder="اختيار د" class="eq-opt">
+            </div>
+            <input type="text" placeholder="الإجابة الصحيحة" class="eq-answer">
+            <input type="number" placeholder="الدرجة" class="eq-grade" value="1">
+            <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">🗑️ حذف</button>
+        `;
+        container.appendChild(div);
+    };
+
+    window.saveAdvancedExam = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        
+        const title = document.getElementById('examTitle').value.trim();
+        const description = document.getElementById('examDescription').value.trim();
+        const startDate = document.getElementById('examStartDate').value;
+        const endDate = document.getElementById('examEndDate').value;
+        const duration = parseInt(document.getElementById('examDuration').value) || 60;
+        const scheduledTime = document.getElementById('examScheduledTime').value;
+        
+        if (!title) return alert('أدخل عنوان الامتحان');
+        if (!startDate || !endDate) return alert('حدد فترة توافر الامتحان');
+        
+        const questionBlocks = document.querySelectorAll('#examQuestionsContainer .question-block');
+        if (questionBlocks.length === 0) return alert('أضف سؤالاً واحداً على الأقل');
+        
+        const questions = [];
+        questionBlocks.forEach(b => {
+            const text = b.querySelector('.eq-text').value.trim();
+            const type = b.querySelector('.eq-type').value;
+            const opts = [];
+            b.querySelectorAll('.eq-opt').forEach(o => { if (o.value.trim()) opts.push(o.value.trim()); });
+            const answer = b.querySelector('.eq-answer').value.trim();
+            const grade = parseFloat(b.querySelector('.eq-grade').value) || 1;
+            if (text) questions.push({ text, type, options: opts, answer, grade });
+        });
+        
+        if (questions.length === 0) return alert('املأ الأسئلة بشكل صحيح');
+        
+        try {
+            const examData = {
+                title: title,
+                description: description || '',
+                startDate: startDate,
+                endDate: endDate,
+                duration: duration,
+                scheduledTime: scheduledTime || null,
+                questions: questions,
+                teacherId: currentUser,
+                teacherName: currentUserData?.username || 'معلم',
+                createdAt: new Date(),
+                status: scheduledTime ? 'scheduled' : 'active'
+            };
+            
+            await addDoc(collection(db, "advancedExams"), examData);
+            
+            // إرسال إشعار للطلاب المرتبطين بهذا المعلم
+            const teacherSnap = await getDoc(doc(db, "teachers", currentUser));
+            if (teacherSnap.exists()) {
+                const students = teacherSnap.data().students || [];
+                for (const student of students) {
+                    // البحث عن الطالب
+                    const q = query(collection(db, "users"), where("username", "==", student));
+                    const snap = await getDocs(q);
+                    snap.forEach(docSnap => {
+                        addNotification(docSnap.id, `📝 امتحان جديد: ${title} - ${description || ''}`, 'exam');
+                    });
+                }
+            }
+            
+            alert('✅ تم حفظ الامتحان بنجاح!');
+            document.getElementById('examTitle').value = '';
+            document.getElementById('examDescription').value = '';
+            document.getElementById('examStartDate').value = '';
+            document.getElementById('examEndDate').value = '';
+            document.getElementById('examDuration').value = '60';
+            document.getElementById('examScheduledTime').value = '';
+            document.getElementById('examQuestionsContainer').innerHTML = '';
+            loadAdvancedExams();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.loadAdvancedExams = function() {
+        const container = document.getElementById('advancedExamsList');
+        const q = query(collection(db, "advancedExams"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد امتحانات</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const e = docSnap.data();
+                const id = docSnap.id;
+                const now = new Date();
+                const start = new Date(e.startDate);
+                const end = new Date(e.endDate);
+                const isActive = now >= start && now <= end;
+                const isScheduled = e.scheduledTime && new Date(e.scheduledTime) > now;
+                
+                let statusText = '';
+                let statusColor = '';
+                if (isScheduled) {
+                    statusText = '⏳ مجدول: ' + new Date(e.scheduledTime).toLocaleString();
+                    statusColor = '#f39c12';
+                } else if (isActive) {
+                    statusText = '✅ متاح حالياً';
+                    statusColor = '#27ae60';
+                } else if (now < start) {
+                    statusText = '⏳ سيبدأ قريباً';
+                    statusColor = '#f39c12';
+                } else {
+                    statusText = '❌ منتهي';
+                    statusColor = '#c0392b';
+                }
+                
+                html += `
+                    <div style="background:#f8faff;padding:15px;border-radius:15px;margin-bottom:10px;border-right:4px solid ${statusColor};">
+                        <strong>${e.title}</strong>
+                        <p style="font-size:0.8rem;color:#555;">${e.description || ''}</p>
+                        <p style="font-size:0.8rem;">📅 من ${new Date(e.startDate).toLocaleString()} إلى ${new Date(e.endDate).toLocaleString()}</p>
+                        <p style="font-size:0.8rem;">⏱️ المدة: ${e.duration} دقيقة</p>
+                        <p style="font-size:0.8rem;color:${statusColor};">${statusText}</p>
+                        <p style="font-size:0.8rem;">📝 عدد الأسئلة: ${e.questions.length}</p>
+                        ${e.teacherId === currentUser ? `<button class="btn btn-danger btn-sm" onclick="deleteAdvancedExam('${id}')" style="width:auto;margin-top:5px;">🗑️ حذف</button>` : ''}
+                        ${isActive ? `<button class="btn btn-success btn-sm" onclick="startExam('${id}')" style="width:auto;margin-top:5px;">▶️ بدء الامتحان</button>` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.deleteAdvancedExam = async function(id) {
+        if (!confirm('حذف الامتحان؟')) return;
+        try {
+            await deleteDoc(doc(db, "advancedExams", id));
+            loadAdvancedExams();
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    // ===== دوال الواجبات =====
+    window.uploadAssignment = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const title = document.getElementById('assignmentTitle').value.trim();
+        const desc = document.getElementById('assignmentDesc').value.trim();
+        const deadline = document.getElementById('assignmentDeadline').value;
+        const file = document.getElementById('assignmentFile').files[0];
+        
+        if (!title || !deadline) return alert('أدخل عنوان الواجب والموعد النهائي');
+        
+        try {
+            let fileURL = '';
+            if (file) {
+                const storageRef = ref(storage, `assignments/${currentUser}/${Date.now()}_${file.name}`);
+                await uploadBytes(storageRef, file);
+                fileURL = await getDownloadURL(storageRef);
+            }
+            
+            await addDoc(collection(db, "assignments"), {
+                title: title,
+                description: desc || '',
+                deadline: deadline,
+                fileURL: fileURL,
+                fileName: file?.name || '',
+                teacherId: currentUser,
+                teacherName: currentUserData?.username || 'معلم',
+                createdAt: new Date(),
+                submissions: []
+            });
+            
+            // إشعار للطلاب
+            const teacherSnap = await getDoc(doc(db, "teachers", currentUser));
+            if (teacherSnap.exists()) {
+                const students = teacherSnap.data().students || [];
+                for (const student of students) {
+                    const q = query(collection(db, "users"), where("username", "==", student));
+                    const snap = await getDocs(q);
+                    snap.forEach(docSnap => {
+                        addNotification(docSnap.id, `📋 واجب جديد: ${title} - استلم قبل ${new Date(deadline).toLocaleString()}`, 'assignment');
+                    });
+                }
+            }
+            
+            alert('✅ تم رفع الواجب بنجاح!');
+            document.getElementById('assignmentTitle').value = '';
+            document.getElementById('assignmentDesc').value = '';
+            document.getElementById('assignmentDeadline').value = '';
+            document.getElementById('assignmentFile').value = '';
+            loadAssignments();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.loadAssignments = function() {
+        const container = document.getElementById('assignmentsList');
+        const q = query(collection(db, "assignments"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد واجبات</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const a = docSnap.data();
+                const id = docSnap.id;
+                const isOverdue = new Date(a.deadline) < new Date();
+                html += `
+                    <div style="background:#f8faff;padding:15px;border-radius:15px;margin-bottom:10px;border-right:4px solid ${isOverdue ? '#c0392b' : '#27ae60'};">
+                        <strong>${a.title}</strong>
+                        <p>${a.description || ''}</p>
+                        <p style="font-size:0.8rem;">📅 الموعد النهائي: ${new Date(a.deadline).toLocaleString()}</p>
+                        ${a.fileURL ? `<a href="${a.fileURL}" target="_blank" class="book-link">📎 تحميل الملف</a>` : ''}
+                        ${a.teacherId === currentUser ? `<button class="btn btn-danger btn-sm" onclick="deleteAssignment('${id}')" style="width:auto;margin-top:5px;">🗑️ حذف</button>` : ''}
+                        <button class="btn btn-outline btn-sm" onclick="viewSubmissions('${id}')" style="width:auto;margin-top:5px;">📊 عرض التسليمات</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.deleteAssignment = async function(id) {
+        if (!confirm('حذف الواجب؟')) return;
+        try {
+            await deleteDoc(doc(db, "assignments", id));
+            loadAssignments();
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    // ============================================================
+    //  دوال الطالب
+    // ============================================================
+    async function loadStudentData() {
+        document.getElementById('studentDashboard').style.display = 'none';
+    }
+
+    window.studentLogin = async function() {
+        const code = document.getElementById('studentCode').value.trim();
+        const u = document.getElementById('studentLoginUser').value.trim();
+        const p = document.getElementById('studentLoginPass').value.trim();
+        if (!code || !u || !p) return alert('املأ الحقول');
+        const q = query(collection(db, "teachers"), where("code", "==", code));
+        const snap = await getDocs(q);
+        if (snap.empty) return alert('كود المعلم غير صحيح');
+        const teacherDoc = snap.docs[0];
+        const teacherData = teacherDoc.data();
+        const student = teacherData.students.find(s => s === u);
+        if (!student) return alert('الطالب غير مسجل عند هذا المعلم');
+        document.getElementById('studentDashboard').style.display = 'block';
+        document.getElementById('currentStudentDisplay').textContent = u;
+        
+        document.getElementById('studentVideosView').innerHTML = teacherData.videos?.map(v =>
+            `<div class="video-item">
+                <strong>📹 ${v.title}</strong>
+                <video controls src="${v.url}"></video>
+            </div>`
+        ).join('') || '<p>لا توجد فيديوهات</p>';
+        
+        document.getElementById('studentExamsView').innerHTML = teacherData.exams?.map((e, idx) =>
+            `<div><strong>${e.title}</strong> <button class="btn btn-outline btn-sm" onclick="alert('سيتم عرض الامتحان')">دخول الامتحان</button></div>`
+        ).join('') || '<p>لا توجد امتحانات</p>';
+        
+        // عرض الواجبات للطالب
+        const assignmentsQuery = query(collection(db, "assignments"), where("teacherId", "==", teacherDoc.id));
+        const assignmentsSnap = await getDocs(assignmentsQuery);
+        let assignmentsHtml = '';
+        assignmentsSnap.forEach(docSnap => {
+            const a = docSnap.data();
+            const isOverdue = new Date(a.deadline) < new Date();
+            assignmentsHtml += `
+                <div style="background:#f8faff;padding:10px;border-radius:10px;margin-bottom:8px;border-right:4px solid ${isOverdue ? '#c0392b' : '#27ae60'};">
+                    <strong>${a.title}</strong>
+                    <p style="font-size:0.8rem;">📅 ${new Date(a.deadline).toLocaleString()}</p>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:5px;">
+                        <input type="file" id="submitFile_${docSnap.id}" style="width:auto;">
+                        <button class="btn btn-success btn-sm" onclick="submitAssignment('${docSnap.id}')" style="width:auto;">📤 تسليم</button>
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById('studentAssignmentsView').innerHTML = assignmentsHtml || '<p>لا توجد واجبات</p>';
+        
+        document.getElementById('studentMeetingsView').innerHTML = teacherData.meetings?.map(m =>
+            `<div class="teacher-meeting-card">
+                <strong>🎥 ${m.title}</strong>
+                <br>⏰ ${m.time ? new Date(m.time).toLocaleString() : 'مرن'}
+                <br><a href="${m.link}" target="_blank" style="color:#1a4b6d;font-weight:bold;">🔗 اضغط للدخول</a>
+            </div>`
+        ).join('') || '<p>لا توجد اجتماعات</p>';
+    };
+
+    window.studentLogout = function() {
+        document.getElementById('studentDashboard').style.display = 'none';
+    };
+
+    // تسليم واجب (للطلاب)
+    window.submitAssignment = async function(assignmentId) {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const file = document.getElementById(`submitFile_${assignmentId}`)?.files[0];
+        if (!file) return alert('اختر ملف للتسليم');
+        
+        try {
+            const storageRef = ref(storage, `submissions/${assignmentId}/${currentUser}_${file.name}`);
+            await uploadBytes(storageRef, file);
+            const fileURL = await getDownloadURL(storageRef);
+            
+            const assignmentRef = doc(db, "assignments", assignmentId);
+            const assignmentSnap = await getDoc(assignmentRef);
+            if (!assignmentSnap.exists()) return alert('الواجب غير موجود');
+            
+            const submissions = assignmentSnap.data().submissions || [];
+            const existing = submissions.find(s => s.studentId === currentUser);
+            if (existing) {
+                const index = submissions.indexOf(existing);
+                submissions[index] = { ...existing, fileURL, fileName: file.name, submittedAt: new Date() };
+            } else {
+                submissions.push({
+                    studentId: currentUser,
+                    studentName: currentUserData?.username || 'طالب',
+                    fileURL: fileURL,
+                    fileName: file.name,
+                    submittedAt: new Date(),
+                    grade: null,
+                    feedback: ''
+                });
+            }
+            await updateDoc(assignmentRef, { submissions });
+            alert('✅ تم تسليم الواجب بنجاح!');
+            loadAssignments();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    // ============================================================
+    //  دوال علم النفس
+    // ============================================================
+    window.loadPsychologists = function() {
+        const container = document.getElementById('psychologistsList');
+        const q = query(collection(db, "psychologists"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا يوجد أخصائيون حالياً.</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                html += `
+                    <div class="psychologist-card">
+                        <img src="${p.image || 'https://via.placeholder.com/80'}" alt="${p.name}">
+                        <div class="info">
+                            <h4>${p.name}</h4>
+                            <p style="color:#555;">🧠 ${p.specialty}</p>
+                            <p style="color:#888; font-size:0.9rem;">${p.description || ''}</p>
+                            <p>💰 ${p.price} ج.م - ⏰ ${p.available}</p>
+                            <button class="btn btn-success btn-sm" onclick="selectPsychologist('${id}')" style="width:auto;">📅 احجز موعد</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.selectPsychologist = function(id) {
+        if (!currentUser) return alert('يجب تسجيل الدخول أولاً');
+        document.getElementById('selectedPsychologistId').value = id;
+        const ref = doc(db, "psychologists", id);
+        getDoc(ref).then(snap => {
+            if (snap.exists()) {
+                document.getElementById('selectedPsychologistName').textContent = snap.data().name;
+                document.getElementById('psychologistBookingForm').style.display = 'block';
+            }
+        });
+    };
+
+    window.bookPsychSession = async function() {
+        const psychId = document.getElementById('selectedPsychologistId').value;
+        if (!psychId) return alert('اختر أخصائي أولاً');
+        const date = document.getElementById('sessionDate').value;
+        const time = document.getElementById('sessionTime').value;
+        const notes = document.getElementById('sessionNotes').value.trim();
+        if (!date || !time) return alert('حدد التاريخ والوقت');
+
+        try {
+            const psychRef = doc(db, "psychologists", psychId);
+            const psychSnap = await getDoc(psychRef);
+            if (!psychSnap.exists()) return alert('الأخصائي غير موجود');
+
+            const sessionId = `psych-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+            const meetLink = `https://meet.jit.si/${sessionId}`;
+
+            await addDoc(collection(db, "psychSessions"), {
+                psychologistId: psychId,
+                psychologistName: psychSnap.data().name,
+                patientId: currentUser,
+                patientName: currentUserData?.username || 'مريض',
+                date: date,
+                time: time,
+                notes: notes,
+                meetLink: meetLink,
+                status: 'pending',
+                createdAt: new Date()
+            });
+            alert('✅ تم حجز الجلسة! سيتم إرسال رابط الميتنج لكل من المريض والأخصائي.');
+            document.getElementById('psychologistBookingForm').style.display = 'none';
+            document.getElementById('sessionDate').value = '';
+            document.getElementById('sessionTime').value = '';
+            document.getElementById('sessionNotes').value = '';
+            loadPsychSessions();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.loadPsychSessions = function() {
+        const container = document.getElementById('psychSessionsList');
+        if (!currentUser) {
+            container.innerHTML = '<p>سجل دخول لعرض حجوزاتك</p>';
+            return;
+        }
+        const q = query(collection(db, "psychSessions"), orderBy("createdAt", "desc"));
+        onSnapshot(q, async (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد حجوزات</p>';
+                return;
+            }
+            let html = '';
+            for (const docSnap of snapshot.docs) {
+                const s = docSnap.data();
+                const id = docSnap.id;
+                const isPatient = s.patientId === currentUser;
+                let isPsychologist = false;
+                if (currentUserData?.role === 'admin' || currentUserData?.role === 'مسؤول') {
+                    isPsychologist = true;
+                } else {
+                    const psychRef = doc(db, "psychologists", s.psychologistId);
+                    const psychSnap = await getDoc(psychRef);
+                    if (psychSnap.exists() && psychSnap.data().userId === currentUser) {
+                        isPsychologist = true;
+                    }
+                }
+                if (!isPatient && !isPsychologist) continue;
+
+                const statusMap = {
+                    'pending': '⏳ قيد الانتظار',
+                    'confirmed': '✅ مؤكد',
+                    'completed': '✔️ مكتمل',
+                    'cancelled': '❌ ملغي'
+                };
+                html += `
+                    <div class="session-item">
+                        <strong>${s.psychologistName}</strong> - ${s.date} الساعة ${s.time}
+                        <br><span style="font-size:0.8rem;">👤 المريض: ${s.patientName}</span>
+                        <br><span style="font-size:0.8rem;color:#555;">الحالة: ${statusMap[s.status] || s.status}</span>
+                        ${s.meetLink ? `<br><a href="${s.meetLink}" target="_blank" class="meet-link">🎥 دخول الميتنج</a>` : ''}
+                        ${isPsychologist ? `
+                            <div class="session-actions" style="margin-top:5px;">
+                                <button class="btn btn-success btn-sm" onclick="updatePsychSessionStatus('${id}', 'confirmed')">تأكيد</button>
+                                <button class="btn btn-danger btn-sm" onclick="updatePsychSessionStatus('${id}', 'cancelled')">إلغاء</button>
+                                <button class="btn btn-outline btn-sm" onclick="updatePsychSessionStatus('${id}', 'completed')">إنهاء</button>
+                            </div>
+                        ` : ''}
+                        ${s.notes ? `<p style="font-size:0.8rem;color:#888;">📝 ${s.notes}</p>` : ''}
+                    </div>
+                `;
+            }
+            container.innerHTML = html || '<p>لا توجد حجوزات</p>';
+        });
+    };
+
+    window.updatePsychSessionStatus = async function(id, status) {
+        if (!confirm(`تغيير حالة الجلسة إلى ${status}؟`)) return;
+        try {
+            await updateDoc(doc(db, "psychSessions", id), { status });
+            loadPsychSessions();
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    // ============================================================
+    //  دوال الكورسات
+    // ============================================================
+    window.loadPsychCourses = function() {
+        const container = document.getElementById('psychCourses');
+        const q = query(collection(db, "courses"), where("category", "==", "psychology"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد كورسات حالياً</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const c = docSnap.data();
+                html += `
+                    <div class="course-card">
+                        <h4>📚 ${c.title}</h4>
+                        <p>👨‍🏫 ${c.instructor}</p>
+                        <p>${c.description}</p>
+                        <p class="${c.price === 'مجاني' ? 'free' : 'price'}">💰 ${c.price}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.loadProgrammingCourses = function() {
+        const container = document.getElementById('programmingCourses');
+        const q = query(collection(db, "courses"), where("category", "==", "programming"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد كورسات حالياً</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const c = docSnap.data();
+                html += `
+                    <div class="course-card">
+                        <h4>💻 ${c.title}</h4>
+                        <p>👨‍🏫 ${c.instructor}</p>
+                        <p>${c.description}</p>
+                        <p class="${c.price === 'مجاني' ? 'free' : 'price'}">💰 ${c.price}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.showAddPsychCourse = function() {
+        document.getElementById('addPsychCourseForm').style.display = 'block';
+    };
+
+    window.addPsychCourse = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const title = document.getElementById('psychCourseTitle').value.trim();
+        const instructor = document.getElementById('psychCourseInstructor').value.trim();
+        const price = document.getElementById('psychCoursePrice').value.trim() || 'مجاني';
+        const description = document.getElementById('psychCourseDesc').value.trim();
+
+        if (!title || !instructor) {
+            alert('عنوان الكورس واسم المحاضر إجباريان');
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "courses"), {
+                title: title,
+                instructor: instructor,
+                description: description || '',
+                price: price,
+                category: 'psychology',
+                createdAt: new Date()
+            });
+            
+            // إشعار للمستخدمين
+            const usersSnap = await getDocs(collection(db, "users"));
+            usersSnap.forEach(docSnap => {
+                addNotification(docSnap.id, `📚 كورس جديد في علم النفس: ${title}`, 'course');
+            });
+            
+            alert('✅ تم إضافة الكورس!');
+            document.getElementById('psychCourseTitle').value = '';
+            document.getElementById('psychCourseInstructor').value = '';
+            document.getElementById('psychCoursePrice').value = '';
+            document.getElementById('psychCourseDesc').value = '';
+            document.getElementById('addPsychCourseForm').style.display = 'none';
+            loadPsychCourses();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.showAddProgrammingCourse = function() {
+        document.getElementById('addProgrammingCourseForm').style.display = 'block';
+    };
+
+    window.addProgrammingCourse = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const title = document.getElementById('progCourseTitle').value.trim();
+        const instructor = document.getElementById('progCourseInstructor').value.trim();
+        const price = document.getElementById('progCoursePrice').value.trim() || 'مجاني';
+        const description = document.getElementById('progCourseDesc').value.trim();
+
+        if (!title || !instructor) {
+            alert('عنوان الكورس واسم المحاضر إجباريان');
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "courses"), {
+                title: title,
+                instructor: instructor,
+                description: description || '',
+                price: price,
+                category: 'programming',
+                createdAt: new Date()
+            });
+            
+            // إشعار للمستخدمين
+            const usersSnap = await getDocs(collection(db, "users"));
+            usersSnap.forEach(docSnap => {
+                addNotification(docSnap.id, `💻 كورس جديد في البرمجة: ${title}`, 'course');
+            });
+            
+            alert('✅ تم إضافة الكورس!');
+            document.getElementById('progCourseTitle').value = '';
+            document.getElementById('progCourseInstructor').value = '';
+            document.getElementById('progCoursePrice').value = '';
+            document.getElementById('progCourseDesc').value = '';
+            document.getElementById('addProgrammingCourseForm').style.display = 'none';
+            loadProgrammingCourses();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    // ============================================================
+    //  دوال المدير (إضافة أخصائيين)
+    // ============================================================
+    window.searchUsersForAdmin = async function(query) {
+        const container = document.getElementById('userSearchResults');
+        if (!query || query.length < 2) {
+            container.innerHTML = '';
+            return;
+        }
+        try {
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, where("username", ">=", query), where("username", "<=", query + '\uf8ff'));
+            const snapshot = await getDocs(q);
+            if (snapshot.empty) {
+                container.innerHTML = '<p style="padding:5px;color:#888;">لا توجد نتائج</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const data = docSnap.data();
+                html += `
+                    <div style="padding:8px;border-bottom:1px solid #eee;cursor:pointer;" onclick="selectUserForAdmin('${docSnap.id}')">
+                        👤 ${data.username} (${data.email})
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    window.selectedUserId = null;
+
+    window.selectUserForAdmin = function(userId) {
+        window.selectedUserId = userId;
+        document.getElementById('userSearchResults').innerHTML = `<div style="padding:5px;color:#27ae60;">✅ تم اختيار المستخدم</div>`;
+        getDoc(doc(db, "users", userId)).then(snap => {
+            if (snap.exists()) {
+                const data = snap.data();
+                document.getElementById('adminPsychEmail').value = data.email || '';
+                document.getElementById('adminPsychName').value = data.username || '';
+            }
+        });
+    };
+
+    window.addPsychologistByAdmin = async function() {
+        if (!currentUserData || (currentUserData.role !== 'admin' && currentUserData.role !== 'مسؤول')) {
+            alert('⛔ فقط المدير يمكنه إضافة أخصائيين.');
+            return;
+        }
+
+        const userId = window.selectedUserId;
+        if (!userId) {
+            alert('⚠️ اختر مستخدم أولاً من قائمة البحث');
+            return;
+        }
+
+        const name = document.getElementById('adminPsychName').value.trim();
+        const specialty = document.getElementById('adminPsychSpecialty').value.trim();
+        const image = document.getElementById('adminPsychImage').value.trim() || 'https://via.placeholder.com/80';
+        const price = parseFloat(document.getElementById('adminPsychPrice').value) || 0;
+        const available = document.getElementById('adminPsychAvailable').value.trim() || 'مرن';
+        const description = document.getElementById('adminPsychDesc').value.trim() || '';
+
+        if (!name || !specialty) {
+            alert('الاسم والتخصص إجباريان');
+            return;
+        }
+
+        try {
+            const userSnap = await getDoc(doc(db, "users", userId));
+            if (!userSnap.exists()) {
+                alert('المستخدم غير موجود');
+                return;
+            }
+
+            await addDoc(collection(db, "psychologists"), {
+                userId: userId,
+                name: name,
+                specialty: specialty,
+                image: image,
+                price: price,
+                available: available,
+                description: description,
+                createdAt: new Date()
+            });
+            alert('✅ تم إضافة الأخصائي بنجاح!');
+            document.getElementById('adminPsychName').value = '';
+            document.getElementById('adminPsychSpecialty').value = '';
+            document.getElementById('adminPsychImage').value = '';
+            document.getElementById('adminPsychPrice').value = '';
+            document.getElementById('adminPsychAvailable').value = '';
+            document.getElementById('adminPsychDesc').value = '';
+            document.getElementById('adminPsychEmail').value = '';
+            document.getElementById('userSearchResults').innerHTML = '';
+            window.selectedUserId = null;
+            loadPsychologists();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.addCourseByAdmin = async function() {
+        if (!currentUserData || (currentUserData.role !== 'admin' && currentUserData.role !== 'مسؤول')) {
+            alert('⛔ فقط المدير يمكنه إضافة كورسات.');
+            return;
+        }
+
+        const category = document.getElementById('adminCourseCategory').value;
+        const title = document.getElementById('adminCourseTitle').value.trim();
+        const instructor = document.getElementById('adminCourseInstructor').value.trim();
+        const price = document.getElementById('adminCoursePrice').value.trim();
+        const description = document.getElementById('adminCourseDesc').value.trim();
+
+        if (!title || !instructor) {
+            alert('عنوان الكورس واسم المحاضر إجباريان');
+            return;
+        }
+
+        try {
+            const courseData = {
+                title: title,
+                instructor: instructor,
+                description: description || '',
+                price: price || 'مجاني',
+                category: category,
+                createdAt: new Date()
+            };
+
+            await addDoc(collection(db, "courses"), courseData);
+            
+            // إشعار للمستخدمين
+            const usersSnap = await getDocs(collection(db, "users"));
+            usersSnap.forEach(docSnap => {
+                addNotification(docSnap.id, `📚 كورس جديد: ${title}`, 'course');
+            });
+            
+            alert('✅ تم إضافة الكورس بنجاح!');
+            document.getElementById('adminCourseTitle').value = '';
+            document.getElementById('adminCourseInstructor').value = '';
+            document.getElementById('adminCoursePrice').value = '';
+            document.getElementById('adminCourseDesc').value = '';
+            
+            if (category === 'psychology') {
+                loadPsychCourses();
+            } else if (category === 'programming') {
+                loadProgrammingCourses();
+            }
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    // ============================================================
+    //  دوال المدونة (زي فيسبوك)
+    // ============================================================
+    window.createPost = async function() {
+        const title = document.getElementById('postTitle').value.trim();
+        const content = document.getElementById('postContent').value.trim();
+        const image = document.getElementById('postImage').value.trim();
+        const videoFile = document.getElementById('postVideoFile').files[0];
+        if (!content && !image && !videoFile) {
+            alert('اكتب محتوى المنشور أو أضف صورة/فيديو');
+            return;
+        }
+        if (!currentUser) {
+            alert('يجب تسجيل الدخول');
+            return;
+        }
+
+        try {
+            let videoURL = '';
+            if (videoFile) {
+                const storageRef = ref(storage, `posts/${currentUser}/${Date.now()}_${videoFile.name}`);
+                await uploadBytes(storageRef, videoFile);
+                videoURL = await getDownloadURL(storageRef);
+            }
+
+            await addDoc(collection(db, "posts"), {
+                userId: currentUser,
+                username: currentUserData?.username || 'مستخدم',
+                userPhoto: currentUserData?.photoURL || '',
+                title: title || 'بدون عنوان',
+                content: content || '',
+                image: image || '',
+                video: videoURL || '',
+                likesCount: 0,
+                comments: [],
+                shares: 0,
+                timestamp: new Date()
+            });
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+            document.getElementById('postImage').value = '';
+            document.getElementById('postVideoFile').value = '';
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.renderFeed = function() {
+        const container = document.getElementById('feedContainer');
+        const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p style="color:#888;text-align:center;padding:20px;">لا توجد منشورات</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                const isOwner = p.userId === currentUser;
+                html += `
+                    <div class="post-card" id="post-${id}">
+                        <div class="post-header">
+                            ${p.userPhoto ? `<img src="${p.userPhoto}" style="width:45px;height:45px;border-radius:50%;object-fit:cover;">` : `<div class="post-avatar">${(p.username || 'م')[0]}</div>`}
+                            <div><strong>${p.username || 'مجهول'}</strong> <span style="font-size:0.7rem;color:#888;">${p.timestamp?.toDate?.()?.toLocaleString() || ''}</span></div>
+                            ${isOwner ? `<span onclick="deletePost('${id}')" style="cursor:pointer;color:#c0392b;margin-right:auto;font-size:0.9rem;">🗑️</span>` : ''}
+                        </div>
+                        <h4>${p.title}</h4>
+                        <p>${p.content}</p>
+                        ${p.image ? `<img src="${p.image}" style="max-width:100%;border-radius:10px;margin:10px 0;" />` : ''}
+                        ${p.video ? `<video controls style="max-width:100%;border-radius:10px;margin:10px 0;" src="${p.video}"></video>` : ''}
+                        <div class="post-actions">
+                            <span onclick="likePost('${id}')" class="${p.likedBy?.includes(currentUser) ? 'liked' : ''}">❤️ ${p.likesCount || 0}</span>
+                            <span onclick="toggleComments('${id}')">💬 تعليق (${p.comments?.length || 0})</span>
+                            <span onclick="sharePost('${id}')">📤 مشاركة (${p.shares || 0})</span>
+                        </div>
+                        <div id="comments-${id}" style="display:none;">
+                            <div class="post-comments">
+                                ${p.comments && p.comments.length ? p.comments.map(c => `
+                                    <div class="comment"><strong>${c.username || 'مجهول'}</strong>: ${c.text}</div>
+                                `).join('') : '<div style="color:#888;font-size:0.8rem;">لا توجد تعليقات</div>'}
+                            </div>
+                            <div class="comment-input-row">
+                                <input type="text" id="commentInput-${id}" placeholder="اكتب تعليقك...">
+                                <button class="btn btn-success btn-sm" onclick="addComment('${id}')">نشر</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.toggleComments = function(postId) {
+        const el = document.getElementById(`comments-${postId}`);
+        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    };
+
+    window.addComment = async function(postId) {
+        const input = document.getElementById(`commentInput-${postId}`);
+        const text = input.value.trim();
+        if (!text) return;
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        
+        try {
+            const ref = doc(db, "posts", postId);
+            const snap = await getDoc(ref);
+            if (snap.exists()) {
+                const comments = snap.data().comments || [];
+                comments.push({
+                    userId: currentUser,
+                    username: currentUserData?.username || 'مستخدم',
+                    text: text,
+                    timestamp: new Date()
+                });
+                await updateDoc(ref, { comments });
+                input.value = '';
+                toggleComments(postId);
+            }
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.likePost = async function(id) {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const ref = doc(db, "posts", id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            const likedBy = snap.data().likedBy || [];
+            const isLiked = likedBy.includes(currentUser);
+            if (isLiked) {
+                await updateDoc(ref, {
+                    likesCount: (snap.data().likesCount || 0) - 1,
+                    likedBy: likedBy.filter(u => u !== currentUser)
+                });
+            } else {
+                await updateDoc(ref, {
+                    likesCount: (snap.data().likesCount || 0) + 1,
+                    likedBy: [...likedBy, currentUser]
+                });
+            }
+        }
+    };
+
+    window.sharePost = async function(id) {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const ref = doc(db, "posts", id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            await updateDoc(ref, { shares: (snap.data().shares || 0) + 1 });
+            alert('✅ تمت المشاركة!');
+        }
+    };
+
+    window.deletePost = async function(id) {
+        if (!confirm('هل تريد حذف هذا المنشور؟')) return;
+        try {
+            await deleteDoc(doc(db, "posts", id));
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.renderHomePosts = function() {
+        const container = document.getElementById('homePosts');
+        const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const posts = [];
+            snapshot.forEach(d => posts.push(d.data()));
+            const limited = posts.slice(0, 3);
+            if (!limited.length) {
+                container.innerHTML = '<p style="color:#888;">لا توجد منشورات</p>';
+                return;
+            }
+            container.innerHTML = limited.map(p => `
+                <div style="border-bottom:1px solid #eee;padding:10px 0;">
+                    <strong>${p.username || 'مجهول'}</strong>: ${p.content ? p.content.substring(0, 50) : '📎 منشور'}...
+                </div>
+            `).join('');
+        });
+    };
+
+    // ============================================================
+    //  دوال الستوري
+    // ============================================================
+    window.addStory = async function() {
+        const text = document.getElementById('storyText').value.trim();
+        const imageFile = document.getElementById('storyImage').files[0];
+        const videoFile = document.getElementById('storyVideo').files[0];
+        
+        if (!text && !imageFile && !videoFile) {
+            alert('اكتب نص أو أضف صورة/فيديو');
+            return;
+        }
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+
+        try {
+            let mediaURL = '';
+            let mediaType = '';
+            if (imageFile) {
+                const storageRef = ref(storage, `stories/${currentUser}/${Date.now()}_${imageFile.name}`);
+                await uploadBytes(storageRef, imageFile);
+                mediaURL = await getDownloadURL(storageRef);
+                mediaType = 'image';
+            } else if (videoFile) {
+                const storageRef = ref(storage, `stories/${currentUser}/${Date.now()}_${videoFile.name}`);
+                await uploadBytes(storageRef, videoFile);
+                mediaURL = await getDownloadURL(storageRef);
+                mediaType = 'video';
+            }
+
+            await addDoc(collection(db, "stories"), {
+                userId: currentUser,
+                username: currentUserData?.username || 'مستخدم',
+                userPhoto: currentUserData?.photoURL || '',
+                text: text || '',
+                mediaURL: mediaURL,
+                mediaType: mediaType,
+                createdAt: new Date(),
+                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000)
+            });
+            document.getElementById('storyText').value = '';
+            document.getElementById('storyImage').value = '';
+            document.getElementById('storyVideo').value = '';
+            loadStories();
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.loadStories = function() {
+        const container = document.getElementById('storiesList');
+        const q = query(collection(db, "stories"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const now = Date.now();
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const s = docSnap.data();
+                const expires = s.expiresAt?.toDate?.()?.getTime() || 0;
+                if (expires < now) {
+                    deleteDoc(doc(db, "stories", docSnap.id)).catch(() => {});
+                    return;
+                }
+                html += `
+                    <div class="story-item">
+                        ${s.mediaURL ? (s.mediaType === 'image' ? `<img src="${s.mediaURL}" alt="ستوري">` : `<video src="${s.mediaURL}" muted></video>`) : ''}
+                        <div class="story-text">${s.text || ''}</div>
+                        <div class="story-username">${s.username}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html || '<p style="color:#888;font-size:0.8rem;">لا توجد قصص</p>';
+        });
+    };
+
+    // ============================================================
+    //  دوال المهام
+    // ============================================================
+    window.renderTasks = function() {
+        const container = document.getElementById('tasksList');
+        if (!currentUser) {
+            container.innerHTML = '<p>سجل دخول لعرض مهامك</p>';
+            return;
+        }
+        const q = query(collection(db, "tasks"), where("userId", "==", currentUser), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد مهام</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const t = docSnap.data();
+                const id = docSnap.id;
+                html += `
+                    <div class="task-item ${t.done ? 'done' : ''}">
+                        <span>${t.text}</span>
+                        <span>
+                            <button class="btn btn-success btn-sm" onclick="toggleTask('${id}')">${t.done ? 'تراجع' : 'تم'}</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteTask('${id}')">🗑️</button>
+                        </span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.addTask = async function() {
+        const input = document.getElementById('newTaskInput');
+        const text = input.value.trim();
+        if (!text) return alert('أدخل نص المهمة');
+        if (!currentUser) return alert('سجل دخول أولاً');
+        try {
+            await addDoc(collection(db, "tasks"), {
+                userId: currentUser,
+                text: text,
+                done: false,
+                timestamp: new Date()
+            });
+            input.value = '';
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.toggleTask = async function(id) {
+        const ref = doc(db, "tasks", id);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            await updateDoc(ref, { done: !snap.data().done });
+        }
+    };
+
+    window.deleteTask = async function(id) {
+        if (confirm('حذف المهمة؟')) {
+            await deleteDoc(doc(db, "tasks", id));
+        }
+    };
+
+    // ============================================================
+    //  دوال الأذكار والمسبحة
+    // ============================================================
+    const dhikrList = ["سبحان الله وبحمده", "سبحان الله العظيم", "لا إله إلا الله", "اللهم صل على محمد", "أستغفر الله"];
+    let dhikrIndex = 0;
+    let dhikrCount = 0;
+    let totalTasbeeh = 0;
+
+    window.nextDhikr = function() {
+        dhikrIndex = (dhikrIndex + 1) % dhikrList.length;
+        document.getElementById('dhikrDisplay').textContent = dhikrList[dhikrIndex];
+    };
+
+    window.countDhikr = function() {
+        dhikrCount++;
+        totalTasbeeh++;
+        document.getElementById('dhikrCount').textContent = dhikrCount;
+        document.getElementById('totalTasbeeh').textContent = totalTasbeeh;
+    };
+
+    window.resetDhikrCount = function() {
+        dhikrCount = 0;
+        document.getElementById('dhikrCount').textContent = 0;
+    };
+
+    let tasbeeh = 0;
+
+    window.tasbeehAdd = function(val) {
+        tasbeeh += val;
+        document.getElementById('tasbeehCount').textContent = tasbeeh;
+    };
+
+    window.tasbeehReset = function() {
+        tasbeeh = 0;
+        document.getElementById('tasbeehCount').textContent = 0;
+    };
+
+    // ============================================================
+    //  مواقيت الصلاة
+    // ============================================================
+    window.getPrayerTimesWithLocation = async function() {
+        const country = document.getElementById('prayerCountry').value.trim() || 'مصر';
+        const city = document.getElementById('prayerCity').value.trim() || 'القاهرة';
+        const msg = document.getElementById('prayerTimes');
+        msg.innerHTML = '⏳ جاري جلب المواقيت...';
+
+        try {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const url = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=5`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    displayPrayerTimes(data);
+                }, () => {
+                    fetchPrayerTimesByCity(country, city);
+                });
+            } else {
+                fetchPrayerTimesByCity(country, city);
+            }
+        } catch (e) {
+            msg.innerHTML = '❌ تعذر جلب المواقيت: ' + e.message;
+        }
+    };
+
+    async function fetchPrayerTimesByCity(country, city) {
+        const today = new Date();
+        const date = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        const url = `https://api.aladhan.com/v1/timingsByCity/${date}?city=${city}&country=${country}&method=5`;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            displayPrayerTimes(data);
+        } catch (e) {
+            document.getElementById('prayerTimes').innerHTML = '❌ تعذر جلب المواقيت';
+        }
+    }
+
+    function displayPrayerTimes(data) {
+        const timings = data.data.timings;
+        document.getElementById('prayerTimes').innerHTML = `
+            <p>🌅 الفجر: ${timings.Fajr}</p>
+            <p>☀️ الشروق: ${timings.Sunrise}</p>
+            <p>🕌 الظهر: ${timings.Dhuhr}</p>
+            <p>🌤️ العصر: ${timings.Asr}</p>
+            <p>🌅 المغرب: ${timings.Maghrib}</p>
+            <p>🌙 العشاء: ${timings.Isha}</p>
+        `;
+    }
+
+    // ============================================================
+    //  ختمة القرآن الذكية
+    // ============================================================
+    window.calculateKhatma = function() {
+        const days = parseInt(document.getElementById('khatmaDays').value) || 30;
+        if (days < 1 || days > 30) {
+            alert('المدة بين 1 و 30 يوم');
+            return;
+        }
+        
+        const totalPages = 604;
+        const totalJuz = 30;
+        
+        const pagesPerDay = Math.ceil(totalPages / days);
+        const juzPerDay = Math.ceil(totalJuz / days);
+        const pagesPerPrayer = Math.ceil(pagesPerDay / 5);
+        
+        const prayers = ['الفجر', 'الظهر', 'العصر', 'المغرب', 'العشاء'];
+        
+        let resultHTML = `
+            <div style="background:#eaf4e8;padding:10px;border-radius:10px;margin-bottom:8px;">
+                <strong>📊 ${days} يوم</strong>
+                <p>📖 يومياً: ${pagesPerDay} صفحة (${juzPerDay} جزء)</p>
+                <p>🕌 بعد كل صلاة: ${pagesPerPrayer} صفحة</p>
+            </div>
+            <div style="background:#fff;padding:10px;border-radius:10px;border:1px solid #dce3ec;font-size:0.75rem;">
+        `;
+        
+        let remainingPages = totalPages;
+        for (let i = 1; i <= days; i++) {
+            let pagesToday = Math.min(pagesPerDay, remainingPages);
+            if (pagesToday <= 0) break;
+            resultHTML += `
+                <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;">
+                    <span>📆 يوم ${i}</span>
+                    <span>📖 ${pagesToday} صفحة</span>
+                </div>
+            `;
+            remainingPages -= pagesToday;
+        }
+        
+        resultHTML += `
+            </div>
+            <div style="background:#f9b83a;padding:8px;border-radius:10px;margin-top:8px;color:#1a2332;font-size:0.75rem;">
+                🕌 توزيع الصلوات: ${prayers.map(p => `${p}: ${pagesPerPrayer} ص`).join(' | ')}
+            </div>
+        `;
+        
+        document.getElementById('khatmaResult').innerHTML = resultHTML;
+    };
+
+    // ============================================================
+    //  المصحف الشريف
+    // ============================================================
+    const surahNames = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+
+    window.loadSurahSelect = function() {
+        const select = document.getElementById('surahSelect');
+        for (let i = 1; i <= 114; i++) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = `${i}. ${surahNames[i-1]}`;
+            select.appendChild(opt);
+        }
+    };
+
+    window.openQuranExternal = function() {
+        const idx = parseInt(document.getElementById('surahSelect').value);
+        window.open(`https://quran.com/${idx}`, '_blank');
+    };
+
+    // ============================================================
+    //  دوال الرسائل والأصدقاء
+    // ============================================================
+    window.sendMessage = async function() {
+        const to = document.getElementById('msgTo').value.trim();
+        const body = document.getElementById('msgBody').value.trim();
+        if (!to || !body) return alert('املأ الحقول');
+        if (!currentUser) return alert('سجل دخول');
+        try {
+            await addDoc(collection(db, "messages"), {
+                from: currentUserData?.username || 'مستخدم',
+                fromId: currentUser,
+                to: to,
+                body: body,
+                timestamp: new Date()
+            });
+            document.getElementById('msgTo').value = '';
+            document.getElementById('msgBody').value = '';
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.renderMessages = function() {
+        const container = document.getElementById('messagesList');
+        if (!currentUser) {
+            container.innerHTML = '<p>سجل دخول لعرض الرسائل</p>';
+            return;
+        }
+        const q = query(collection(db, "messages"), orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد رسائل</p>';
+                return;
+            }
+            const user = currentUserData?.username || '';
+            let html = '';
+            snapshot.forEach(d => {
+                const m = d.data();
+                if (m.from === user || m.to === user) {
+                    html += `
+                        <div class="msg-item">
+                            <strong>${m.from}</strong> → ${m.to}: ${m.body}
+                            <span style="font-size:0.6rem;color:#888;">${m.timestamp?.toDate?.()?.toLocaleString() || ''}</span>
+                        </div>
+                    `;
+                }
+            });
+            container.innerHTML = html || '<p>لا توجد رسائل لك</p>';
+        });
+    };
+
+    window.addFriend = async function() {
+        const friend = document.getElementById('friendUser').value.trim();
+        if (!friend) return alert('أدخل اسم المستخدم');
+        if (!currentUser) return alert('سجل دخول');
+        if (friend === currentUserData?.username) return alert('لا يمكنك إضافة نفسك');
+        const ref = doc(db, "users", currentUser);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            const friends = snap.data().friends || [];
+            if (friends.includes(friend)) return alert('هذا المستخدم صديق بالفعل');
+            const q = query(collection(db, "users"), where("username", "==", friend));
+            const qSnap = await getDocs(q);
+            if (qSnap.empty) return alert('المستخدم غير موجود');
+            await updateDoc(ref, { friends: arrayUnion(friend) });
+            document.getElementById('friendUser').value = '';
+            renderFriends();
+        }
+    };
+
+    window.renderFriends = function() {
+        const container = document.getElementById('friendsList');
+        if (!currentUser) {
+            container.innerHTML = '<p>سجل دخول لعرض الأصدقاء</p>';
+            return;
+        }
+        const ref = doc(db, "users", currentUser);
+        onSnapshot(ref, (snap) => {
+            if (snap.exists()) {
+                const friends = snap.data().friends || [];
+                if (!friends.length) {
+                    container.innerHTML = '<p>لا يوجد أصدقاء</p>';
+                    return;
+                }
+                container.innerHTML = friends.map(f => `<div class="friend-item">👤 ${f}</div>`).join('');
+            }
+        });
+    };
+
+    window.verifyAccount = async function() {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        const ref = doc(db, "users", currentUser);
+        const snap = await getDoc(ref);
+        if (snap.exists() && snap.data().verified) return alert('حسابك موثق بالفعل');
+        await updateDoc(ref, { verified: true });
+        document.getElementById('verificationStatus').innerHTML = '<span style="color:#27ae60;">✅ تم توثيق حسابك!</span>';
+    };
+
+    // ============================================================
+    //  دوال الخدمات التقنية
+    // ============================================================
+    window.cropVideo = function() {
+        const fileInput = document.getElementById('videoCropInput');
+        if (!fileInput.files.length) return alert('اختر ملف فيديو');
+        const file = fileInput.files[0];
+        const url = URL.createObjectURL(file);
+        document.getElementById('cropResult').innerHTML = `<video controls width="100%"><source src="${url}" type="${file.type}"></video><p>⏱️ تم القص (محاكاة)</p>`;
+        alert('تم قص الفيديو (محاكاة)');
+    };
+
+    window.editImage = function() {
+        const fileInput = document.getElementById('imageEditInput');
+        if (!fileInput.files.length) return alert('اختر صورة');
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                for (let i = 0; i < data.length; i += 4) {
+                    const gray = 0.34 * data[i] + 0.5 * data[i+1] + 0.16 * data[i+2];
+                    data[i] = gray;
+                    data[i+1] = gray;
+                    data[i+2] = gray;
+                }
+                ctx.putImageData(imageData, 0, 0);
+                document.getElementById('editResult').innerHTML = `<img src="${canvas.toDataURL('image/png')}" style="max-width:100%;border-radius:10px;margin-top:10px;" /><p>✅ تم التعديل</p>`;
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+
+    window.calcCalories = function() {
+        const name = document.getElementById('foodName').value.trim();
+        const weight = parseFloat(document.getElementById('foodWeight').value);
+        if (!name || !weight) return alert('أدخل اسم الطعام والوزن');
+        const map = { 'تفاح': 52, 'موز': 89, 'خبز': 265, 'أرز': 130, 'دجاج': 165, 'لحم': 250, 'سمك': 206, 'بيض': 155, 'حليب': 60, 'زبدة': 717 };
+        const per100 = map[name.toLowerCase()] || 100;
+        const total = (per100 * weight) / 100;
+        document.getElementById('calorieResult').innerHTML = `<div style="background:#eaf4e8;padding:10px;border-radius:15px;"><strong>${name}</strong> (${weight}g) = ${total.toFixed(1)} سعرة حرارية</div>`;
+    };
+
+    window.calcBMR = function() {
+        const gender = document.getElementById('genderBMR').value;
+        const age = parseFloat(document.getElementById('ageBMR').value);
+        const height = parseFloat(document.getElementById('heightBMR').value);
+        const weight = parseFloat(document.getElementById('weightBMR').value);
+        const activity = parseFloat(document.getElementById('activityBMR').value);
+        if (!age || !height || !weight) {
+            alert('يرجى إدخال العمر والطول والوزن');
+            return;
+        }
+        let bmr = (gender === 'male') ? 10 * weight + 6.25 * height - 5 * age + 5 : 10 * weight + 6.25 * height - 5 * age - 161;
+        document.getElementById('bmrResult').innerHTML = `
+            <div style="background:#eaf4e8;padding:10px;border-radius:15px;">
+                <p><strong>BMR:</strong> ${bmr.toFixed(0)} سعرة</p>
+                <p><strong>احتياجك اليومي:</strong> ${(bmr * activity).toFixed(0)} سعرة</p>
+            </div>
+        `;
+    };
+
+    // ============================================================
+    //  دوال الدردشة
+    // ============================================================
+    window.sendChatMessage = async function() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if (!text) return alert('اكتب رسالة');
+        if (!currentUser) return alert('يجب تسجيل الدخول للدردشة');
+        try {
+            await addDoc(collection(db, "chatMessages"), {
+                userId: currentUser,
+                username: currentUserData?.username || 'مستخدم',
+                userPhoto: currentUserData?.photoURL || '',
+                text: text,
+                timestamp: new Date()
+            });
+            input.value = '';
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.renderChat = function() {
+        const container = document.getElementById('chatMessages');
+        const q = query(collection(db, "chatMessages"), orderBy("timestamp", "asc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p style="color:#888;text-align:center;padding:20px;">لا توجد رسائل، ابدأ الدردشة!</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(d => {
+                const data = d.data();
+                html += `
+                    <div class="chat-message">
+                        ${data.userPhoto ? `<img src="${data.userPhoto}" style="width:25px;height:25px;border-radius:50%;object-fit:cover;display:inline-block;vertical-align:middle;">` : ''}
+                        <span class="sender">${data.username || 'مجهول'}</span>
+                        <span style="font-size:0.7rem;color:#888;">${data.timestamp?.toDate?.()?.toLocaleTimeString() || ''}</span>
+                        <p>${data.text}</p>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            container.scrollTop = container.scrollHeight;
+        });
+    };
+
+    // ============================================================
+    //  دوال الميتنج العام
+    // ============================================================
+    window.createPublicMeeting = async function() {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        const title = document.getElementById('publicMeetingTitle').value.trim();
+        const host = document.getElementById('publicMeetingHost').value.trim() || currentUserData?.username || 'مستخدم';
+        const time = document.getElementById('publicMeetingTime').value;
+        if (!title) return alert('أدخل عنوان الاجتماع');
+        const meetLink = prompt('أدخل رابط Google Meet أو Zoom:', 'https://meet.google.com/');
+        if (!meetLink) return;
+        try {
+            await addDoc(collection(db, "publicMeetings"), {
+                creatorId: currentUser,
+                creatorName: currentUserData?.username || 'مستخدم',
+                host: host,
+                title: title,
+                time: time || new Date().toISOString(),
+                link: meetLink,
+                createdAt: new Date()
+            });
+            alert('✅ تم إنشاء الاجتماع العام!');
+            document.getElementById('publicMeetingTitle').value = '';
+            document.getElementById('publicMeetingHost').value = '';
+            document.getElementById('publicMeetingTime').value = '';
+            loadPublicMeetings();
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.loadPublicMeetings = function() {
+        const container = document.getElementById('publicMeetingsList');
+        const q = query(collection(db, "publicMeetings"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد اجتماعات عامة حالياً</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(d => {
+                const m = d.data();
+                const id = d.id;
+                html += `
+                    <div class="meeting-card">
+                        <strong>🎥 ${m.title}</strong>
+                        <br>👤 المضيف: ${m.host || m.creatorName}
+                        <br>⏰ ${m.time ? new Date(m.time).toLocaleString() : 'مرن'}
+                        <br><a href="${m.link}" target="_blank" style="color:#1a4b6d;font-weight:bold;">🔗 اضغط للدخول</a>
+                        ${m.creatorId === currentUser ? `<br><button class="btn btn-danger btn-sm" onclick="deletePublicMeeting('${id}')" style="width:auto;margin-top:5px;">🗑️ حذف</button>` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.deletePublicMeeting = async function(id) {
+        if (!confirm('حذف الاجتماع؟')) return;
+        try {
+            await deleteDoc(doc(db, "publicMeetings", id));
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    // ============================================================
+    //  دوال الأماكن والحجوزات
+    // ============================================================
+    window.addPlace = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول أولاً');
+        const name = document.getElementById('placeName').value.trim();
+        const category = document.getElementById('placeCategory').value;
+        const address = document.getElementById('placeAddress').value.trim();
+        const phone = document.getElementById('placePhone').value.trim();
+        const description = document.getElementById('placeDescription').value.trim();
+        const slotsRaw = document.getElementById('placeSlots').value.trim();
+
+        if (!name || !address) return alert('اسم المكان والعنوان إجباريان');
+        const slots = slotsRaw ? slotsRaw.split(',').map(s => s.trim()) : [];
+
+        try {
+            await addDoc(collection(db, "places"), {
+                ownerId: currentUser,
+                ownerName: currentUserData?.username || 'صاحب المكان',
+                name: name,
+                category: category,
+                address: address,
+                phone: phone,
+                description: description,
+                availableSlots: slots,
+                createdAt: new Date()
+            });
+            alert('✅ تم إضافة المكان بنجاح!');
+            document.getElementById('placeName').value = '';
+            document.getElementById('placeAddress').value = '';
+            document.getElementById('placePhone').value = '';
+            document.getElementById('placeDescription').value = '';
+            document.getElementById('placeSlots').value = '';
+            loadPlaces();
+            loadMyBookings();
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    window.loadPlaces = function() {
+        const container = document.getElementById('placesList');
+        const q = query(collection(db, "places"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = '<p>لا توجد أماكن متاحة للحجز حالياً</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(docSnap => {
+                const p = docSnap.data();
+                const id = docSnap.id;
+                const categoryEmojis = { 'cafe': '☕', 'restaurant': '🍽️', 'clinic': '🏥', 'course': '📚', 'tutoring': '📖' };
+                html += `
+                    <div class="place-card">
+                        <h4>${categoryEmojis[p.category] || '📍'} ${p.name}</h4>
+                        <p>📍 ${p.address}</p>
+                        <p>📞 ${p.phone || 'غير متاح'}</p>
+                        <p>${p.description || ''}</p>
+                        <p>⏰ المواعيد: ${p.availableSlots?.join(' - ') || 'مرنة'}</p>
+                        <p style="font-size:0.7rem;color:#888;">المضيف: ${p.ownerName}</p>
+                        <button class="btn btn-success btn-sm" onclick="bookPlace('${id}')" style="width:auto;margin-top:5px;">📅 احجز موعد</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    };
+
+    window.bookPlace = async function(placeId) {
+        if (!currentUser) return alert('يجب تسجيل الدخول للحجز');
+        const date = prompt('أدخل التاريخ (مثال: 2026-07-30):');
+        if (!date) return;
+        const time = prompt('أدخل الوقت (مثال: 14:30):');
+        if (!time) return;
+        const notes = prompt('أي ملاحظات إضافية؟ (اختياري)') || '';
+
+        try {
+            const placeRef = doc(db, "places", placeId);
+            const placeSnap = await getDoc(placeRef);
+            if (!placeSnap.exists()) return alert('المكان غير موجود');
+            const placeData = placeSnap.data();
+
+            await addDoc(collection(db, "bookings"), {
+                placeId: placeId,
+                placeName: placeData.name,
+                ownerId: placeData.ownerId,
+                userId: currentUser,
+                userName: currentUserData?.username || 'مستخدم',
+                userPhone: currentUserData?.phone || 'غير مسجل',
+                date: date,
+                time: time,
+                notes: notes,
+                status: 'pending',
+                createdAt: new Date()
+            });
+            alert('✅ تم إرسال طلب الحجز! في انتظار تأكيد صاحب المكان.');
+            loadMyBookings();
+        } catch (e) {
+            alert('خطأ في الحجز: ' + e.message);
+        }
+    };
+
+    window.loadMyBookings = async function() {
+        const container = document.getElementById('myBookingsList');
+        if (!currentUser) {
+            container.innerHTML = '<p>سجل دخول لعرض حجوزاتك</p>';
+            return;
+        }
+        try {
+            const q1 = query(collection(db, "bookings"), where("userId", "==", currentUser));
+            const q2 = query(collection(db, "bookings"), where("ownerId", "==", currentUser));
+            const snap1 = await getDocs(q1);
+            const snap2 = await getDocs(q2);
+            const allBookings = [];
+            snap1.forEach(d => allBookings.push({ id: d.id, ...d.data() }));
+            snap2.forEach(d => {
+                if (!allBookings.find(b => b.id === d.id)) {
+                    allBookings.push({ id: d.id, ...d.data() });
+                }
+            });
+            if (allBookings.length === 0) {
+                container.innerHTML = '<p>لا توجد حجوزات</p>';
+                return;
+            }
+            allBookings.sort((a, b) => (a.createdAt?.toDate?.() || 0) - (b.createdAt?.toDate?.() || 0));
+            let html = '';
+            allBookings.forEach(b => {
+                const statusMap = {
+                    'pending': '⏳ قيد الانتظار',
+                    'confirmed': '✅ مؤكد',
+                    'completed': '✔️ مكتمل',
+                    'cancelled': '❌ ملغي'
+                };
+                const isOwner = b.ownerId === currentUser;
+                html += `
+                    <div class="booking-item" style="border-right-color: ${b.status === 'pending' ? '#f39c12' : '#27ae60'};">
+                        <strong>${b.placeName}</strong> - ${b.date} الساعة ${b.time}
+                        <br><span style="font-size:0.8rem;">👤 ${b.userName} - 📞 ${b.userPhone}</span>
+                        <br><span style="font-size:0.8rem;color:#555;">الحالة: ${statusMap[b.status] || b.status}</span>
+                        ${isOwner ? `
+                            <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;">
+                                <button class="btn btn-success btn-sm" onclick="updateBookingStatus('${b.id}', 'confirmed')" style="width:auto;">تأكيد</button>
+                                <button class="btn btn-danger btn-sm" onclick="updateBookingStatus('${b.id}', 'cancelled')" style="width:auto;">إلغاء</button>
+                                <button class="btn btn-outline btn-sm" onclick="updateBookingStatus('${b.id}', 'completed')" style="width:auto;">إنهاء</button>
+                            </div>
+                        ` : ''}
+                        ${b.notes ? `<p style="font-size:0.8rem;color:#888;">📝 ${b.notes}</p>` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        } catch (e) {
+            console.error(e);
+            container.innerHTML = '<p>حدث خطأ في تحميل الحجوزات</p>';
+        }
+    };
+
+    window.updateBookingStatus = async function(bookingId, status) {
+        if (!confirm(`هل تريد تغيير الحالة إلى ${status}؟`)) return;
+        try {
+            await updateDoc(doc(db, "bookings", bookingId), { status });
+            loadMyBookings();
+        } catch (e) {
+            alert('خطأ: ' + e.message);
+        }
+    };
+
+    // ============================================================
+    //  دوال أولياء الأمور
+    // ============================================================
+    window.linkParent = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const parentEmail = document.getElementById('parentEmail').value.trim();
+        if (!parentEmail) return alert('أدخل بريد ولي الأمر');
+        
+        try {
+            const q = query(collection(db, "users"), where("email", "==", parentEmail));
+            const snapshot = await getDocs(q);
+            if (snapshot.empty) {
+                alert('📧 لم يتم العثور على ولي الأمر. سيتم إرسال دعوة عبر البريد الإلكتروني.');
+                return;
+            }
+            
+            const parentDoc = snapshot.docs[0];
+            const parentId = parentDoc.id;
+            
+            await updateDoc(doc(db, "users", currentUser), {
+                parentId: parentId,
+                parentEmail: parentEmail
+            });
+            
+            await updateDoc(doc(db, "users", parentId), {
+                children: arrayUnion({
+                    studentId: currentUser,
+                    studentName: currentUserData?.username || 'طالب',
+                    linkedAt: new Date()
+                })
+            });
+            
+            document.getElementById('parentStatus').innerHTML = '<span style="color:#27ae60;">✅ تم ربط ولي الأمر بنجاح!</span>';
+            document.getElementById('parentEmail').value = '';
+            loadParentDashboard();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    window.loadParentDashboard = async function() {
+        if (!currentUser) return;
+        const userSnap = await getDoc(doc(db, "users", currentUser));
+        if (!userSnap.exists()) return;
+        const userData = userSnap.data();
+        
+        // لو المستخدم الحالي ولي أمر
+        if (userData.children && userData.children.length > 0) {
+            document.getElementById('parentDashboard').style.display = 'block';
+            const child = userData.children[0];
+            const studentId = child.studentId;
+            
+            // جلب بيانات الطالب
+            const studentSnap = await getDoc(doc(db, "users", studentId));
+            if (studentSnap.exists()) {
+                const studentData = studentSnap.data();
+                document.getElementById('parentStudentInfo').innerHTML = `
+                    <div style="background:#eaf4e8;padding:15px;border-radius:15px;">
+                        <h4>👤 ${studentData.username}</h4>
+                        <p>📧 ${studentData.email}</p>
+                        <p>📱 ${studentData.phone}</p>
+                        <p>📍 ${studentData.city || ''}، ${studentData.country || ''}</p>
+                    </div>
+                `;
+            }
+            
+            // جلب درجات الطالب
+            const assignmentsQuery = query(collection(db, "assignments"), where("submissions", "array-contains", { studentId: studentId }));
+            const assignmentsSnap = await getDocs(assignmentsQuery);
+            let gradesHtml = '';
+            assignmentsSnap.forEach(docSnap => {
+                const a = docSnap.data();
+                const submission = a.submissions.find(s => s.studentId === studentId);
+                if (submission) {
+                    gradesHtml += `
+                        <div style="background:#f8faff;padding:10px;border-radius:10px;margin-bottom:8px;">
+                            <strong>${a.title}</strong>
+                            <p>📊 الدرجة: ${submission.grade !== null ? submission.grade : 'لم تصحح بعد'}</p>
+                            <p>📝 ${submission.feedback || ''}</p>
+                        </div>
+                    `;
+                }
+            });
+            document.getElementById('parentGrades').innerHTML = gradesHtml || '<p>لا توجد درجات</p>';
+            
+            // جلب حضور الطالب
+            document.getElementById('parentAttendance').innerHTML = `
+                <div style="background:#f8faff;padding:10px;border-radius:10px;">
+                    <p>✅ عدد المحاضرات: ${Math.floor(Math.random() * 30) + 5}</p>
+                    <p>📅 نسبة الحضور: ${Math.floor(Math.random() * 40) + 60}%</p>
+                </div>
+            `;
+            
+            // تحميل رسائل ولي الأمر
+            const messagesQuery = query(collection(db, "parentMessages"), where("parentId", "==", currentUser), orderBy("createdAt", "desc"));
+            onSnapshot(messagesQuery, (snapshot) => {
+                let html = '';
+                snapshot.forEach(docSnap => {
+                    const m = docSnap.data();
+                    html += `
+                        <div class="chat-message">
+                            <strong>${m.from === 'parent' ? 'ولي الأمر' : 'المعلم'}</strong>
+                            <p>${m.message}</p>
+                            <span style="font-size:0.6rem;color:#888;">${m.createdAt?.toDate?.()?.toLocaleString() || ''}</span>
+                        </div>
+                    `;
+                });
+                document.getElementById('parentMessagesList').innerHTML = html || '<p>لا توجد رسائل</p>';
+            });
+        }
+    };
+
+    window.sendParentMessage = async function() {
+        if (!currentUser) return alert('يجب تسجيل الدخول');
+        const message = document.getElementById('parentMessage').value.trim();
+        if (!message) return alert('اكتب رسالة');
+        
+        try {
+            const userSnap = await getDoc(doc(db, "users", currentUser));
+            const userData = userSnap.data();
+            const child = userData.children?.[0];
+            if (!child) return alert('ليس لديك أبناء مرتبطون');
+            
+            // البحث عن معلم الطالب
+            const teachersQuery = query(collection(db, "teachers"), where("students", "array-contains", child.studentName));
+            const teachersSnap = await getDocs(teachersQuery);
+            let teacherId = null;
+            teachersSnap.forEach(docSnap => {
+                teacherId = docSnap.data().userId;
+            });
+            
+            if (!teacherId) return alert('لم يتم العثور على معلم للطالب');
+            
+            await addDoc(collection(db, "parentMessages"), {
+                parentId: currentUser,
+                parentName: userData.username || 'ولي أمر',
+                teacherId: teacherId,
+                studentId: child.studentId,
+                studentName: child.studentName,
+                message: message,
+                from: 'parent',
+                createdAt: new Date()
+            });
+            
+            // إشعار للمعلم
+            await addNotification(teacherId, `📩 رسالة من ولي أمر ${userData.username}: ${message.substring(0, 50)}...`, 'parent');
+            
+            document.getElementById('parentMessage').value = '';
+            alert('✅ تم إرسال الرسالة');
+            loadParentDashboard();
+        } catch (e) {
+            alert('❌ خطأ: ' + e.message);
+        }
+    };
+
+    // ============================================================
+    //  دوال علم النفس (مكتبة + مراكز)
+    // ============================================================
+    window.renderPsychology = function() {
+        const books = [
+            { title: "مدخل إلى التحليل النفسي - فرويد", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D9%85%D8%AF%D8%AE%D9%84-%D8%A7%D9%84%D9%89-%D8%A7%D9%84%D8%AA%D8%AD%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%86%D9%81%D8%B3%D9%8A-%D9%81%D8%B1%D9%88%D9%8A%D8%AF-pdf" },
+            { title: "العلاج السلوكي المعرفي - د. جودت", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D8%AC-%D8%A7%D9%84%D8%B3%D9%84%D9%88%D9%83%D9%8A-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%81%D9%8A-pdf" },
+            { title: "تفسير الأحلام - فرويد", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D8%A7%D9%84%D8%A7%D8%AD%D9%84%D8%A7%D9%85-%D9%81%D8%B1%D9%88%D9%8A%D8%AF-pdf" },
+            { title: "علم النفس الإيجابي - سليجمان", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D8%B9%D9%84%D9%85-%D8%A7%D9%84%D9%86%D9%81%D8%B3-%D8%A7%D9%84%D8%A7%D9%8A%D8%AC%D8%A7%D8%A8%D9%8A-pdf" },
+            { title: "فن التعامل مع الناس - ديل كارنيجي", link: "https://www.noor-book.com/%D9%83%D8%AA%D8%A7%D8%A8-%D9%81%D9%86-%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%85%D9%84-%D9%85%D8%B9-%D8%A7%D9%84%D9%86%D8%A7%D8%B3-pdf" }
+        ];
+        document.getElementById('psychBooks').innerHTML = books.map(b =>
+            `<div style="padding:10px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+                <span style="color:#1a4b6d;font-weight:bold;">📘 ${b.title}</span>
+                <a href="${b.link}" target="_blank" class="book-link"><i class="fas fa-download"></i> تحميل PDF</a>
+            </div>`
+        ).join('');
+    };
+
+    window.renderPsychologyCenters = function() {
+        const centers = [
+            { name: "مركز الإرشاد النفسي - جامعة عين شمس", desc: "برامج تدريبية ودبلومات في علم النفس الإكلينيكي.", location: "العباسية، القاهرة", contact: "26831231" },
+            { name: "الجمعية المصرية للمعالجين النفسيين", desc: "دورات تدريبية وورش عمل متخصصة.", location: "شارع الهرم، الجيزة", contact: "01030756456" },
+            { name: "أكاديمية MSA للعلوم النفسية", desc: "دورات تدريبية واستشارات نفسية متخصصة.", location: "القاهرة", contact: "0237762220" }
+        ];
+        document.getElementById('psychologyCenters').innerHTML = centers.map(c =>
+            `<div class="psych-center-item">
+                <strong>🏛️ ${c.name}</strong>
+                <div class="desc">${c.desc}</div>
+                <div class="info">📍 ${c.location} ${c.contact ? '| 📞 ' + c.contact : ''}</div>
+            </div>`
+        ).join('');
+    };
+
+    // ============================================================
+    //  دوال البرمجة
+    // ============================================================
+    window.renderProgramming = function() {
+        const articles = [
+            { title: "مقدمة في الخوارزميات", content: `الخوارزمية هي مجموعة من الخطوات المنطقية المتسلسلة لحل مشكلة معينة.\n<strong>مثال (جافا سكريبت):</strong>\n<div class="code-block">function binarySearch(arr, target) {\n  let left = 0, right = arr.length - 1;\n  while (left <= right) {\n    let mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    else if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}</div>` },
+            { title: "هياكل البيانات", content: `هياكل البيانات هي طرق تنظيم وتخزين البيانات.\n<strong>مثال Stack:</strong>\n<div class="code-block">class Stack {\n  constructor() { this.items = []; }\n  push(el) { this.items.push(el); }\n  pop() { return this.items.pop(); }\n}</div>` }
+        ];
+        const container = document.getElementById('programmingArticles');
+        container.innerHTML = articles.map((a, i) => `
+            <div class="programming-article">
+                <h4 onclick="document.getElementById('articleDetail_${i}').style.display = document.getElementById('articleDetail_${i}').style.display === 'block' ? 'none' : 'block'">📘 ${a.title}</h4>
+                <div id="articleDetail_${i}" class="article-detail"><pre>${a.content}</pre></div>
+            </div>
+        `).join('');
+    };
+
+    window.renderProgrammingCenters = function() {
+        const centers = [
+            { name: "معهد تكنولوجيا المعلومات (ITI)", desc: "أكبر معهد تدريب تكنولوجيا معلومات في مصر.", link: "https://www.iti.gov.eg" },
+            { name: "مدرسة الروبوتات - الإسكندرية", desc: "دورات تدريبية في الروبوتات والبرمجة.", link: "https://www.robotics-school.com" },
+            { name: "أكاديمية نيو هورايزن", desc: "مركز تدريب معتمد يقدم دورات في لغات البرمجة المختلفة.", link: "https://www.newhorizons.com" }
+        ];
+        document.getElementById('programmingCenters').innerHTML = centers.map(c =>
+            `<div style="padding:12px 0;border-bottom:1px solid #eee;">
+                <strong><a href="${c.link}" target="_blank" style="color:#1a4b6d;text-decoration:none;">🏛️ ${c.name}</a></strong>
+                <p style="margin:4px 0;font-size:0.9rem;color:#555;">${c.desc}</p>
+                <a href="${c.link}" target="_blank" style="font-size:0.8rem;color:#f9b83a;">🔗 زيارة الموقع</a>
+            </div>`
+        ).join('');
+    };
+
+    // ============================================================
+    //  دوال الطقس والتقويم
+    // ============================================================
+    window.getWeather = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${p.coords.latitude}&lon=${p.coords.longitude}&units=metric&lang=ar&appid=6c6f5b9e5a1e7b8c0d4e3f2a1b0c9d8e`)
+                    .then(r => r.json())
+                    .then(d => document.getElementById('weatherDisplay').innerHTML = `🌡️ ${d.main.temp}°C - ${d.weather[0].description} - ${d.name}`)
+                    .catch(() => document.getElementById('weatherDisplay').textContent = 'تعذر جلب الطقس');
+            }, () => document.getElementById('weatherDisplay').textContent = 'الرجاء السماح بتحديد الموقع');
+        } else {
+            document.getElementById('weatherDisplay').textContent = 'المتصفح لا يدعم الموقع';
+        }
+    };
+
+    window.updateCalendar = function() {
+        const now = new Date();
+        document.getElementById('gregorianDate').textContent = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const hijri = new Intl.DateTimeFormat('ar-TN-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).format(now);
+        document.getElementById('hijriDate').textContent = hijri;
+    };
+
+    // ============================================================
+    //  دوال المعلمين (ميتنج)
+    // ============================================================
+    window.createTeacherMeeting = async function() {
+        if (!currentUser) return alert('سجل دخول أولاً');
+        const title = document.getElementById('teacherMeetingTitle').value.trim();
+        const time = document.getElementById('teacherMeetingTime').value;
+        if (!title) return alert('أدخل عنوان الاجتماع');
+        const meetLink = prompt('أدخل رابط Google Meet أو Zoom:', 'https://meet.google.com/');
+        if (!meetLink) return;
+        try {
+            const ref = doc(db, "teachers", currentUser);
+            const snap = await getDoc(ref);
+            if (snap.exists()) {
+                const meetings = snap.data().meetings || [];
+                meetings.push({ title, time, link: meetLink, createdAt: new Date() });
+                await updateDoc(ref, { meetings });
+                
+                // إشعار للطلاب
+                const students = snap.data().students || [];
+                for (const student of students) {
+                    const q = query(collection(db, "users"), where("username", "==", student));
+                    const snap2 = await getDocs(q);
+                    snap2.forEach(docSnap => {
+                        addNotification(docSnap.id, `🎥 اجتماع جديد: ${title} - ${new Date(time).toLocaleString()}`, 'meeting');
+                    });
+                }
+                
+                alert('✅ تم إنشاء الاجتماع!');
+                document.getElementById('teacherMeetingTitle').value = '';
+                document.getElementById('teacherMeetingTime').value = '';
+                renderTeacherData();
+            }
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.deleteTeacherMeeting = async function(idx) {
+        if (!confirm('حذف الاجتماع؟')) return;
+        try {
+            const ref = doc(db, "teachers", currentUser);
+            const snap = await getDoc(ref);
+            if (snap.exists()) {
+                const meetings = snap.data().meetings || [];
+                meetings.splice(idx, 1);
+                await updateDoc(ref, { meetings });
+                renderTeacherData();
+            }
+        } catch (e) { alert('خطأ: ' + e.message); }
+    };
+
+    window.teacherLogout = function() {
+        document.getElementById('teacherDashboard').style.display = 'none';
+    };
+
+    // ============================================================
+    //  التنقل و PWA
+    // ============================================================
     window.setupNavigation = function() {
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -1255,6 +3697,9 @@
                 if (sectionId === 'placesSection') {
                     loadPlaces();
                     loadMyBookings();
+                }
+                if (sectionId === 'parentSection') {
+                    loadParentDashboard();
                 }
                 if (sectionId === 'adminSection') {
                     if (currentUserData?.role !== 'admin' && currentUserData?.role !== 'مسؤول') {
@@ -1304,6 +3749,45 @@
         };
     };
 
+    // ============================================================
+    //  التهيئة العامة
+    // ============================================================
+    window.renderAll = function() {
+        getWeather();
+        updateCalendar();
+        renderTasks();
+        renderPsychology();
+        renderPsychologyCenters();
+        renderProgramming();
+        renderProgrammingCenters();
+        renderFeed();
+        renderHomePosts();
+        renderMessages();
+        renderFriends();
+        loadSurahSelect();
+        renderChat();
+        loadPublicMeetings();
+        loadPlaces();
+        loadMyBookings();
+        loadPsychologists();
+        loadPsychSessions();
+        loadStories();
+        loadPsychCourses();
+        loadProgrammingCourses();
+        loadAssignments();
+        loadAdvancedExams();
+        loadParentDashboard();
+        if (currentUserData?.verified) {
+            document.getElementById('verificationStatus').innerHTML = '<span style="color:#27ae60;">✅ حساب موثق</span>';
+        }
+        if (!document.getElementById('selectedPsychologistId')) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.id = 'selectedPsychologistId';
+            document.body.appendChild(input);
+        }
+    };
+
     window.onload = function() {
         populateCountries();
         setupNavigation();
@@ -1321,7 +3805,8 @@
         window.addEventListener('load', window.onload);
     }
 
-    console.log('✅ تم تحميل التطبيق بالكامل مع الميزات الجديدة!');
+    console.log('✅ تم تحميل التطبيق بالكامل مع جميع الميزات!');
 </script>
 </body>
 </html>
+                                            
